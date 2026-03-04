@@ -1,8 +1,8 @@
 const highlights = [
-    { title: 'Mapa Vivo 2026', description: 'Explora centros y ensayos activos en tiempo real. Integración con datos abiertos de AEMPS.', badge: 'Live' },
-    { title: 'Modo Trip-Safe', description: 'UI suave, animaciones ralentizadas, lectura ampliada y guía de respiración.', badge: 'Accesibilidad' },
-    { title: 'Audio Sinestésico', description: 'Solfeggio + binaurales + soundscapes generativos sincronizados.', badge: 'NeuroSound' },
-    { title: 'Comunidad Real', description: 'Relatos, debates y votaciones con normas de cuidado colectivo. Comunidad real con Supabase.', badge: 'UGC' },
+    { title: 'Directorio Clínico', description: 'Encuentra terapeutas, centros médicos y ensayos activos en territorio español.', badge: 'Verificado' },
+    { title: 'Reducción de Daños', description: 'Guías de dosificación seguras, interacciones (Combo Checker) y buenas prácticas.', badge: 'Trip-Safe' },
+    { title: 'Soporte e Integración', description: 'Frecuencias inmersivas de sonido y herramientas post-experiencia psicodélica.', badge: 'Bienestar' },
+    { title: 'Comunidad Segura', description: 'Foro de debate libre de estigmas. Conecta con otros usuarios y comparte experiencias.', badge: 'Foro' },
 ];
 
 export default function AuroraBanner() {
@@ -13,9 +13,9 @@ export default function AuroraBanner() {
             <div className="relative max-w-6xl mx-auto px-6 py-14">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
                     <div className="max-w-xl">
-                        <p className="text-xs uppercase tracking-[0.4em] text-white/40">Novedades 2026</p>
-                        <h2 className="text-3xl md:text-4xl font-semibold text-white/90 mt-4">Mejoras sensoriales para la nueva era</h2>
-                        <p className="text-white/50 mt-4">Integramos herramientas avanzadas de bienestar, sonido inmersivo y comunidad responsable. Todo pensado para el viaje psicodélico moderno.</p>
+                        <p className="text-xs uppercase tracking-[0.4em] text-white/40">Portal de Referencia</p>
+                        <h2 className="text-3xl md:text-4xl font-semibold text-white/90 mt-4">Herramientas gratuitas para un viaje seguro</h2>
+                        <p className="text-white/50 mt-4">Integramos información científica contrastada, un directorio de profesionales en España y utilidades de bienestar. Todo pensado para acompañarte antes, durante y después de la experiencia psicodélica.</p>
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
                         {highlights.map(item => (

@@ -57,8 +57,8 @@ export default function HomePage() {
 
   return (
     <>
-      <AuroraBanner />
       <HeroSection />
+      <AuroraBanner />
 
       {/* ═══ SECCIONES DEL PORTAL ═══ */}
       <section className="relative py-24 px-6">
