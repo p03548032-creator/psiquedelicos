@@ -2,6 +2,8 @@
    DATOS: Artículos completos del Portal PSY
    ═══════════════════════════════════════════════════════ */
 
+import { TestTube, HeartPulse, Brain, Leaf, ShieldAlert, Palette } from 'lucide-react';
+
 export interface ArticleFull {
   id: string;
   title: string;
@@ -10,7 +12,7 @@ export interface ArticleFull {
   category: string;
   readTime: string;
   color: string;
-  icon: string;
+  icon: any;
   author: string;
   date: string;
   heroQuote?: string;
@@ -35,7 +37,7 @@ export const articlesFull: ArticleFull[] = [
     category: 'Guía',
     readTime: '12 min',
     color: '#a78bfa',
-    icon: '⚗️',
+    icon: TestTube,
     author: 'Equipo PortalPSY',
     date: '15 de enero de 2026',
     heroQuote: 'La microdosis no es un atajo hacia la iluminación. Es una herramienta sutil que amplifica lo que ya hay dentro de ti.',
@@ -131,7 +133,7 @@ export const articlesFull: ArticleFull[] = [
     category: 'Investigación',
     readTime: '8 min',
     color: '#f472b6',
-    icon: '🏥',
+    icon: HeartPulse,
     author: 'Equipo PortalPSY',
     date: '10 de febrero de 2026',
     heroQuote: 'No estamos hablando del futuro, estamos hablando del presente. Los psicodélicos ya están cambiando la psiquiatría.',
@@ -187,7 +189,7 @@ export const articlesFull: ArticleFull[] = [
     category: 'Educación',
     readTime: '6 min',
     color: '#22d3ee',
-    icon: '🧠',
+    icon: Brain,
     author: 'Equipo PortalPSY',
     date: '5 de diciembre de 2025',
     heroQuote: 'Los psicodélicos no son la experiencia. Son la llave. El set y el setting son la puerta.',
@@ -267,7 +269,7 @@ export const articlesFull: ArticleFull[] = [
     category: 'Bienestar',
     readTime: '10 min',
     color: '#34d399',
-    icon: '🌱',
+    icon: Leaf,
     author: 'Equipo PortalPSY',
     date: '20 de noviembre de 2025',
     heroQuote: 'La experiencia psicodélica es la semilla. La integración es el jardín donde decides plantarla.',
@@ -353,7 +355,7 @@ export const articlesFull: ArticleFull[] = [
     category: 'Seguridad',
     readTime: '7 min',
     color: '#fbbf24',
-    icon: '🛡️',
+    icon: ShieldAlert,
     author: 'Equipo PortalPSY',
     date: '1 de octubre de 2025',
     heroQuote: 'El respeto es la base de toda relación segura con las sustancias psicoactivas.',
@@ -448,7 +450,7 @@ export const articlesFull: ArticleFull[] = [
     category: 'Cultura',
     readTime: '9 min',
     color: '#f97316',
-    icon: '🎨',
+    icon: Palette,
     author: 'Equipo PortalPSY',
     date: '15 de septiembre de 2025',
     heroQuote: 'Tomar LSD fue una experiencia profunda, una de las cosas más importantes en mi vida.',

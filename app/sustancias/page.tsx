@@ -43,7 +43,9 @@ export default function SustanciasPage() {
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                                 style={{ background: `radial-gradient(circle at center, ${s.color}10, transparent 70%)` }} />
                             <div className="relative">
-                                <span className="text-3xl mb-3 block">{s.emoji}</span>
+                                <span className="mb-3 block text-white/80">
+                                    <s.icon size={32} strokeWidth={1.5} />
+                                </span>
                                 <h2 className="text-sm font-bold text-white leading-snug mb-1">{s.name}</h2>
                                 <p className="text-xs text-white/30">{s.aka}</p>
                                 <div className="mt-3 flex flex-wrap gap-1">

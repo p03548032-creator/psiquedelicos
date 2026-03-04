@@ -6,45 +6,47 @@ import { MetatronDivider, SeedOfLifeIcon } from '@/components/SacredGeometry';
 import AuroraBanner from '@/components/AuroraBanner';
 import BackToTopFab from '@/components/BackToTopFab';
 
+import { FlaskConical, Microscope, HeartPulse, UserCheck, MessagesSquare, Headphones } from 'lucide-react';
+
 const sections = [
   {
     href: '/sustancias',
-    emoji: '🍄',
+    icon: FlaskConical,
     label: 'Sustancias',
     desc: 'Enciclopedia completa con efectos, dosis, riesgos y estado legal',
     color: '#c084fc',
   },
   {
     href: '/investigacion',
-    emoji: '🔬',
+    icon: Microscope,
     label: 'Investigación',
     desc: 'Ensayos clínicos, papers y noticias científicas en español',
     color: '#22d3ee',
   },
   {
     href: '/terapia-espana',
-    emoji: '🏥',
+    icon: HeartPulse,
     label: 'Terapia en España',
     desc: 'Mapa de centros, cronología y marco legal actualizado 2026',
     color: '#f472b6',
   },
   {
     href: '/terapeutas',
-    emoji: '🧑‍⚕️',
+    icon: UserCheck,
     label: 'Terapeutas',
     desc: 'Directorio verificado de centros e integradores en España',
     color: '#34d399',
   },
   {
     href: '/comunidad',
-    emoji: '🌐',
+    icon: MessagesSquare,
     label: 'Comunidad',
     desc: 'Foro y espacio de debate libre de estigma',
     color: '#a78bfa',
   },
   {
     href: '/bienestar',
-    emoji: '🎧',
+    icon: Headphones,
     label: 'Bienestar',
     desc: 'Sonidos, música y prácticas para preparación e integración',
     color: '#fbbf24',
@@ -74,7 +76,9 @@ export default function HomePage() {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{ background: `radial-gradient(circle at top left, ${s.color}0a, transparent 60%)` }} />
                 <div className="relative">
-                  <span className="text-3xl mb-4 block">{s.emoji}</span>
+                  <span className="mb-4 block" style={{ color: s.color }}>
+                    <s.icon size={32} strokeWidth={1.5} />
+                  </span>
                   <h3 className="text-base font-bold text-white mb-2">{s.label}</h3>
                   <p className="text-white/35 text-sm leading-relaxed">{s.desc}</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-xs"
@@ -106,7 +110,9 @@ export default function HomePage() {
             {featuredSubstances.map(s => (
               <Link key={s.id} href={`/sustancia/${s.id}`}
                 className="glass-sacred rounded-2xl p-5 hover:scale-[1.04] transition-all duration-300 group">
-                <span className="text-3xl mb-3 block">{s.emoji}</span>
+                <span className="mb-3 block text-white/80">
+                  <s.icon size={28} strokeWidth={1.5} />
+                </span>
                 <h3 className="text-sm font-bold text-white mb-1">{s.name}</h3>
                 <p className="text-xs text-white/30">{s.aka}</p>
               </Link>
@@ -136,7 +142,9 @@ export default function HomePage() {
             {featuredArticles.map(a => (
               <Link key={a.id} href={`/articulo/${a.id}`}
                 className="glass-sacred rounded-2xl p-5 md:p-6 flex items-center gap-5 hover:scale-[1.01] transition-all duration-300 group">
-                <span className="text-3xl flex-shrink-0">{a.icon}</span>
+                <span className="text-white/80 flex-shrink-0">
+                  <a.icon size={24} strokeWidth={1.5} />
+                </span>
                 <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-bold text-white mb-1 leading-snug line-clamp-1">{a.title}</h3>
                   <p className="text-white/35 text-xs leading-relaxed line-clamp-2">{a.excerpt}</p>

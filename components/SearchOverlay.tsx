@@ -90,7 +90,10 @@ export default function SearchOverlay({ open, onClose, onNavigate }: SearchOverl
                                         <Link key={item.id} href={`/sustancia/${item.id}`} onClick={() => { onClose(); onNavigate?.(); }} className="block p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-psyche-violet/40 transition">
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <p className="text-white/80 font-semibold">{item.emoji} {item.name}</p>
+                                                    <div className="flex items-center gap-2 text-white/80 font-semibold">
+                                                        <item.icon size={16} />
+                                                        <span>{item.name}</span>
+                                                    </div>
                                                     <p className="text-xs text-white/40 mt-1">{item.category} · {item.duration}</p>
                                                 </div>
                                                 <span className="text-xs text-white/40">Ver ficha →</span>
@@ -106,7 +109,10 @@ export default function SearchOverlay({ open, onClose, onNavigate }: SearchOverl
                                         <Link key={article.id} href={`/articulo/${article.id}`} onClick={() => { onClose(); onNavigate?.(); }} className="block p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-psyche-cyan/40 transition">
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <p className="text-white/80 font-semibold">{article.icon} {article.title}</p>
+                                                    <div className="flex items-center gap-2 text-white/80 font-semibold">
+                                                        <article.icon size={16} />
+                                                        <span>{article.title}</span>
+                                                    </div>
                                                     <p className="text-xs text-white/40 mt-1">{article.category} · {article.readTime}</p>
                                                 </div>
                                                 <span className="text-xs text-white/40">Leer →</span>

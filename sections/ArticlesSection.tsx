@@ -19,7 +19,7 @@ function ArticleCard({ article, index }: { article: typeof articles[0]; index: n
 
                 <div className="relative">
                     <div className="flex items-center gap-3 mb-4">
-                        <span className={`text-2xl ${isFeature ? 'text-4xl' : ''}`}>{article.icon}</span>
+                        <span className="text-white/80"><article.icon size={isFeature ? 48 : 28} strokeWidth={1.5} /></span>
                         <span className="vesica-btn px-3 py-1 text-xs font-medium" style={{ background: `${article.color}15`, color: article.color }}>{article.category}</span>
                         <span className="text-white/20 text-xs ml-auto">{article.readTime}</span>
                     </div>

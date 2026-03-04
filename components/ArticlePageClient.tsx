@@ -85,7 +85,7 @@ export default function ArticlePageClient({ id }: { id: string }) {
 
                 <header className="mb-16">
                     <div className="flex items-center gap-3 mb-6">
-                        <span className="text-4xl">{article.icon}</span>
+                        <span className="text-white/80"><article.icon size={48} strokeWidth={1.5} /></span>
                         <span className="vesica-btn px-4 py-1.5 text-sm font-medium" style={{ background: `${article.color}15`, color: article.color }}>{article.category}</span>
                         <span className="text-white/20 text-sm">{article.readTime}</span>
                     </div>
@@ -152,7 +152,7 @@ export default function ArticlePageClient({ id }: { id: string }) {
                         <div className="grid md:grid-cols-3 gap-4">
                             {relatedArticles.map(ra => ra && (
                                 <Link key={ra.id} href={`/articulo/${ra.id}`} className="glass-sacred rounded-2xl p-6 group hover:scale-[1.02] transition-all duration-500">
-                                    <span className="text-2xl mb-3 block">{ra.icon}</span>
+                                    <span className="mb-3 block text-white/80"><ra.icon size={28} strokeWidth={1.5} /></span>
                                     <h4 className="text-sm font-bold text-white group-hover:text-white/90 transition-colors mb-2 leading-snug">{ra.title}</h4>
                                     <span className="text-xs text-white/20">{ra.readTime}</span>
                                 </Link>

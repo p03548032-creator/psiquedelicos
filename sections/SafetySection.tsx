@@ -9,7 +9,9 @@ function SafetyCard({ rule, index }: { rule: typeof safetyRules[0]; index: numbe
         <div ref={ref} className={`${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.1}s` }}>
             <div className="glass-sacred rounded-2xl p-6 h-full hover:scale-[1.02] transition-all duration-500 group">
                 <div className="flex items-start gap-4">
-                    <div className="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">{rule.icon}</div>
+                    <div className="flex-shrink-0 group-hover:scale-110 transition-transform text-white/80">
+                        <rule.icon size={28} strokeWidth={1.5} />
+                    </div>
                     <div>
                         <h3 className="text-lg font-bold text-white mb-2">{rule.title}</h3>
                         <p className="text-white/40 text-sm leading-relaxed">{rule.text}</p>

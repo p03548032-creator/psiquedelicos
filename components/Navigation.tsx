@@ -5,15 +5,17 @@ import { usePathname } from 'next/navigation';
 import SearchOverlay from '@/components/SearchOverlay';
 import { createClient } from '@/lib/supabase/client';
 
+import { FlaskConical, Microscope, HeartPulse, UserCheck, MessagesSquare, Headphones, Wrench, Mail } from 'lucide-react';
+
 const navLinks = [
-    { href: '/sustancias', label: 'Sustancias', emoji: '🍄' },
-    { href: '/investigacion', label: 'Investigación', emoji: '🔬' },
-    { href: '/terapia-espana', label: 'Terapia España', emoji: '🏥' },
-    { href: '/terapeutas', label: 'Terapeutas', emoji: '🧑‍⚕️' },
-    { href: '/comunidad', label: 'Comunidad', emoji: '🌐' },
-    { href: '/bienestar', label: 'Bienestar', emoji: '🎧' },
-    { href: '/herramientas', label: 'Herramientas', emoji: '🛠️' },
-    { href: '/newsletter', label: 'Newsletter', emoji: '📬' },
+    { href: '/sustancias', label: 'Sustancias', icon: FlaskConical },
+    { href: '/investigacion', label: 'Investigación', icon: Microscope },
+    { href: '/terapia-espana', label: 'Terapia España', icon: HeartPulse },
+    { href: '/terapeutas', label: 'Terapeutas', icon: UserCheck },
+    { href: '/comunidad', label: 'Comunidad', icon: MessagesSquare },
+    { href: '/bienestar', label: 'Bienestar', icon: Headphones },
+    { href: '/herramientas', label: 'Herramientas', icon: Wrench },
+    { href: '/newsletter', label: 'Newsletter', icon: Mail },
 ];
 
 export default function Navigation() {
@@ -156,7 +158,7 @@ export default function Navigation() {
                                 <Link key={link.href} href={link.href}
                                     className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm transition-colors ${active ? 'text-white bg-white/8' : 'text-white/50 hover:text-white/80 hover:bg-white/5'
                                         }`}>
-                                    <span>{link.emoji}</span>
+                                    <span><link.icon size={18} strokeWidth={1.5} /></span>
                                     <span>{link.label}</span>
                                 </Link>
                             );

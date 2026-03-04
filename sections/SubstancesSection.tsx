@@ -16,7 +16,9 @@ function SubstanceCard({ substance, index }: { substance: typeof substances[0]; 
                     <SeedOfLifeIcon size={50} color={substance.color} />
                 </div>
                 <div className="flex items-start gap-4">
-                    <span className="text-4xl md:text-5xl">{substance.emoji}</span>
+                    <span className="text-white/80 mt-1">
+                        <substance.icon size={48} strokeWidth={1.5} />
+                    </span>
                     <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
                             <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-white transition-colors">{substance.name}</h3>

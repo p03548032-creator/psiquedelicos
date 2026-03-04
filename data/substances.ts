@@ -1,8 +1,10 @@
+import { Eye, Leaf, Sparkles, Droplet, Beaker, TestTube, HeartPulse, Brain, ShieldAlert, Palette, Scale, Users, Home, Pill, AlertTriangle } from 'lucide-react';
+
 export interface Substance {
   id: string;
   name: string;
   aka: string;
-  emoji: string;
+  icon: any;
   category: string;
   color: string;
   colorFrom: string;
@@ -20,7 +22,7 @@ export const substances: Substance[] = [
     id: 'lsd',
     name: 'LSD-25',
     aka: 'Ácido, Tripi, Lucy',
-    emoji: '🌈',
+    icon: Eye,
     category: 'Lisergamida',
     color: '#a78bfa',
     colorFrom: '#7c3aed',
@@ -36,7 +38,7 @@ export const substances: Substance[] = [
     id: 'psilocibina',
     name: 'Psilocibina',
     aka: 'Setas mágicas, Hongos',
-    emoji: '🍄',
+    icon: Leaf,
     category: 'Triptamina',
     color: '#c084fc',
     colorFrom: '#9333ea',
@@ -52,7 +54,7 @@ export const substances: Substance[] = [
     id: 'dmt',
     name: 'DMT',
     aka: 'La Molécula del Espíritu',
-    emoji: '👁️',
+    icon: Sparkles,
     category: 'Triptamina',
     color: '#f472b6',
     colorFrom: '#db2777',
@@ -68,7 +70,7 @@ export const substances: Substance[] = [
     id: 'mescalina',
     name: 'Mescalina',
     aka: 'Peyote, San Pedro',
-    emoji: '🌵',
+    icon: Droplet,
     category: 'Fenetilamina',
     color: '#34d399',
     colorFrom: '#059669',
@@ -84,7 +86,7 @@ export const substances: Substance[] = [
     id: 'ayahuasca',
     name: 'Ayahuasca',
     aka: 'La Liana del Alma, Yagé',
-    emoji: '🌿',
+    icon: Leaf,
     category: 'DMT + IMAO',
     color: '#fbbf24',
     colorFrom: '#d97706',
@@ -100,7 +102,7 @@ export const substances: Substance[] = [
     id: 'ketamina',
     name: 'Ketamina',
     aka: 'Keta, Special K, Vitamina K',
-    emoji: '💎',
+    icon: Beaker,
     category: 'Disociativo',
     color: '#22d3ee',
     colorFrom: '#0891b2',
@@ -121,7 +123,7 @@ export interface Article {
   category: string;
   readTime: string;
   color: string;
-  icon: string;
+  icon: any;
 }
 
 export const articles: Article[] = [
@@ -132,7 +134,7 @@ export const articles: Article[] = [
     category: 'Guía',
     readTime: '12 min',
     color: '#a78bfa',
-    icon: '⚗️',
+    icon: TestTube,
   },
   {
     id: '2',
@@ -141,7 +143,7 @@ export const articles: Article[] = [
     category: 'Investigación',
     readTime: '8 min',
     color: '#f472b6',
-    icon: '🏥',
+    icon: HeartPulse,
   },
   {
     id: '3',
@@ -150,7 +152,7 @@ export const articles: Article[] = [
     category: 'Educación',
     readTime: '6 min',
     color: '#22d3ee',
-    icon: '🧠',
+    icon: Brain,
   },
   {
     id: '4',
@@ -159,7 +161,7 @@ export const articles: Article[] = [
     category: 'Bienestar',
     readTime: '10 min',
     color: '#34d399',
-    icon: '🌱',
+    icon: Leaf,
   },
   {
     id: '5',
@@ -168,7 +170,7 @@ export const articles: Article[] = [
     category: 'Seguridad',
     readTime: '7 min',
     color: '#fbbf24',
-    icon: '🛡️',
+    icon: ShieldAlert,
   },
   {
     id: '6',
@@ -177,15 +179,15 @@ export const articles: Article[] = [
     category: 'Cultura',
     readTime: '9 min',
     color: '#f97316',
-    icon: '🎨',
+    icon: Palette,
   },
 ];
 
 export const safetyRules = [
-  { icon: '⚖️', title: 'Conoce tu sustancia', text: 'Usa kits de testeo (Ehrlich, Marquis, Mecke). Nunca consumas algo sin verificar.' },
-  { icon: '🧪', title: 'Dosifica con precisión', text: 'Empieza bajo, sube despacio. Una báscula de miligramos cuesta 15€ y puede salvarte la vida.' },
-  { icon: '🤝', title: 'Trip Sitter', text: 'Ten siempre a alguien sobrio de confianza, especialmente en primeras experiencias.' },
-  { icon: '🏠', title: 'Set & Setting', text: 'Espacio seguro, cómodo y familiar. Estado mental positivo. Sin obligaciones al día siguiente.' },
-  { icon: '💊', title: 'Interacciones', text: 'Consulta interacciones farmacológicas. ISRS, litio, IMAO y otros pueden ser peligrosos.' },
-  { icon: '🆘', title: 'Plan de emergencia', text: 'Ten a mano: agua, fruta, manta, música tranquila. Saber dónde está urgencias. 112 para emergencias.' },
+  { icon: Scale, title: 'Conoce tu sustancia', text: 'Usa kits de testeo (Ehrlich, Marquis, Mecke). Nunca consumas algo sin verificar.' },
+  { icon: Beaker, title: 'Dosifica con precisión', text: 'Empieza bajo, sube despacio. Una báscula de miligramos cuesta 15€ y puede salvarte la vida.' },
+  { icon: Users, title: 'Trip Sitter', text: 'Ten siempre a alguien sobrio de confianza, especialmente en primeras experiencias.' },
+  { icon: Home, title: 'Set & Setting', text: 'Espacio seguro, cómodo y familiar. Estado mental positivo. Sin obligaciones al día siguiente.' },
+  { icon: Pill, title: 'Interacciones', text: 'Consulta interacciones farmacológicas. ISRS, litio, IMAO y otros pueden ser peligrosos.' },
+  { icon: AlertTriangle, title: 'Plan de emergencia', text: 'Ten a mano: agua, fruta, manta, música tranquila. Saber dónde está urgencias. 112 para emergencias.' },
 ];

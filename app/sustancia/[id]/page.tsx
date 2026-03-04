@@ -54,8 +54,8 @@ export default async function SubstancePage({ params }: Props) {
                 <header className="mb-16">
                     <div className="flex items-start gap-6">
                         <div className="relative">
-                            <div className="w-24 h-24 rounded-3xl flex items-center justify-center text-5xl" style={{ background: `${substance.color}15` }}>
-                                {substance.emoji}
+                            <div className="w-24 h-24 rounded-3xl flex items-center justify-center text-white/90" style={{ background: `${substance.color}15` }}>
+                                <substance.icon size={48} strokeWidth={1.5} />
                             </div>
                             <div className="absolute -bottom-2 -right-2 opacity-40">
                                 <SeedOfLifeIcon size={32} color={substance.color} />
