@@ -20,16 +20,38 @@ const pastIssues = [
 ];
 
 export default function NewsletterPage() {
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'already_subscribed'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus('loading');
+        setErrorMessage('');
 
-        // Simular petición a ConvertKit o API
-        await new Promise(resolve => setTimeout(resolve, 800));
+        const formData = new FormData(e.currentTarget);
+        const firstName = formData.get('first_name');
+        const email = formData.get('email_address');
 
-        setStatus('success');
+        try {
+            const res = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ firstName, email }),
+            });
+
+            const data = await res.json();
+
+            if (res.status === 409) {
+                setStatus('already_subscribed');
+            } else if (!res.ok) {
+                throw new Error(data.error || 'Ocurrió un error inesperado');
+            } else {
+                setStatus('success');
+            }
+        } catch (error: any) {
+            setStatus('error');
+            setErrorMessage(error.message || 'Error de conexión. Inténtalo más tarde.');
+        }
     };
 
     return (
@@ -60,9 +82,9 @@ export default function NewsletterPage() {
                         <h2 className="text-xl font-bold text-white text-center mb-2">Únete a más de 1.200 lectores</h2>
                         <p className="text-white/30 text-sm text-center mb-8">Sale el primer lunes de cada mes · Sin spam · Cancela cuando quieras</p>
 
-                        {/* Estado de Éxito */}
-                        {status === 'success' ? (
-                            <div className="text-center p-8 glass-sacred rounded-2xl border-green-500/20 bg-green-500/10">
+                        {/* Estado: Éxito */}
+                        {status === 'success' && (
+                            <div className="text-center p-8 glass-sacred rounded-2xl border-green-500/20 bg-green-500/10 mb-6 transition-all duration-500">
                                 <span className="text-4xl mb-4 block">✨</span>
                                 <h3 className="text-xl font-bold text-white mb-2">¡Gracias por unirte!</h3>
                                 <p className="text-white/60 text-sm leading-relaxed mb-4">
@@ -71,7 +93,29 @@ export default function NewsletterPage() {
                                 </p>
                                 <p className="text-white/30 text-xs">Revisa tu carpeta de spam u "Otros" por si acaso.</p>
                             </div>
-                        ) : (
+                        )}
+
+                        {/* Estado: Ya suscrito */}
+                        {status === 'already_subscribed' && (
+                            <div className="text-center p-6 glass-sacred rounded-2xl border-psyche-cyan/20 bg-psyche-cyan/10 mb-6 transition-all duration-500">
+                                <span className="text-3xl mb-3 block">🌀</span>
+                                <h3 className="text-lg font-bold text-white mb-2">¡Ya estabas en la lista!</h3>
+                                <p className="text-white/60 text-sm leading-relaxed">
+                                    No te preocupes, tu email ({errorMessage || "actual"}) ya está registrado correctamente en nuestra base de datos para recibir la newsletter.
+                                </p>
+                            </div>
+                        )}
+
+                        {/* Estado: Error genérico */}
+                        {status === 'error' && (
+                            <div className="text-center p-4 glass-sacred rounded-2xl border-red-500/20 bg-red-500/10 mb-6 transition-all duration-500">
+                                <p className="text-red-200 text-sm">⚠️ {errorMessage}</p>
+                                <button onClick={() => setStatus('idle')} className="text-white/50 text-xs mt-2 hover:text-white underline">Reintentar</button>
+                            </div>
+                        )}
+
+                        {/* Formulario (solo visible si no hay éxito ni ya está suscrito) */}
+                        {(status === 'idle' || status === 'loading' || status === 'error') && (
                             /* Sub Form */
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="flex flex-col sm:flex-row gap-3">
