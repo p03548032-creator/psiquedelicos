@@ -65,8 +65,8 @@ export async function POST(request: Request) {
                     <h2 style="color: #4CAF50; margin-top: 30px;">Tus regalos de bienvenida 🎁</h2>
                     <p>Como lo prometido es deuda, aquí tienes el acceso a nuestras playlists de integración musical cuidadosamente curadas:</p>
                     <ul>
-                        <li><a href="https://open.spotify.com/playlist/7v886H1F562725V977D06T" target="_blank" rel="noopener noreferrer">Playlist Integración - Spotify ↗</a></li>
-                        <li><a href="https://youtube.com/playlist?list=PLjVrv8KngW_ySns-C8hVd5E2U1a6VzCqy" target="_blank" rel="noopener noreferrer">Frecuencias Solfeggio - YouTube ↗</a></li>
+                        <li><a href="https://open.spotify.com/playlist/5KWf8H2pM0tlVd7niMtqeU" target="_blank" rel="noopener noreferrer">Playlist Integración - Spotify ↗</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=aIbbD_z6oSE" target="_blank" rel="noopener noreferrer">Frecuencias Solfeggio - YouTube ↗</a></li>
                     </ul>
                     
                     <p style="margin-top: 40px;">¡Nos leemos en el próximo boletín!</p>
