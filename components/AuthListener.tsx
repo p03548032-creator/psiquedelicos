@@ -2,30 +2,43 @@
 
 import { useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function AuthListener() {
     const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
         const supabase = createClient();
 
-        // Comprobación inmediata por si llegamos con el hash de recuperación
-        if (typeof window !== 'undefined' && window.location.hash.includes('type=recovery')) {
-            router.push('/reset-password');
-        }
+        // Función para redirigir si detectamos modo recuperación en el hash (#)
+        const checkRecovery = () => {
+            if (typeof window !== 'undefined' &&
+                window.location.hash.includes('type=recovery') &&
+                pathname !== '/reset-password') {
 
-        // Escuchar cambios en el estado de autenticación (evento oficial)
+                // Forzamos la redirección de navegador para limpiar el estado y asegurar que se cargue el formulario
+                window.location.href = '/reset-password';
+                return true;
+            }
+            return false;
+        };
+
+        // 1. Comprobación inmediata al cargar
+        if (checkRecovery()) return;
+
+        // 2. Escuchar cambios en el estado de autenticación (evento oficial de Supabase)
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-            if (event === 'PASSWORD_RECOVERY') {
+            if (event === 'PASSWORD_RECOVERY' && pathname !== '/reset-password') {
                 router.push('/reset-password');
+                router.refresh();
             }
         });
 
         return () => {
             subscription.unsubscribe();
         };
-    }, [router]);
+    }, [router, pathname]);
 
-    return null; // Este componente no renderiza nada visualmente
+    return null;
 }
