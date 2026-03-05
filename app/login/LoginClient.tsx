@@ -49,7 +49,7 @@ export default function LoginClient() {
                 }
             }}
             providers={['google']}
-            redirectTo={`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`}
+            redirectTo={`${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/auth/callback`}
             localization={{
                 variables: {
                     sign_in: {
