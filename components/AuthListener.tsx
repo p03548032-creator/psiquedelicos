@@ -11,27 +11,26 @@ export default function AuthListener() {
     useEffect(() => {
         const supabase = createClient();
 
-        // Función para redirigir si detectamos modo recuperación en el hash (#)
+        // Función para redirigir si detectamos modo recuperación en CUALQUIER parte de la URL
         const checkRecovery = () => {
-            if (typeof window !== 'undefined' &&
-                window.location.hash.includes('type=recovery') &&
-                pathname !== '/reset-password') {
-
-                // Forzamos la redirección de navegador para limpiar el estado y asegurar que se cargue el formulario
-                window.location.href = '/reset-password';
-                return true;
+            if (typeof window !== 'undefined') {
+                const url = window.location.href;
+                if (url.includes('type=recovery') && pathname !== '/reset-password') {
+                    // Forzamos la redirección total del navegador
+                    window.location.href = '/reset-password';
+                    return true;
+                }
             }
             return false;
         };
 
-        // 1. Comprobación inmediata al cargar
+        // 1. Comprobación inmediata al cargar (Fragment/Implicit flow)
         if (checkRecovery()) return;
 
         // 2. Escuchar cambios en el estado de autenticación (evento oficial de Supabase)
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
             if (event === 'PASSWORD_RECOVERY' && pathname !== '/reset-password') {
-                router.push('/reset-password');
-                router.refresh();
+                window.location.href = '/reset-password';
             }
         });
 
