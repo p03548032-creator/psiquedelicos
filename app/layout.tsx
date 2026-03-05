@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import AuthListener from '@/components/AuthListener';
 
 export const metadata: Metadata = {
   title: 'PortalPSY — Portal de referencia sobre psicodélicos en España',
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
+        <AuthListener />
         <Navigation />
         {children}
         <Footer />
@@ -31,3 +33,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

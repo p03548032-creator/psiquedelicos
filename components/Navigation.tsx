@@ -125,7 +125,7 @@ export default function Navigation() {
                     </Link>
 
                     {user ? (
-                        <Link href="/comunidad" className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/5 transition">
+                        <Link href="/perfil" className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/5 transition">
                             <span className="text-xs text-white/60">{user.user_metadata?.full_name?.split(' ')[0] || 'Mi Perfil'}</span>
                             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-psyche-violet to-psyche-pink flex items-center justify-center text-[10px] font-bold">
                                 {user.user_metadata?.full_name?.charAt(0) || 'U'}
@@ -166,9 +166,9 @@ export default function Navigation() {
                     </div>
                     <div className="border-t border-white/5 p-4 space-y-2">
                         {user ? (
-                            <Link href="/comunidad" onClick={() => setMenuOpen(false)}
+                            <Link href="/perfil" onClick={() => setMenuOpen(false)}
                                 className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-white/5 text-white/80 border border-white/10 hover:bg-white/10 transition">
-                                Mi Perfil (Comunidad)
+                                Mi Perfil
                             </Link>
                         ) : (
                             <Link href="/login" onClick={() => setMenuOpen(false)}
