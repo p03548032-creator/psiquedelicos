@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { Check, Star, Zap, Music, Headphones, Brain, ArrowRight, Shield } from 'lucide-react';
 
@@ -30,11 +30,8 @@ export default function ProPage() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        const supabase = createClient();
         const fetchUser = async () => {
-            const supabase = createClient(
-                process.env.NEXT_PUBLIC_SUPABASE_URL!,
-                process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-            );
             const { data: { user } } = await supabase.auth.getUser();
             if (user) {
                 setUserId(user.id);
@@ -54,16 +51,29 @@ export default function ProPage() {
         setLoading(true);
         setError(null);
         try {
+            // Enviamos el origen actual para que Stripe sepa a dónde volver
+            const origin = typeof window !== 'undefined' ? window.location.origin : 'https://portalpsy.es';
+
             const res = await fetch('/api/stripe/checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId, email: userEmail }),
+                body: JSON.stringify({ userId, email: userEmail, origin }),
             });
-            const { url, error: err } = await res.json();
-            if (err) { setError(err); return; }
-            window.location.href = url;
+
+            const data = await res.json();
+
+            if (data.error) {
+                setError(`Error de Stripe: ${data.error}`);
+                return;
+            }
+
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                setError('No se pudo generar la sesión de pago. Revisa las claves de Stripe.');
+            }
         } catch (e: any) {
-            setError(e.message);
+            setError(`Ocurrió un fallo en la llamada: ${e.message}`);
         } finally {
             setLoading(false);
         }
@@ -72,13 +82,23 @@ export default function ProPage() {
     const handlePortal = async () => {
         if (!userId) return;
         setLoading(true);
-        const res = await fetch('/api/stripe/portal', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId }),
-        });
-        const { url } = await res.json();
-        window.location.href = url;
+        try {
+            const res = await fetch('/api/stripe/portal', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId }),
+            });
+            const { url, error: err } = await res.json();
+            if (err) {
+                setError(`Error al abrir el portal: ${err}`);
+                return;
+            }
+            if (url) window.location.href = url;
+        } catch (e: any) {
+            setError(`Fallo al conectar con el portal: ${e.message}`);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const isPro = userPlan === 'pro';
@@ -124,14 +144,16 @@ export default function ProPage() {
                                 </li>
                             ))}
                         </ul>
-                        <Link href="/login" className="vesica-btn block text-center px-6 py-3 glass-sacred text-sm text-white/60 hover:text-white transition-colors">
-                            {userId ? 'Tu plan actual' : 'Crear cuenta gratis'}
-                        </Link>
+                        <div className="mt-auto">
+                            <span className="block text-center px-6 py-3 glass-sacred rounded-xl text-sm text-white/40 border border-white/5">
+                                {userId ? 'Tu plan actual' : 'Disponible al registrarte'}
+                            </span>
+                        </div>
                     </div>
 
                     {/* PRO Card */}
                     <div
-                        className="relative rounded-2xl p-8 border overflow-hidden"
+                        className="relative rounded-2xl p-8 border overflow-hidden flex flex-col"
                         style={{
                             borderColor: '#f59e0b50',
                             background: 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(239,68,68,0.05), transparent)',
@@ -151,7 +173,7 @@ export default function ProPage() {
                         </div>
                         <p className="text-white/30 text-sm mb-6">Cancela cuando quieras · Sin compromiso</p>
 
-                        <ul className="space-y-3 mb-8">
+                        <ul className="space-y-3 mb-8 flex-1">
                             {proFeatures.map(({ icon: Icon, text }) => (
                                 <li key={text} className="flex items-start gap-3 text-sm text-white/80">
                                     <Icon size={14} className="text-amber-400 flex-shrink-0 mt-0.5" />
@@ -160,18 +182,22 @@ export default function ProPage() {
                             ))}
                         </ul>
 
-                        {error && <p className="text-red-400 text-xs mb-4">{error}</p>}
+                        {error && (
+                            <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs">
+                                {error}
+                            </div>
+                        )}
 
                         {isPro ? (
                             <div className="space-y-3">
-                                <div className="flex items-center gap-2 text-amber-400 text-sm font-semibold">
-                                    <Star size={14} fill="currentColor" /> ¡Ya tienes el plan PRO activo!
+                                <div className="flex items-center gap-2 text-amber-400 text-sm font-semibold justify-center">
+                                    <Star size={14} fill="currentColor" /> ¡Ya eres PRO!
                                 </div>
                                 <button onClick={handlePortal} className="vesica-btn w-full py-3 text-sm text-white/60 glass-sacred hover:text-white transition-colors cursor-pointer">
                                     Gestionar suscripción →
                                 </button>
-                                <Link href="/bienestar" className="vesica-btn block text-center w-full py-3 text-sm gradient-psyche text-white font-semibold">
-                                    Ir a la Sala de Viaje PRO →
+                                <Link href="/bienestar" className="vesica-btn block text-center w-full py-3 text-sm gradient-psyche text-white font-semibold shadow-lg shadow-psyche-violet/20">
+                                    Ir a la Sala PRO →
                                 </Link>
                             </div>
                         ) : (
@@ -182,7 +208,7 @@ export default function ProPage() {
                                 style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)', boxShadow: '0 8px 30px rgba(245,158,11,0.3)' }}
                             >
                                 {loading ? (
-                                    <span className="animate-spin">⟳</span>
+                                    <span className="animate-spin text-xl">⟳</span>
                                 ) : (
                                     <><Star size={14} fill="white" strokeWidth={0} /> Activar PRO ahora <ArrowRight size={14} /></>
                                 )}

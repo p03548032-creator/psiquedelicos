@@ -9,8 +9,8 @@ export async function POST(request: Request) {
             process.env.SUPABASE_SERVICE_ROLE_KEY!
         );
 
-        // Obtener el usuario autenticado desde la cookie de sesión
-        const { userId, email } = await request.json();
+        // Obtener datos del cuerpo
+        const { userId, email, origin = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000' } = await request.json();
 
         if (!userId || !email) {
             return NextResponse.json({ error: 'Se requiere autenticación' }, { status: 401 });
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
             .eq('id', userId)
             .single();
 
-        // Si ya es PRO, redirigir al portal
+        // Si ya es PRO, avisar
         if (profile?.plan === 'pro') {
             return NextResponse.json({ error: 'Ya tienes el plan PRO activo.' }, { status: 400 });
         }
@@ -56,8 +56,8 @@ export async function POST(request: Request) {
                     quantity: 1,
                 },
             ],
-            success_url: `${process.env.NEXT_PUBLIC_URL}/pro/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.NEXT_PUBLIC_URL}/pro`,
+            success_url: `${origin}/pro/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/pro`,
             locale: 'es',
             metadata: {
                 supabase_user_id: userId,
