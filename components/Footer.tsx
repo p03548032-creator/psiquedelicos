@@ -42,7 +42,7 @@ export default function Footer() {
                     <div>
                         <h4 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">Experiencia</h4>
                         <div className="space-y-2">
-                            {[{ label: '🎧 Frecuencias', href: '/bienestar' }, { label: '🌐 Comunidad', href: '/comunidad' }, { label: '📖 Relatos', href: '/comunidad' }, { label: '🎵 Playlists', href: '/bienestar' }].map(link => (
+                            {[{ label: '🎧 Frecuencias', href: '/bienestar' }, { label: '🌐 Comunidad', href: '/comunidad' }, { label: '📖 Relatos', href: '/comunidad' }, { label: '🎵 Playlists', href: '/bienestar' }, { label: '⭐ Sala PRO', href: '/pro' }].map(link => (
                                 <Link key={link.label} href={link.href} className="block text-white/30 text-sm hover:text-white/60 transition-colors">{link.label}</Link>
                             ))}
                         </div>
