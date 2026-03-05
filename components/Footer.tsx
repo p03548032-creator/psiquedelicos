@@ -76,7 +76,15 @@ export default function Footer() {
 
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-white/20 text-xs">
                     <p>© 2026 PortalPSY — Información, no incitación. Tu consciencia, tu responsabilidad.</p>
-                    <p>Diseñado con geometría sagrada · φ = 1.618</p>
+
+                    <div className="flex items-center gap-4 flex-wrap justify-center">
+                        <Link href="/aviso-legal" className="hover:text-white/60 transition-colors">Aviso Legal</Link>
+                        <Link href="/privacidad" className="hover:text-white/60 transition-colors">Privacidad</Link>
+                        <Link href="/cookies" className="hover:text-white/60 transition-colors">Cookies</Link>
+                        <Link href="/descargo-responsabilidad" className="hover:text-white/60 transition-colors">Descargo Médico</Link>
+                    </div>
+
+                    <p className="hidden lg:block">Diseñado con geometría sagrada · φ = 1.618</p>
                 </div>
             </div>
         </footer>

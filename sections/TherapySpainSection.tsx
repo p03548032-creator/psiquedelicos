@@ -31,7 +31,7 @@ function StatItem({ stat, index }: { stat: typeof keyStats[0]; index: number }) 
           style={{ background: `radial-gradient(circle at center, ${stat.color}08, transparent 70%)` }}
         />
         <div className="relative">
-          <span className="text-2xl mb-2 block">{stat.icon}</span>
+          <div className="text-white/80 flex items-center justify-center mb-2"><stat.icon size={28} strokeWidth={1.5} /></div>
           <div className="text-2xl md:text-3xl font-black mb-1" style={{ color: stat.color }}>
             {stat.value}
           </div>
@@ -101,14 +101,14 @@ function TimelineItem({ event, index, isLeft }: { event: TimelineEvent; index: n
       {/* Central node — on mobile: left side; on desktop: center */}
       <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 flex flex-col items-center z-10">
         <div
-          className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm md:text-base border-2 shadow-lg"
+          className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-white/80 border-2 shadow-lg"
           style={{
             background: `${event.color}15`,
             borderColor: `${event.color}50`,
             boxShadow: `0 0 20px ${event.color}20`,
           }}
         >
-          {event.icon}
+          <event.icon size={20} strokeWidth={1.5} />
         </div>
       </div>
 
@@ -207,7 +207,7 @@ function TherapyCard({ therapy, index }: { therapy: TherapyApproach; index: numb
           />
 
           <div className="relative flex items-start gap-4">
-            <span className="text-4xl flex-shrink-0">{therapy.emoji}</span>
+            <span className="text-white/80 flex-shrink-0 mt-1"><therapy.emoji size={36} strokeWidth={1.5} /></span>
             <div className="flex-1 min-w-0">
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <h3 className="text-lg md:text-xl font-bold text-white">{therapy.substance}</h3>
@@ -277,7 +277,7 @@ function QuoteCard({ quote, index }: { quote: typeof expertQuotes[0]; index: num
           <div className="absolute top-4 right-6 text-6xl font-serif text-white/[0.03] leading-none select-none pointer-events-none">"</div>
 
           <div className="relative">
-            <span className="text-3xl mb-4 block">{quote.photo}</span>
+            <span className="text-white/80 mb-4 block"><quote.photo size={28} strokeWidth={1.5} /></span>
             <blockquote className="text-white/60 text-sm leading-relaxed italic mb-6">
               "{quote.quote}"
             </blockquote>
@@ -290,8 +290,8 @@ function QuoteCard({ quote, index }: { quote: typeof expertQuotes[0]; index: num
               <button
                 onClick={() => setExpanded(!expanded)}
                 className={`flex-shrink-0 vesica-btn px-3 py-1.5 text-xs transition-all duration-300 cursor-pointer flex items-center gap-1.5 ${expanded
-                    ? 'bg-psyche-violet/10 text-psyche-violet border-psyche-violet/20'
-                    : 'text-white/30 hover:text-white/60'
+                  ? 'bg-psyche-violet/10 text-psyche-violet border-psyche-violet/20'
+                  : 'text-white/30 hover:text-white/60'
                   }`}
               >
                 {expanded ? '▲ Menos' : '▼ Ver perfil'}
@@ -374,7 +374,7 @@ function LegalCard({ aspect, index }: { aspect: typeof legalFramework[0]; index:
         }}
       >
         <div className="flex items-start gap-3">
-          <span className="text-xl flex-shrink-0">{aspect.icon}</span>
+          <span className="text-white/80 flex-shrink-0 mt-0.5"><aspect.icon size={22} strokeWidth={1.5} /></span>
           <div>
             <h4 className="text-sm font-bold text-white mb-1.5">{aspect.title}</h4>
             <p className="text-white/40 text-xs leading-relaxed">{aspect.content}</p>
@@ -635,8 +635,8 @@ function FilterTabs({ active, onChange, options }: {
           key={opt.value}
           onClick={() => onChange(opt.value)}
           className={`vesica-btn px-4 py-2 text-sm transition-all duration-300 cursor-pointer ${active === opt.value
-              ? 'text-white glass-sacred'
-              : 'text-white/30 hover:text-white/60'
+            ? 'text-white glass-sacred'
+            : 'text-white/30 hover:text-white/60'
             }`}
           style={active === opt.value && opt.color ? { borderColor: `${opt.color}30` } : {}}
         >

@@ -2,13 +2,16 @@
    DATOS: Terapia Psicodélica en España — Estado Actual 2026
    ═══════════════════════════════════════════════════════ */
 
+import { Globe, Microscope, FlaskConical, Scale, Hospital, Mic, GraduationCap, Coins, Users, Calendar, Target, Dna, FileSearch, Sparkles, Building, Pill, ArrowRight, Search } from 'lucide-react';
+import { User, Shield, Brain, Sparkles as SparklesIcon, FileText } from 'lucide-react';
+
 export interface TimelineEvent {
   year: string;
   month?: string;
   title: string;
   description: string;
   type: 'milestone' | 'research' | 'legal' | 'clinical' | 'social';
-  icon: string;
+  icon: any;
   color: string;
   institution?: string;
 }
@@ -19,7 +22,7 @@ export const timeline: TimelineEvent[] = [
     title: 'ICEERS establece base en Barcelona',
     description: 'El International Center for Ethnobotanical Education, Research & Service fija su sede en Barcelona, convirtiéndola en un hub europeo de investigación psicodélica.',
     type: 'milestone',
-    icon: '🌍',
+    icon: Globe,
     color: '#22d3ee',
     institution: 'ICEERS',
   },
@@ -28,7 +31,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Fundación Beckley abre línea con España',
     description: 'Comienzan colaboraciones con universidades españolas para estudios de neuroimagen con LSD y psilocibina.',
     type: 'research',
-    icon: '🔬',
+    icon: Microscope,
     color: '#a78bfa',
     institution: 'Beckley Foundation',
   },
@@ -37,7 +40,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Energy Control amplía servicio de testeo',
     description: 'El servicio de análisis de sustancias de ABD se consolida como referencia europea en reducción de daños, analizando más de 10.000 muestras anuales.',
     type: 'social',
-    icon: '🧪',
+    icon: FlaskConical,
     color: '#34d399',
     institution: 'Energy Control / ABD',
   },
@@ -46,7 +49,7 @@ export const timeline: TimelineEvent[] = [
     title: 'AEMPS aprueba Spravato® (esketamina)',
     description: 'España aprueba el uso clínico de esketamina nasal (Spravato®) para depresión resistente al tratamiento, marcando un hito como primer psicodélico terapéutico legal.',
     type: 'legal',
-    icon: '⚖️',
+    icon: Scale,
     color: '#fbbf24',
     institution: 'AEMPS',
   },
@@ -55,7 +58,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Primer ensayo clínico con MDMA en España',
     description: 'Investigadores del Hospital Clínic de Barcelona inician un estudio piloto sobre MDMA asistida para TEPT en colaboración con MAPS.',
     type: 'clinical',
-    icon: '🏥',
+    icon: Hospital,
     color: '#f472b6',
     institution: 'Hospital Clínic, Barcelona',
   },
@@ -65,7 +68,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Conferencia PSYCH en Madrid',
     description: 'Primera gran conferencia sobre medicina psicodélica en España con más de 1.200 asistentes, investigadores de 15 países y la participación de la AEMPS.',
     type: 'social',
-    icon: '🎤',
+    icon: Mic,
     color: '#f97316',
     institution: 'PSYCH Symposium',
   },
@@ -75,7 +78,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Universidad de Barcelona: Máster en Psicodélicos',
     description: 'La UB anuncia el primer programa de posgrado en ciencias psicodélicas en una universidad pública española.',
     type: 'milestone',
-    icon: '🎓',
+    icon: GraduationCap,
     color: '#22d3ee',
     institution: 'Universitat de Barcelona',
   },
@@ -85,7 +88,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Estudio PSILO-DEP en Hospital Sant Pau',
     description: 'Comienza el primer ensayo clínico español con psilocibina sintética para depresión resistente, liderado por la Dra. Ana López.',
     type: 'clinical',
-    icon: '🍄',
+    icon: Target,
     color: '#c084fc',
     institution: 'Hospital Sant Pau, Barcelona',
   },
@@ -95,7 +98,7 @@ export const timeline: TimelineEvent[] = [
     title: 'La Fundación CANNA financia investigación',
     description: 'Se destinan 2 millones de euros para financiar investigación psicodélica en tres hospitales españoles durante los próximos 4 años.',
     type: 'research',
-    icon: '💰',
+    icon: Coins,
     color: '#34d399',
     institution: 'Fundación CANNA',
   },
@@ -105,7 +108,7 @@ export const timeline: TimelineEvent[] = [
     title: 'FDA rechaza MDMA pero España continúa',
     description: 'Pese al rechazo de la FDA a la aplicación de MAPS, la EMA mantiene su evaluación independiente y España anuncia que seguirá sus propios ensayos.',
     type: 'legal',
-    icon: '🇪🇺',
+    icon: Building,
     color: '#fbbf24',
     institution: 'EMA / AEMPS',
   },
@@ -115,7 +118,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Spravato® disponible en 42 hospitales',
     description: 'La esketamina nasal se expande a 42 centros hospitalarios en España, tratando a más de 3.000 pacientes con depresión resistente.',
     type: 'clinical',
-    icon: '💎',
+    icon: Pill,
     color: '#22d3ee',
     institution: 'SNS España',
   },
@@ -125,7 +128,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Estudio Ketamina + Psicoterapia en Navarra',
     description: 'El Hospital Universitario de Navarra publica resultados prometedores combinando ketamina IV con terapia cognitivo-conductual para ideación suicida.',
     type: 'research',
-    icon: '🧠',
+    icon: Brain,
     color: '#a78bfa',
     institution: 'HU de Navarra',
   },
@@ -135,7 +138,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Debate parlamentario sobre regulación',
     description: 'Por primera vez, el Congreso de los Diputados debate una Proposición No de Ley sobre el marco regulatorio de la terapia asistida con psicodélicos.',
     type: 'legal',
-    icon: '🏛️',
+    icon: Building,
     color: '#fbbf24',
     institution: 'Congreso de España',
   },
@@ -145,7 +148,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Ensayo fase II con psilocibina para adicciones',
     description: 'El Hospital Sant Pau amplía su programa con un ensayo específico para dependencia alcohólica usando psilocibina asistida con terapia.',
     type: 'clinical',
-    icon: '🍄',
+    icon: Target,
     color: '#c084fc',
     institution: 'Hospital Sant Pau',
   },
@@ -155,7 +158,7 @@ export const timeline: TimelineEvent[] = [
     title: 'Red Española de Medicina Psicodélica (REMP)',
     description: 'Se funda oficialmente la REMP, uniendo a 8 hospitales, 3 universidades y 15 grupos de investigación en una red coordinada de terapia psicodélica.',
     type: 'milestone',
-    icon: '🇪🇸',
+    icon: Users,
     color: '#f97316',
     institution: 'REMP',
   },
@@ -275,7 +278,7 @@ export const researchCenters: ResearchCenter[] = [
 
 export interface TherapyApproach {
   substance: string;
-  emoji: string;
+  emoji: any;
   indication: string;
   phase: string;
   availability: string;
@@ -289,7 +292,7 @@ export interface TherapyApproach {
 export const therapyApproaches: TherapyApproach[] = [
   {
     substance: 'Esketamina (Spravato®)',
-    emoji: '💎',
+    emoji: SparklesIcon,
     indication: 'Depresión resistente al tratamiento',
     phase: 'Aprobado',
     availability: '42 hospitales en España',
@@ -301,7 +304,7 @@ export const therapyApproaches: TherapyApproach[] = [
   },
   {
     substance: 'Psilocibina',
-    emoji: '🍄',
+    emoji: Target,
     indication: 'Depresión, adicciones, ansiedad existencial',
     phase: 'Ensayo Fase II',
     availability: 'Solo en ensayos clínicos',
@@ -313,7 +316,7 @@ export const therapyApproaches: TherapyApproach[] = [
   },
   {
     substance: 'MDMA',
-    emoji: '💚',
+    emoji: Brain,
     indication: 'Trastorno de Estrés Postraumático (TEPT)',
     phase: 'Ensayo Fase II',
     availability: 'Solo en ensayos clínicos',
@@ -325,7 +328,7 @@ export const therapyApproaches: TherapyApproach[] = [
   },
   {
     substance: 'Ketamina IV',
-    emoji: '🔮',
+    emoji: Dna,
     indication: 'Ideación suicida, depresión aguda',
     phase: 'Uso compasivo',
     availability: 'Hospitales seleccionados',
@@ -337,7 +340,7 @@ export const therapyApproaches: TherapyApproach[] = [
   },
   {
     substance: 'Ayahuasca',
-    emoji: '🌿',
+    emoji: Sparkles,
     indication: 'Adicciones, depresión, trauma',
     phase: 'Investigación observacional',
     availability: 'Ceremonias (zona gris legal)',
@@ -354,7 +357,7 @@ export interface ExpertQuote {
   title: string;
   institution: string;
   quote: string;
-  photo: string; // emoji placeholder
+  photo: any; // emoji placeholder
   bio: string;
   publications: string[];
   profileUrl?: string;
@@ -366,7 +369,7 @@ export const expertQuotes: ExpertQuote[] = [
     title: 'Neurofarmacólogo Clínico (1968–2020)',
     institution: 'Hospital Sant Pau · UAB, Barcelona',
     quote: 'La ayahuasca produce un estado de consciencia que no se parece a ningún otro. Es como si el cerebro pudiera verse a sí mismo desde fuera.',
-    photo: '👨‍🔬',
+    photo: User,
     bio: 'Pionero absoluto de la investigación española con psicodélicos. Farmacéutico y doctor en farmacología (UAB, 2003), realizó los primeros ensayos clínicos controlados con ayahuasca en humanos en España desde finales de los 90. Publicó cerca de 80 artículos científicos y contribuyó a legitimar el estudio de estas sustancias en el ámbito académico. Falleció el 14 de agosto de 2020, dejando un legado fundamental para la neurociencia psicodélica occidental.',
     publications: [
       'Riba et al. (2001) — Subjective effects and tolerability of the South American psychoactive beverage ayahuasca. Psychopharmacology 154(1):85-95',
@@ -380,7 +383,7 @@ export const expertQuotes: ExpertQuote[] = [
     title: 'Investigadora en Neuropsicofarmacología',
     institution: 'ICEERS, Barcelona',
     quote: 'España tiene una oportunidad única para posicionarse como líder europeo en terapia psicodélica. Tenemos la infraestructura, los investigadores y una tradición cultural que entiende estas sustancias.',
-    photo: '👩‍🔬',
+    photo: User,
     bio: 'Investigadora especializada en neuropsicofarmacología y etnobotánica. Su trabajo se centra en el estudio de los efectos de la ayahuasca, el DMT, la salvinorina-A y otras sustancias psicoactivas en humanos, analizando sus mecanismos de acción a nivel neurológico. Es también autora de trabajos sobre la configuración de la psicoterapia asistida con psicodélicos y el uso tradicional de especies como la Salvia divinorum.',
     publications: [
       'Maqueda et al. (2015) — Salvinorin-A induces intense dissociative effects, blocking external sensory perception. J Psychopharmacol 29(9):1017-1029',
@@ -394,7 +397,7 @@ export const expertQuotes: ExpertQuote[] = [
     title: 'Psicólogo Clínico · Director Científico',
     institution: 'ICEERS & Clínica Synaptica, Barcelona',
     quote: 'No estamos hablando del futuro, estamos hablando del presente. Los psicodélicos ya están cambiando la psiquiatría. La pregunta no es si, sino cuándo España regulará su uso terapéutico.',
-    photo: '🧑‍🔬',
+    photo: User,
     bio: 'Psicólogo clínico con doctorado en farmacología por la Universidad Autónoma de Barcelona. Director Científico de ICEERS desde 2010 y cofundador de Clínica Synaptica —primera clínica de medicina psicodélica en España—. Ha realizado estudios pioneros sobre MDMA para el TEPT desde los años 90 y coordina actualmente estudios longitudinales de largo plazo sobre ayahuasca, ibogaína y cannabis. Representante activo en organismos internacionales como la ONU y la OMS.',
     publications: [
       'Bouso et al. (2012) — MDMA-assisted psychotherapy in women with PTSD: a randomized controlled pilot study. Eur Neuropsychopharmacol 22(3):138-145',
@@ -408,7 +411,7 @@ export const expertQuotes: ExpertQuote[] = [
     title: 'Presidenta Sociedad Española de Psiquiatría y Salud Mental',
     institution: 'Hospital Clínico San Carlos, Madrid',
     quote: 'La esketamina ha supuesto una revolución en nuestro arsenal terapéutico. Por primera vez podemos ofrecer alivio rápido a pacientes con depresión que no respondían a nada.',
-    photo: '👩‍⚕️',
+    photo: User,
     bio: 'Catedrática de Psiquiatría en la Universidad Complutense de Madrid (UCM) y Jefa de la Unidad de Trastornos de la Conducta Alimentaria e Intervención Temprana en Psicosis del Hospital Clínico San Carlos. Formada en Metodología de Investigación en Mount Sinai Hospital (Nueva York). Presidenta de la Sociedad Española de Psiquiatría y Salud Mental (SEPSM) y ex-Presidenta de la Sociedad de Psiquiatría de Madrid. Especialista en neurobiología del estrés, salud mental de la mujer y trastornos de personalidad.',
     publications: [
       'Díaz-Marsá et al. (2012) — HPA axis and cortisol in borderline personality disorder. Psychoneuroendocrinology 37(9):1554-1566',
@@ -422,7 +425,7 @@ export const expertQuotes: ExpertQuote[] = [
 
 export interface LegalAspect {
   title: string;
-  icon: string;
+  icon: any;
   content: string;
   status: 'legal' | 'ambiguous' | 'illegal' | 'clinical';
   color: string;
@@ -431,42 +434,42 @@ export interface LegalAspect {
 export const legalFramework: LegalAspect[] = [
   {
     title: 'Esketamina (Spravato®)',
-    icon: '✅',
+    icon: Shield,
     content: 'Aprobada por AEMPS y financiada por el SNS. Administración exclusivamente hospitalaria bajo supervisión psiquiátrica. Requiere registro REMS.',
     status: 'legal',
     color: '#34d399',
   },
   {
     title: 'Ketamina IV (off-label)',
-    icon: '⚠️',
+    icon: FlaskConical,
     content: 'Legal como medicamento anestésico. Uso antidepresivo es off-label — a criterio del clínico. Sin protocolo estandarizado en España.',
     status: 'ambiguous',
     color: '#fbbf24',
   },
   {
     title: 'Psilocibina',
-    icon: '🔬',
+    icon: Target,
     content: 'Sustancia fiscalizada (Lista I). Solo accesible dentro de ensayos clínicos autorizados por AEMPS con aprobación del comité ético.',
     status: 'clinical',
     color: '#a78bfa',
   },
   {
     title: 'MDMA',
-    icon: '🔬',
+    icon: FileText,
     content: 'Sustancia fiscalizada (Lista I). Investigación clínica autorizada. Pendiente de evaluación de EMA para posible reclasificación.',
     status: 'clinical',
     color: '#f472b6',
   },
   {
     title: 'LSD',
-    icon: '❌',
+    icon: ArrowRight,
     content: 'Sustancia fiscalizada (Lista I). Sin ensayos clínicos autorizados actualmente en España. Investigación activa en Suiza y otros países.',
     status: 'illegal',
     color: '#ef4444',
   },
   {
     title: 'Ayahuasca',
-    icon: '⚠️',
+    icon: Search,
     content: 'Situación legal ambigua. El brebaje no está explícitamente fiscalizado pero contiene DMT (Lista I). Uso ceremonial tolerado, no regulado.',
     status: 'ambiguous',
     color: '#fbbf24',
@@ -474,10 +477,10 @@ export const legalFramework: LegalAspect[] = [
 ];
 
 export const keyStats = [
-  { value: '42', label: 'Hospitales con esketamina', color: '#22d3ee', icon: '🏥' },
-  { value: '3.200+', label: 'Pacientes tratados con Spravato®', color: '#34d399', icon: '👥' },
-  { value: '5', label: 'Ensayos clínicos activos', color: '#c084fc', icon: '🔬' },
-  { value: '8', label: 'Centros de investigación', color: '#a78bfa', icon: '🧠' },
-  { value: '15', label: 'Grupos de investigación', color: '#f472b6', icon: '👩‍🔬' },
-  { value: '2028', label: 'Estimación regulación MDMA (EMA)', color: '#fbbf24', icon: '📅' },
+  { value: '42', label: 'Hospitales con esketamina', color: '#22d3ee', icon: Hospital },
+  { value: '3.200+', label: 'Pacientes tratados con Spravato®', color: '#34d399', icon: Users },
+  { value: '5', label: 'Ensayos clínicos activos', color: '#c084fc', icon: Target },
+  { value: '8', label: 'Centros de investigación', color: '#a78bfa', icon: Brain },
+  { value: '15', label: 'Grupos de investigación', color: '#f472b6', icon: FileSearch },
+  { value: '2028', label: 'Estimación regulación MDMA (EMA)', color: '#fbbf24', icon: Calendar },
 ];

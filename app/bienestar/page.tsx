@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import SoundSection from '@/sections/SoundSection';
+import JourneyRoomSection from '@/sections/JourneyRoomSection';
+
 
 export const metadata: Metadata = {
     title: 'Bienestar y Sonido — PortalPSY',
@@ -11,6 +13,7 @@ export default function BienestarPage() {
     return (
         <main className="min-h-screen pt-20">
             <SoundSection />
+            <JourneyRoomSection />
         </main>
     );
 }

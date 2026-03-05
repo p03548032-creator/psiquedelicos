@@ -13,45 +13,51 @@ import engine from '@/audio/AudioEngine';
 
 // ── Datos ──
 
+import { Heart, Activity, ShieldPlus, ArrowRightLeft, Globe, Infinity, Users, Eye, Sparkles, Crown } from 'lucide-react';
+import { Moon, User as UserMeditator, Droplet, Zap, Star } from 'lucide-react';
+import { CloudRain, Bell, Music, Waves, Volume2, Wind, Flame, Droplets } from 'lucide-react';
+
 const solfeggioFreqs = [
-  { hz: 174, name: 'Alivio del Dolor', color: '#ef4444', emoji: '🔴', chakra: 'Sub-raíz', description: 'Frecuencia base del solfeggio. Reduce el dolor físico, relaja la musculatura y genera sensación de seguridad.', benefits: ['Reducción del dolor', 'Relajación muscular', 'Sensación de seguridad'] },
-  { hz: 285, name: 'Regeneración Celular', color: '#f97316', emoji: '🟠', chakra: 'Sacro inferior', description: 'Promueve la curación de tejidos dañados y restaura campos energéticos.', benefits: ['Curación de tejidos', 'Restauración energética', 'Rejuvenecimiento'] },
-  { hz: 396, name: 'Liberación del Miedo', color: '#dc2626', emoji: '🔻', chakra: 'Raíz (Muladhara)', description: 'Libera culpa y miedo. Desbloquea la energía del chakra raíz.', benefits: ['Liberar culpa', 'Superar miedos', 'Arraigo'] },
-  { hz: 417, name: 'Facilitar el Cambio', color: '#ea580c', emoji: '🟧', chakra: 'Sacro (Svadhisthana)', description: 'Deshace situaciones negativas y facilita el cambio. Limpia experiencias traumáticas.', benefits: ['Limpiar trauma', 'Facilitar cambio', 'Creatividad'] },
-  { hz: 432, name: 'Armonía Universal', color: '#8b5cf6', emoji: '💜', chakra: 'Todos', description: 'La "afinación del universo". A=432 Hz es consonante con patrones naturales.', benefits: ['Armonía natural', 'Paz mental', 'Coherencia cardíaca'] },
-  { hz: 528, name: 'Transformación & ADN', color: '#22c55e', emoji: '💚', chakra: 'Plexo Solar (Manipura)', description: 'La "frecuencia del amor". Investigaciones sugieren efectos en la reducción del cortisol.', benefits: ['Reparación ADN', 'Reducir cortisol', 'Amor incondicional'] },
-  { hz: 639, name: 'Conexión Humana', color: '#06b6d4', emoji: '💙', chakra: 'Corazón (Anahata)', description: 'Promueve la armonía en relaciones y comunicación empática.', benefits: ['Relaciones', 'Comunicación', 'Empatía'] },
-  { hz: 741, name: 'Despertar Intuición', color: '#4f46e5', emoji: '🔵', chakra: 'Garganta (Vishuddha)', description: 'Limpieza celular y expansión de consciencia. Despierta la intuición.', benefits: ['Intuición', 'Autoexpresión', 'Limpieza celular'] },
-  { hz: 852, name: 'Visión Espiritual', color: '#9333ea', emoji: '👁️', chakra: 'Tercer Ojo (Ajna)', description: 'Retorno al orden espiritual. Activa la visión interior.', benefits: ['Visión interior', 'Clarividencia', 'Orden espiritual'] },
-  { hz: 963, name: 'Conexión Divina', color: '#ec4899', emoji: '👑', chakra: 'Corona (Sahasrara)', description: 'Conecta con la consciencia universal. Activa la glándula pineal.', benefits: ['Consciencia cósmica', 'Glándula pineal', 'Unidad mística'] },
+  { hz: 174, name: 'Alivio del Dolor', color: '#ef4444', emoji: Heart, chakra: 'Sub-raíz', description: 'Frecuencia base del solfeggio. Reduce el dolor físico, relaja la musculatura y genera sensación de seguridad.', benefits: ['Reducción del dolor', 'Relajación muscular', 'Sensación de seguridad'] },
+  { hz: 285, name: 'Regeneración Celular', color: '#f97316', emoji: Activity, chakra: 'Sacro inferior', description: 'Promueve la curación de tejidos dañados y restaura campos energéticos.', benefits: ['Curación de tejidos', 'Restauración energética', 'Rejuvenecimiento'] },
+  { hz: 396, name: 'Liberación del Miedo', color: '#dc2626', emoji: ShieldPlus, chakra: 'Raíz (Muladhara)', description: 'Libera culpa y miedo. Desbloquea la energía del chakra raíz.', benefits: ['Liberar culpa', 'Superar miedos', 'Arraigo'] },
+  { hz: 417, name: 'Facilitar el Cambio', color: '#ea580c', emoji: ArrowRightLeft, chakra: 'Sacro (Svadhisthana)', description: 'Deshace situaciones negativas y facilita el cambio. Limpia experiencias traumáticas.', benefits: ['Limpiar trauma', 'Facilitar cambio', 'Creatividad'] },
+  { hz: 432, name: 'Armonía Universal', color: '#8b5cf6', emoji: Globe, chakra: 'Todos', description: 'La "afinación del universo". A=432 Hz es consonante con patrones naturales.', benefits: ['Armonía natural', 'Paz mental', 'Coherencia cardíaca'] },
+  { hz: 528, name: 'Transformación & ADN', color: '#22c55e', emoji: Infinity, chakra: 'Plexo Solar (Manipura)', description: 'La "frecuencia del amor". Investigaciones sugieren efectos en la reducción del cortisol.', benefits: ['Reparación ADN', 'Reducir cortisol', 'Amor incondicional'] },
+  { hz: 639, name: 'Conexión Humana', color: '#06b6d4', emoji: Users, chakra: 'Corazón (Anahata)', description: 'Promueve la armonía en relaciones y comunicación empática.', benefits: ['Relaciones', 'Comunicación', 'Empatía'] },
+  { hz: 741, name: 'Despertar Intuición', color: '#4f46e5', emoji: Sparkles, chakra: 'Garganta (Vishuddha)', description: 'Limpieza celular y expansión de consciencia. Despierta la intuición.', benefits: ['Intuición', 'Autoexpresión', 'Limpieza celular'] },
+  { hz: 852, name: 'Visión Espiritual', color: '#9333ea', emoji: Eye, chakra: 'Tercer Ojo (Ajna)', description: 'Retorno al orden espiritual. Activa la visión interior.', benefits: ['Visión interior', 'Clarividencia', 'Orden espiritual'] },
+  { hz: 963, name: 'Conexión Divina', color: '#ec4899', emoji: Crown, chakra: 'Corona (Sahasrara)', description: 'Conecta con la consciencia universal. Activa la glándula pineal.', benefits: ['Consciencia cósmica', 'Glándula pineal', 'Unidad mística'] },
 ];
 
 const binauralPresets = [
-  { id: 'delta', name: 'Sueño Profundo', emoji: '🌙', baseFreq: 200, beatFreq: 2, color: '#6366f1', brainwave: 'Delta · 2 Hz', description: 'Ondas Delta (0.5-4 Hz). Sueño reparador, regeneración celular.', uses: ['Insomnio', 'Regeneración', 'Meditación profunda'] },
-  { id: 'theta', name: 'Trance Meditativo', emoji: '🧘', baseFreq: 220, beatFreq: 6, color: '#7c3aed', brainwave: 'Theta · 6 Hz', description: 'Ondas Theta (4-8 Hz). Estado hipnagógico, creatividad.', uses: ['Meditación', 'Creatividad', 'Visualización'] },
-  { id: 'alpha', name: 'Relajación Lúcida', emoji: '🌊', baseFreq: 250, beatFreq: 10, color: '#06b6d4', brainwave: 'Alpha · 10 Hz', description: 'Ondas Alpha (8-13 Hz). Relajación consciente, flow.', uses: ['Anti-estrés', 'Flow state', 'Preparación'] },
-  { id: 'beta', name: 'Enfoque Activo', emoji: '⚡', baseFreq: 300, beatFreq: 18, color: '#f59e0b', brainwave: 'Beta · 18 Hz', description: 'Ondas Beta (13-30 Hz). Concentración y pensamiento analítico.', uses: ['Concentración', 'Estudio', 'Integración'] },
-  { id: 'gamma', name: 'Consciencia Expandida', emoji: '✨', baseFreq: 350, beatFreq: 40, color: '#db2777', brainwave: 'Gamma · 40 Hz', description: 'Ondas Gamma (30-100 Hz). Estados de consciencia elevada.', uses: ['Peak experience', 'Insight', 'Consciencia expandida'] },
+  { id: 'delta', name: 'Sueño Profundo', emoji: Moon, baseFreq: 200, beatFreq: 2, color: '#6366f1', brainwave: 'Delta · 2 Hz', description: 'Ondas Delta (0.5-4 Hz). Sueño reparador, regeneración celular.', uses: ['Insomnio', 'Regeneración', 'Meditación profunda'] },
+  { id: 'theta', name: 'Trance Meditativo', emoji: UserMeditator, baseFreq: 220, beatFreq: 6, color: '#7c3aed', brainwave: 'Theta · 6 Hz', description: 'Ondas Theta (4-8 Hz). Estado hipnagógico, creatividad.', uses: ['Meditación', 'Creatividad', 'Visualización'] },
+  { id: 'alpha', name: 'Relajación Lúcida', emoji: Droplet, baseFreq: 250, beatFreq: 10, color: '#06b6d4', brainwave: 'Alpha · 10 Hz', description: 'Ondas Alpha (8-13 Hz). Relajación consciente, flow.', uses: ['Anti-estrés', 'Flow state', 'Preparación'] },
+  { id: 'beta', name: 'Enfoque Activo', emoji: Zap, baseFreq: 300, beatFreq: 18, color: '#f59e0b', brainwave: 'Beta · 18 Hz', description: 'Ondas Beta (13-30 Hz). Concentración y pensamiento analítico.', uses: ['Concentración', 'Estudio', 'Integración'] },
+  { id: 'gamma', name: 'Consciencia Expandida', emoji: Star, baseFreq: 350, beatFreq: 40, color: '#db2777', brainwave: 'Gamma · 40 Hz', description: 'Ondas Gamma (30-100 Hz). Estados de consciencia elevada.', uses: ['Peak experience', 'Insight', 'Consciencia expandida'] },
 ];
 
 const soundscapeLayers = [
-  { id: 'rain', name: 'Lluvia Suave', emoji: '🌧️', desc: 'Gotas sobre cristal', type: 'noise' as const, freq: 0, filterFreq: 2500, filterType: 'lowpass' as BiquadFilterType, vol: 0.12 },
-  { id: 'bowl', name: 'Cuencos Tibetanos', emoji: '🔔', desc: 'Cuenco 396 Hz con armónicos', type: 'bowl' as const, freq: 396, filterFreq: 0, filterType: 'lowpass' as BiquadFilterType, vol: 0.06 },
-  { id: 'om', name: 'OM Continuo', emoji: '🕉️', desc: 'Frecuencia del OM (136.1 Hz)', type: 'tone' as const, freq: 136.1, filterFreq: 0, filterType: 'lowpass' as BiquadFilterType, vol: 0.05 },
-  { id: 'river', name: 'Río Fluyendo', emoji: '💧', desc: 'Agua sobre piedras', type: 'noise' as const, freq: 0, filterFreq: 1200, filterType: 'lowpass' as BiquadFilterType, vol: 0.10 },
-  { id: 'drone432', name: 'Drone 432 Hz', emoji: '🎵', desc: 'Drone tonal con armónicos', type: 'tone' as const, freq: 432, filterFreq: 0, filterType: 'lowpass' as BiquadFilterType, vol: 0.04 },
-  { id: 'wind', name: 'Viento Cósmico', emoji: '🌬️', desc: 'Brisa etérea filtrada', type: 'noise' as const, freq: 0, filterFreq: 600, filterType: 'bandpass' as BiquadFilterType, vol: 0.08 },
-  { id: 'fire', name: 'Fuego Crepitante', emoji: '🔥', desc: 'Crepitar de hoguera', type: 'noise' as const, freq: 0, filterFreq: 4000, filterType: 'highpass' as BiquadFilterType, vol: 0.06 },
-  { id: 'ocean', name: 'Olas del Mar', emoji: '🌊', desc: 'Oleaje rítmico', type: 'noise' as const, freq: 0, filterFreq: 800, filterType: 'lowpass' as BiquadFilterType, vol: 0.10 },
+  { id: 'rain', name: 'Lluvia Suave', emoji: CloudRain, desc: 'Gotas sobre cristal', type: 'noise' as const, freq: 0, filterFreq: 2500, filterType: 'lowpass' as BiquadFilterType, vol: 0.12 },
+  { id: 'bowl', name: 'Cuencos Tibetanos', emoji: Bell, desc: 'Cuenco 396 Hz con armónicos', type: 'bowl' as const, freq: 396, filterFreq: 0, filterType: 'lowpass' as BiquadFilterType, vol: 0.06 },
+  { id: 'om', name: 'OM Continuo', emoji: Volume2, desc: 'Frecuencia del OM (136.1 Hz)', type: 'tone' as const, freq: 136.1, filterFreq: 0, filterType: 'lowpass' as BiquadFilterType, vol: 0.05 },
+  { id: 'river', name: 'Río Fluyendo', emoji: Droplets, desc: 'Agua sobre piedras', type: 'noise' as const, freq: 0, filterFreq: 1200, filterType: 'lowpass' as BiquadFilterType, vol: 0.10 },
+  { id: 'drone432', name: 'Drone 432 Hz', emoji: Music, desc: 'Drone tonal con armónicos', type: 'tone' as const, freq: 432, filterFreq: 0, filterType: 'lowpass' as BiquadFilterType, vol: 0.04 },
+  { id: 'wind', name: 'Viento Cósmico', emoji: Wind, desc: 'Brisa etérea filtrada', type: 'noise' as const, freq: 0, filterFreq: 600, filterType: 'bandpass' as BiquadFilterType, vol: 0.08 },
+  { id: 'fire', name: 'Fuego Crepitante', emoji: Flame, desc: 'Crepitar de hoguera', type: 'noise' as const, freq: 0, filterFreq: 4000, filterType: 'highpass' as BiquadFilterType, vol: 0.06 },
+  { id: 'ocean', name: 'Olas del Mar', emoji: Waves, desc: 'Oleaje rítmico', type: 'noise' as const, freq: 0, filterFreq: 800, filterType: 'lowpass' as BiquadFilterType, vol: 0.10 },
 ];
 
+import { Feather, Leaf, Sparkles as Sparkles2, FlaskConical, Globe as Globe2, Music as Music2 } from 'lucide-react';
+
 const playlists = [
-  { id: 'ceremony', title: 'Ceremonial Sagrado', emoji: '🪶', color: '#d97706', tracks: 24, duration: '4h 30min', description: 'Ícaros y cantos ceremoniales amazónicos.', tags: ['Ayahuasca', 'Ícaros', 'Ceremonial'] },
-  { id: 'integration', title: 'Integración Suave', emoji: '🌱', color: '#10b981', tracks: 18, duration: '2h 15min', description: 'Ambient suave para post-experiencia.', tags: ['Post-sesión', 'Ambient', 'Healing'] },
-  { id: 'journey', title: 'Viaje Interior', emoji: '🌌', color: '#7c3aed', tracks: 32, duration: '6h 00min', description: 'Arco narrativo basado en protocolo Johns Hopkins.', tags: ['Sesión completa', 'Psilocibina'] },
-  { id: 'microdose', title: 'Microdosis & Flow', emoji: '🔬', color: '#06b6d4', tracks: 40, duration: '3h 20min', description: 'Beats lo-fi para días de microdosis.', tags: ['Microdosis', 'Lo-fi', 'Productividad'] },
-  { id: 'nature', title: 'Sonidos de Gaia', emoji: '🌍', color: '#059669', tracks: 15, duration: '5h 00min', description: 'Field recordings puros. Solo Tierra.', tags: ['Nature sounds', 'Grounding'] },
-  { id: 'rock', title: 'Psicodelia Clásica', emoji: '🎸', color: '#e11d48', tracks: 50, duration: '4h 45min', description: 'De Pink Floyd a Tame Impala.', tags: ['Rock psicodélico', 'Clásicos'] },
+  { id: 'ceremony', title: 'Ceremonial Sagrado', emoji: Feather, color: '#d97706', tracks: 24, duration: '4h 30min', description: 'Ícaros y cantos ceremoniales amazónicos.', tags: ['Ayahuasca', 'Ícaros', 'Ceremonial'] },
+  { id: 'integration', title: 'Integración Suave', emoji: Leaf, color: '#10b981', tracks: 18, duration: '2h 15min', description: 'Ambient suave para post-experiencia.', tags: ['Post-sesión', 'Ambient', 'Healing'] },
+  { id: 'journey', title: 'Viaje Interior', emoji: Sparkles2, color: '#7c3aed', tracks: 32, duration: '6h 00min', description: 'Arco narrativo basado en protocolo Johns Hopkins.', tags: ['Sesión completa', 'Psilocibina'] },
+  { id: 'microdose', title: 'Microdosis & Flow', emoji: FlaskConical, color: '#06b6d4', tracks: 40, duration: '3h 20min', description: 'Beats lo-fi para días de microdosis.', tags: ['Microdosis', 'Lo-fi', 'Productividad'] },
+  { id: 'nature', title: 'Sonidos de Gaia', emoji: Globe2, color: '#059669', tracks: 15, duration: '5h 00min', description: 'Field recordings puros. Solo Tierra.', tags: ['Nature sounds', 'Grounding'] },
+  { id: 'rock', title: 'Psicodelia Clásica', emoji: Music2, color: '#e11d48', tracks: 50, duration: '4h 45min', description: 'De Pink Floyd a Tame Impala.', tags: ['Rock psicodélico', 'Clásicos'] },
 ];
 
 
@@ -350,7 +356,7 @@ function SolfeggioPanel({ onUpdate }: { onUpdate: () => void }) {
                 </div>
 
                 <p className="text-xs font-semibold text-white/70 mb-0.5">{f.name}</p>
-                <p className="text-[10px] text-white/25">{f.emoji} {f.chakra}</p>
+                <p className="text-[10px] text-white/25"><f.emoji size={12} strokeWidth={1.5} /> {f.chakra}</p>
 
                 {isOn && (
                   <div className="mt-2 flex items-center gap-2">
@@ -489,7 +495,7 @@ function BinauralPanel({ onUpdate }: { onUpdate: () => void }) {
                   {[0, 1, 2].map(i => <div key={i} className="w-1 rounded-full animate-pulse" style={{ height: 8 + i * 4, backgroundColor: p.color, animationDelay: `${i * 0.15}s` }} />)}
                 </div>
               )}
-              <span className="text-2xl mb-2 block">{p.emoji}</span>
+              <span className="text-2xl mb-2 block"><p.emoji size={24} strokeWidth={1.5} /></span>
               <h4 className="text-sm font-semibold text-white/90 mb-1">{p.name}</h4>
               <p className="text-xs text-white/40 mb-2">{p.brainwave}</p>
               <div className="flex flex-wrap gap-1">
@@ -504,7 +510,7 @@ function BinauralPanel({ onUpdate }: { onUpdate: () => void }) {
       {activePreset && activeId && (
         <div className="p-5 rounded-2xl border" style={{ borderColor: activePreset.color + '30', background: `linear-gradient(135deg, ${activePreset.color}08, transparent)` }}>
           <div className="flex items-start gap-4">
-            <span className="text-4xl">{activePreset.emoji}</span>
+            <span className="text-4xl"><activePreset.emoji size={36} strokeWidth={1.5} /></span>
             <div>
               <h4 className="text-lg font-bold text-white/90">{activePreset.name}</h4>
               <p className="text-white/50 text-sm mt-1">{activePreset.description}</p>
@@ -656,7 +662,7 @@ function SoundscapePanel({ onUpdate }: { onUpdate: () => void }) {
             >
               <button onClick={() => toggle(layer)} className="w-full p-4 text-left cursor-pointer">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xl">{layer.emoji}</span>
+                  <span className="text-xl"><layer.emoji size={20} strokeWidth={1.5} /></span>
                   {isOn && (
                     <div className="flex gap-px">
                       {[0, 1, 2].map(j => <div key={j} className="w-0.5 bg-purple-500 rounded-full animate-pulse" style={{ height: 6 + j * 3, animationDelay: `${j * 0.1}s` }} />)}
@@ -699,7 +705,7 @@ function PlaylistsPanel() {
           >
             <div className="absolute inset-0 opacity-[0.06] group-hover:opacity-[0.12] transition-opacity" style={{ background: `linear-gradient(135deg, ${pl.color}, transparent)` }} />
             <div className="relative">
-              <span className="text-3xl mb-3 block">{pl.emoji}</span>
+              <span className="text-3xl mb-3 block"><pl.emoji size={28} strokeWidth={1.5} /></span>
               <h4 className="text-base font-bold text-white/90 mb-1">{pl.title}</h4>
               <p className="text-xs text-white/30 mb-3">{pl.tracks} tracks · {pl.duration}</p>
               <div className="flex flex-wrap gap-1.5">
@@ -715,7 +721,7 @@ function PlaylistsPanel() {
         return (
           <div className="p-6 rounded-2xl border" style={{ borderColor: pl.color + '25', background: `linear-gradient(135deg, ${pl.color}05, transparent)` }}>
             <div className="flex flex-col sm:flex-row items-start gap-6">
-              <div className="flex-shrink-0 w-20 h-20 rounded-xl flex items-center justify-center text-4xl" style={{ background: pl.color + '15' }}>{pl.emoji}</div>
+              <div className="flex-shrink-0 w-20 h-20 rounded-xl flex items-center justify-center text-4xl" style={{ background: pl.color + '15' }}><pl.emoji size={36} strokeWidth={1.5} /></div>
               <div>
                 <h4 className="text-xl font-bold text-white/90 mb-2">{pl.title}</h4>
                 <p className="text-white/50 text-sm mb-3">{pl.description}</p>

@@ -6,11 +6,13 @@ import { MetatronDivider } from '@/components/SacredGeometry';
 // Quitado el export de metadata dado que ahora es un 'use client' component.
 // Podrás añadir la metadata en el `layout.tsx` si lo necesitas luego.
 
+import { Microscope, Scale, MapPin, UserCheck, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+
 const benefits = [
-    { emoji: '🔬', title: 'Análisis de ensayos clínicos', desc: 'Resumen mensual de los estudios más relevantes en España y Europa, explicados en lenguaje accesible.' },
-    { emoji: '⚖️', title: 'Actualización regulatoria', desc: 'Te avisamos cuando cambia algo en la AEMPS, EMA o el Congreso que afecte a la terapia psicodélica.' },
-    { emoji: '🗺️', title: 'Nuevos centros y terapeutas', desc: 'Cada mes añadimos nuevos centros verificados al directorio y te lo contamos primero.' },
-    { emoji: '👩‍🔬', title: 'Entrevistas exclusivas', desc: 'Conversaciones con investigadores, terapeutas y activistas que lideran el campo en España.' },
+    { emoji: Microscope, title: 'Análisis de ensayos clínicos', desc: 'Resumen mensual de los estudios más relevantes en España y Europa, explicados en lenguaje accesible.' },
+    { emoji: Scale, title: 'Actualización regulatoria', desc: 'Te avisamos cuando cambia algo en la AEMPS, EMA o el Congreso que afecte a la terapia psicodélica.' },
+    { emoji: MapPin, title: 'Nuevos centros y terapeutas', desc: 'Cada mes añadimos nuevos centros verificados al directorio y te lo contamos primero.' },
+    { emoji: UserCheck, title: 'Entrevistas exclusivas', desc: 'Conversaciones con investigadores, terapeutas y activistas que lideran el campo en España.' },
 ];
 
 const pastIssues = [
@@ -84,9 +86,9 @@ export default function NewsletterPage() {
 
                         {/* Estado: Éxito */}
                         {status === 'success' && (
-                            <div className="text-center p-8 glass-sacred rounded-2xl border-green-500/20 bg-green-500/10 mb-6 transition-all duration-500">
-                                <span className="text-4xl mb-4 block">✨</span>
-                                <h3 className="text-xl font-bold text-white mb-2">¡Gracias por unirte!</h3>
+                            <div className="text-center p-8 glass-sacred rounded-2xl border-psyche-cyan/20 bg-psyche-cyan/10 transition-all duration-500">
+                                <span className="mb-4 flex items-center justify-center text-psyche-cyan/80"><CheckCircle2 size={48} strokeWidth={1.5} /></span>
+                                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">¡Suscripción confirmada!</h3>
                                 <p className="text-white/60 text-sm leading-relaxed mb-4">
                                     Tu suscripción ha sido confirmada. Como lo prometido es deuda, acabamos de enviarte a tu correo
                                     los <strong className="text-white/80">enlaces exclusivos de Spotify y YouTube</strong> con todas las playlists del portal.
@@ -98,7 +100,7 @@ export default function NewsletterPage() {
                         {/* Estado: Ya suscrito */}
                         {status === 'already_subscribed' && (
                             <div className="text-center p-6 glass-sacred rounded-2xl border-psyche-cyan/20 bg-psyche-cyan/10 mb-6 transition-all duration-500">
-                                <span className="text-3xl mb-3 block">🌀</span>
+                                <span className="mb-3 flex items-center justify-center text-psyche-cyan/80"><Sparkles size={36} strokeWidth={1.5} /></span>
                                 <h3 className="text-lg font-bold text-white mb-2">¡Ya estabas en la lista!</h3>
                                 <p className="text-white/60 text-sm leading-relaxed">
                                     No te preocupes, tu email ({errorMessage || "actual"}) ya está registrado correctamente en nuestra base de datos para recibir la newsletter.
@@ -109,7 +111,10 @@ export default function NewsletterPage() {
                         {/* Estado: Error genérico */}
                         {status === 'error' && (
                             <div className="text-center p-4 glass-sacred rounded-2xl border-red-500/20 bg-red-500/10 mb-6 transition-all duration-500">
-                                <p className="text-red-200 text-sm">⚠️ {errorMessage}</p>
+                                <div className="flex items-center justify-center gap-2 text-red-200 text-sm">
+                                    <AlertCircle size={16} strokeWidth={2} />
+                                    <span>{errorMessage}</span>
+                                </div>
                                 <button onClick={() => setStatus('idle')} className="text-white/50 text-xs mt-2 hover:text-white underline">Reintentar</button>
                             </div>
                         )}
@@ -164,9 +169,13 @@ export default function NewsletterPage() {
                     <div className="grid sm:grid-cols-2 gap-4">
                         {benefits.map((b, i) => (
                             <div key={i} className="glass-sacred rounded-2xl p-6 hover:scale-[1.02] transition-all">
-                                <span className="text-2xl mb-3 block">{b.emoji}</span>
-                                <h3 className="text-sm font-bold text-white mb-2">{b.title}</h3>
-                                <p className="text-white/40 text-xs leading-relaxed">{b.desc}</p>
+                                <div className="p-8 h-full flex flex-col items-center text-center">
+                                    <div className="w-16 h-16 rounded-full bg-psyche-violet/10 flex items-center justify-center text-psyche-violet/80 mb-6 border border-psyche-violet/20">
+                                        <b.emoji size={28} strokeWidth={1.5} />
+                                    </div>
+                                    <h3 className="text-sm font-bold text-white mb-2">{b.title}</h3>
+                                    <p className="text-white/40 text-xs leading-relaxed">{b.desc}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
