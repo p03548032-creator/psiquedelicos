@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import { Lock, Eye, EyeOff, CheckCircle } from 'lucide-react';
 
@@ -15,17 +15,18 @@ export default function ResetPasswordPage() {
     const [sessionReady, setSessionReady] = useState(false);
     const router = useRouter();
 
-    // Verificar que hay una sesión activa (viene del enlace de recuperación)
     useEffect(() => {
-        const supabase = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-        );
+        const supabase = createClient();
+
         supabase.auth.getSession().then(({ data }) => {
             if (data.session) {
                 setSessionReady(true);
             } else {
-                router.replace('/login');
+                // Si no hay sesión, comprobamos si estamos en medio de un proceso de recovery
+                const hash = typeof window !== 'undefined' ? window.location.hash : '';
+                if (!hash.includes('access_token')) {
+                    router.replace('/login');
+                }
             }
         });
     }, [router]);
@@ -44,10 +45,7 @@ export default function ResetPasswordPage() {
         }
 
         setLoading(true);
-        const supabase = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-        );
+        const supabase = createClient();
 
         const { error: updateError } = await supabase.auth.updateUser({ password });
 
@@ -55,11 +53,11 @@ export default function ResetPasswordPage() {
             setError(updateError.message);
         } else {
             setSuccess(true);
-            // Redirigir al login tras 3 segundos
-            setTimeout(() => router.push('/comunidad'), 3000);
+            setTimeout(() => router.push('/perfil'), 3000);
         }
         setLoading(false);
     };
+
 
     if (!sessionReady) {
         return (
