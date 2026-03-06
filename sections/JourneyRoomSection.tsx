@@ -28,10 +28,10 @@ const journeyTracks: JourneyTrack[] = [
     // ── Preparación ──
     {
         id: 'p1',
-        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Meditation_Impromptu_01.ogg',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
         title: 'Música del Chakra Raíz — Arraigo Profundo',
-        artist: 'Kevin MacLeod (Incompetech)',
-        duration: '10 min',
+        artist: 'Kevin MacLeod (Incompetech) - Demo',
+        duration: '6 min',
         phase: 'preparacion',
         description: 'Tonos de tierra para centrar y enraizar la mente antes de la experiencia.',
         icon: Leaf,
@@ -40,10 +40,10 @@ const journeyTracks: JourneyTrack[] = [
     },
     {
         id: 'p2',
-        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Meditation_Impromptu_03.ogg',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
         title: 'Calma Profunda — Silencio Preparatorio',
-        artist: 'Kevin MacLeod (Incompetech)',
-        duration: '12 min',
+        artist: 'Kevin MacLeod (Incompetech) - Demo',
+        duration: '7 min',
         phase: 'preparacion',
         description: 'Ambient suave para la meditación pre-viaje. Establece un estado de quietud y apertura.',
         icon: Wind,
@@ -54,9 +54,9 @@ const journeyTracks: JourneyTrack[] = [
     // ── Inicio del viaje ──
     {
         id: 'j1',
-        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Night_Cave.ogg',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
         title: 'Deep Journey — Ambient Terapéutico',
-        artist: 'Kevin MacLeod',
+        artist: 'Ambient Soundscape - Demo',
         duration: '8 min',
         phase: 'viaje',
         description: 'Atmósferas fluidas diseñadas para reducir la ansiedad y facilitar el inicio de la experiencia.',
@@ -66,10 +66,10 @@ const journeyTracks: JourneyTrack[] = [
     },
     {
         id: 'j2',
-        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Ambient_music.ogg',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
         title: 'Vibraciones Estelares — Expansión',
-        artist: 'Free Soundscape',
-        duration: '15 min',
+        artist: 'Free Soundscape - Demo',
+        duration: '9 min',
         phase: 'viaje',
         description: 'Música ambiental expansiva, ideal para acompañar los primeros efectos visuales o físicos.',
         icon: Flame,
@@ -80,10 +80,10 @@ const journeyTracks: JourneyTrack[] = [
     // ── Cumbre / Pico ──
     {
         id: 'c1',
-        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Tibetan_Incantations.ogg',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
         title: 'The Shaman\'s Dream — Ceremonial Soundscape',
-        artist: 'Traditional',
-        duration: '11 min',
+        artist: 'Traditional - Demo',
+        duration: '6 min',
         phase: 'cumbre',
         description: 'Cánticos tibetanos y sonidos profundos para el pico de la experiencia.',
         icon: Star,
@@ -94,10 +94,10 @@ const journeyTracks: JourneyTrack[] = [
     // ── Descenso ──
     {
         id: 'd1',
-        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Relaxing_Piano_Music.ogg',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',
         title: 'Deep Healing — Calm the Mind',
-        artist: 'Piano Meditations',
-        duration: '20 min',
+        artist: 'Piano Meditations - Demo',
+        duration: '7 min',
         phase: 'descenso',
         description: 'Música de curación profunda con notas de piano. Para el regreso suave a la normalidad.',
         icon: Moon,
@@ -108,10 +108,10 @@ const journeyTracks: JourneyTrack[] = [
     // ── Integración ──
     {
         id: 'i1',
-        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Meditation_Impromptu_01.ogg',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',
         title: 'Earth Connection — Integración',
-        artist: 'Nature Spirits',
-        duration: '10 min',
+        artist: 'Nature Spirits - Demo',
+        duration: '8 min',
         phase: 'integracion',
         description: 'Sonidos orgánicos para anclar la experiencia, meditar en paz y procesar los aprendizajes.',
         icon: Leaf,
