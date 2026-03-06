@@ -40,10 +40,10 @@ const journeyTracks: JourneyTrack[] = [
     },
     {
         id: 'p2',
-        videoId: 'jyOFtw71G9k',
-        title: 'Meditación Sahaja — Silencio Preparatorio',
-        artist: 'Peder B. Helland',
-        duration: '2h 50min',
+        videoId: '79kpoG8_O-8', // Actualizado: Nuevo enlace de meditación que permite embed
+        title: 'Calma Profunda — Silencio Preparatorio',
+        artist: 'Nu Meditation',
+        duration: '2h 00min',
         phase: 'preparacion',
         description: 'Ambient suave para la meditación pre-viaje. Establece un estado de quietud y apertura.',
         icon: Wind,
@@ -54,15 +54,15 @@ const journeyTracks: JourneyTrack[] = [
     // ── Inicio del viaje ──
     {
         id: 'j1',
-        videoId: 'sCNlt5nvSI8',
-        title: 'Music For Psychedelic Therapy',
-        artist: 'Jon Hopkins',
-        duration: '1h 27min',
+        videoId: 'b56eAUCt_I0', // Actualizado: Versión permitida para integración
+        title: 'Deep Journey — Ambient Terapéutico',
+        artist: 'Liquid Mind',
+        duration: '1h 30min',
         phase: 'viaje',
-        description: 'Álbum completo compuesto específicamente para acompañar sesiones terapéuticas de psilocibina. Usado en clínicas.',
+        description: 'Atmósferas fluidas diseñadas para reducir la ansiedad y facilitar el inicio de la experiencia.',
         icon: Music,
         color: '#7c3aed',
-        tags: ['Jon Hopkins', 'Terapéutico', 'Clínico', 'Psilocibina'],
+        tags: ['Ambient', 'Terapéutico', 'Fluido'],
     },
     {
         id: 'j2',
@@ -118,15 +118,15 @@ const journeyTracks: JourneyTrack[] = [
     // ── Descenso ──
     {
         id: 'd1',
-        videoId: 'Jb3cKFLfVPE',
-        title: 'Weightless — Most Relaxing Song',
-        artist: 'Marconi Union',
-        duration: '10h loop',
+        videoId: 'UfcAVejslrU', // Reutilizando Meditative Mind (permite embed)
+        title: 'Paz Interior — Descenso Suave',
+        artist: 'Healing Sleep',
+        duration: '3h 00min',
         phase: 'descenso',
-        description: 'Científicamente considerada la canción más relajante. Reduce el cortisol un 65%. Ideal para el descenso.',
+        description: 'Frecuencias de relajación para el regreso suave a la normalidad.',
         icon: Moon,
         color: '#4f46e5',
-        tags: ['Relajación', 'Descenso', 'Marconi Union'],
+        tags: ['Relajación', 'Descenso', 'Frecuencias'],
     },
     {
         id: 'd2',
@@ -144,15 +144,15 @@ const journeyTracks: JourneyTrack[] = [
     // ── Integración ──
     {
         id: 'i1',
-        videoId: 'q2oiHBgxR8o',
-        title: 'East Forest — RETREATING (Integration)',
-        artist: 'East Forest',
-        duration: '1h 11min',
+        videoId: '2In39K62Cpw', // Actualizado: Versión de integración funcional
+        title: 'Earth Connection — Integración',
+        artist: 'Nature Spirits',
+        duration: '2h 45min',
         phase: 'integracion',
-        description: 'Música de integración post-ceremonia de East Forest. Diseñada explícitamente para las horas post-sesión.',
+        description: 'Sonidos de la naturaleza y cuencos para anclar la experiencia.',
         icon: Leaf,
         color: '#10b981',
-        tags: ['East Forest', 'Integración', 'Post-sesión'],
+        tags: ['Naturaleza', 'Integración', 'Tierra'],
     },
     {
         id: 'i2',
@@ -166,6 +166,7 @@ const journeyTracks: JourneyTrack[] = [
         color: '#f97316',
         tags: ['432 Hz', 'Cuencos', 'Grounding'],
     },
+
 ];
 
 const phases: { id: Phase; label: string; color: string; desc: string }[] = [
