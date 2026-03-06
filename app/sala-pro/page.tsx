@@ -382,14 +382,16 @@ export default function SalaProPage() {
                                                         Abrir <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
                                                     </div>
                                                 )}
+                                            </button>
+                                        );
                                     })}
-                                            </div>
+                                </div>
                             </div>
                         ))}
-                            </div>
+                    </div>
 
-                    {/* Acceso rápido a Sala de Viaje */ }
-                            < div className = "p-6 rounded-2xl border border-white/5 bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-4" >
+                    {/* Acceso rápido a Sala de Viaje */}
+                    <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-xl bg-psyche-violet/10 flex items-center justify-center flex-shrink-0">
                                 <Headphones size={20} className="text-psyche-violet" strokeWidth={1.5} />
