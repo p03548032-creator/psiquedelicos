@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Play, ExternalLink, Info, X, Film, Headphones, Moon, Music, Wind, Waves, Leaf, Star, Flame, LucideIcon } from 'lucide-react';
+import { Play, ExternalLink, Info, X, Film, Headphones, Moon, Music, Wind, Waves, Leaf, Star, Flame, LucideIcon, Volume2, Sliders } from 'lucide-react';
 
 /* ═══════════════════════════════════════════════════════
    SALA DE VIAJE — Reproductor de Sesiones Largas
@@ -133,14 +133,59 @@ const phases: { id: Phase; label: string; color: string; desc: string }[] = [
 // ── Reproductor de Audio Nativo Custom ──
 function NativeAudioPlayer({ track, onClose }: { track: JourneyTrack; onClose: () => void }) {
     const audioRef = useRef<HTMLAudioElement>(null);
+    const audioCtxRef = useRef<AudioContext | null>(null);
+    const pannerRef = useRef<StereoPannerNode | null>(null);
+    const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [currentTimeStr, setCurrentTimeStr] = useState('0:00');
     const [durationStr, setDurationStr] = useState(track.duration);
+    const [volume, setVolume] = useState(1);
+    const [balance, setBalance] = useState(0);
+
+    const initAudioContext = () => {
+        if (!audioCtxRef.current && audioRef.current) {
+            try {
+                const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+                audioCtxRef.current = new AudioContext();
+                sourceRef.current = audioCtxRef.current.createMediaElementSource(audioRef.current);
+                pannerRef.current = audioCtxRef.current.createStereoPanner();
+                sourceRef.current.connect(pannerRef.current);
+                pannerRef.current.connect(audioCtxRef.current.destination);
+                pannerRef.current.pan.value = balance;
+            } catch (e) {
+                console.warn("AudioContext setup failed:", e);
+            }
+        }
+        if (audioCtxRef.current?.state === 'suspended') {
+            audioCtxRef.current.resume();
+        }
+    };
+
+    const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = Number(e.target.value);
+        setVolume(val);
+        if (audioRef.current) {
+            audioRef.current.volume = val;
+        }
+    };
+
+    const handleBalance = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = Number(e.target.value);
+        setBalance(val);
+        if (pannerRef.current) {
+            pannerRef.current.pan.value = val;
+        }
+    };
 
     useEffect(() => {
         if (audioRef.current) {
-            audioRef.current.play().then(() => setIsPlaying(true)).catch(e => console.error("AutoPlay prevented", e));
+            audioRef.current.crossOrigin = "anonymous";
+            audioRef.current.play().then(() => {
+                setIsPlaying(true);
+                initAudioContext();
+            }).catch(e => console.error("AutoPlay prevented", e));
         }
     }, [track.audioUrl]);
 
@@ -169,6 +214,7 @@ function NativeAudioPlayer({ track, onClose }: { track: JourneyTrack; onClose: (
 
     const togglePlay = () => {
         if (!audioRef.current) return;
+        initAudioContext();
         if (isPlaying) {
             audioRef.current.pause();
         } else {
@@ -210,7 +256,7 @@ function NativeAudioPlayer({ track, onClose }: { track: JourneyTrack; onClose: (
                 <div className="relative z-10 bg-black/40 border border-white/5 rounded-2xl p-6">
                     <audio
                         ref={audioRef}
-                        src={track.audioUrl}
+                        src={`/api/proxy-audio?url=${encodeURIComponent(track.audioUrl)}`}
                         onTimeUpdate={handleTimeUpdate}
                         onEnded={onClose}
                         loop // Iterar durante la sesión para viajes largos
@@ -232,10 +278,35 @@ function NativeAudioPlayer({ track, onClose }: { track: JourneyTrack; onClose: (
                     </div>
 
                     <div className="flex justify-center mt-6">
-                        <button onClick={togglePlay} className="w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-black transition-transform hover:scale-105"
+                        <button onClick={togglePlay} className="w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-black transition-transform hover:scale-105 outline-none"
                             style={{ background: `linear-gradient(135deg, ${track.color}, ${track.color}aa)` }}>
                             {isPlaying ? <Music size={24} className="text-white animate-pulse" /> : <Play size={24} className="text-white" fill="white" style={{ marginLeft: 4 }} />}
                         </button>
+                    </div>
+
+                    {/* Controles de Balance y Volumen */}
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-8 pt-6 border-t border-white/5">
+                        {/* Volumen */}
+                        <div className="flex items-center gap-3 w-full sm:w-1/2">
+                            <Volume2 size={16} className="text-white/40" />
+                            <input
+                                type="range" min="0" max="1" step="0.01"
+                                value={volume} onChange={handleVolume}
+                                className="w-full h-1 bg-white/10 rounded-full appearance-none outline-none cursor-pointer"
+                                style={{ background: `linear-gradient(to right, ${track.color} ${volume * 100}%, rgba(255,255,255,0.1) ${volume * 100}%)` }}
+                            />
+                        </div>
+                        {/* Balance */}
+                        <div className="flex items-center gap-3 w-full sm:w-1/2">
+                            <span className="text-xs text-white/40 font-mono w-4 text-center">L</span>
+                            <input
+                                type="range" min="-1" max="1" step="0.01"
+                                value={balance} onChange={handleBalance}
+                                className="w-full h-1 bg-white/10 rounded-full appearance-none outline-none cursor-pointer"
+                            />
+                            <span className="text-xs text-white/40 font-mono w-4 text-center">R</span>
+                            <Sliders size={16} className="text-white/40 ml-1" />
+                        </div>
                     </div>
                 </div>
 

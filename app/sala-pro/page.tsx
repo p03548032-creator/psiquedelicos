@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
     Timer, AlertTriangle, BookOpen, Map, Star, Lock,
-    Headphones, Zap, ChevronRight, Shield, X
+    Headphones, Zap, ChevronRight, Shield, X, Maximize2, Minimize2
 } from 'lucide-react';
 import TripTimer from '@/components/TripTimer';
 import InteractionChecker from '@/components/InteractionChecker';
@@ -141,6 +141,7 @@ export default function SalaProPage() {
     const [loading, setLoading] = useState(true);
     const [activeTool, setActiveTool] = useState<Tool | null>(null);
     const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | 'visualizer' | 'microdose' | 'journey-room' | null>(null);
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -195,13 +196,23 @@ export default function SalaProPage() {
 
             {/* Generic Modal Wrapper */}
             {activeModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6"
                     style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(20px)' }}>
-                    <div className="relative w-full max-w-xl glass-sacred rounded-3xl p-8 border border-white/5 max-h-[92vh] overflow-y-auto">
-                        <button onClick={() => setActiveModal(null)}
-                            className="absolute top-5 right-5 p-2 rounded-full glass-sacred hover:bg-white/10 transition-colors text-white/40 hover:text-white cursor-pointer z-10">
-                            <X size={18} />
-                        </button>
+                    <div className={`relative w-full glass-sacred overflow-y-auto transition-all duration-300 ${isFullscreen ? 'max-w-none h-full rounded-none border-none p-4 md:p-12' : 'max-w-2xl rounded-3xl p-8 border border-white/5 max-h-[92vh]'}`}>
+                        <div className="absolute top-5 right-5 flex items-center gap-2 z-10">
+                            <button onClick={() => setIsFullscreen(!isFullscreen)}
+                                className="p-2 rounded-full glass-sacred hover:bg-white/10 transition-colors text-white/40 hover:text-white cursor-pointer"
+                                title={isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
+                            >
+                                {isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
+                            </button>
+                            <button onClick={() => { setActiveModal(null); setIsFullscreen(false); }}
+                                className="p-2 rounded-full glass-sacred hover:bg-white/10 transition-colors text-white/40 hover:text-white cursor-pointer"
+                                title="Cerrar"
+                            >
+                                <X size={18} />
+                            </button>
+                        </div>
                         {activeModal === 'interactions' && (
                             <>
                                 <div className="mb-6">
