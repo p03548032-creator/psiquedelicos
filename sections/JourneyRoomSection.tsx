@@ -342,7 +342,7 @@ export default function JourneyRoomSection() {
 
             <section
                 id="sala-viaje"
-                className="relative py-32 px-6"
+                className="relative py-8 px-6"
                 ref={sectionRef}
             >
                 {/* Fondo */}

@@ -16,9 +16,10 @@ import NaviganteChat from '@/components/NaviganteChat';
 import GuidedSession from '@/components/GuidedSession';
 import InteractiveVisualizer from '@/components/InteractiveVisualizer';
 import MicrodosePlanner from '@/components/MicrodosePlanner';
-import { MousePointer2, Calendar as CalendarIcon } from 'lucide-react';
+import JourneyRoomSection from '@/sections/JourneyRoomSection';
+import { MousePointer2, Calendar as CalendarIcon, Music } from 'lucide-react';
 
-type Tool = 'trip-timer' | 'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | 'visualizer' | 'microdose';
+type Tool = 'trip-timer' | 'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | 'visualizer' | 'microdose' | 'journey-room';
 
 interface ProTool {
     id: Tool;
@@ -121,6 +122,17 @@ const proTools: ProTool[] = [
         available: true,
         badge: 'NUEVO',
     },
+    {
+        id: 'journey-room',
+        icon: Music,
+        emoji: '🎵',
+        title: 'Sala de Viaje',
+        subtitle: 'Música curada por fases',
+        description: 'Reproductor HD nativo sin anuncios. Audios ambientales y chamánicos desde la preparación a la integración.',
+        color: '#8b5cf6',
+        available: true,
+        badge: 'DESTACADO',
+    },
 ];
 
 export default function SalaProPage() {
@@ -128,7 +140,7 @@ export default function SalaProPage() {
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [activeTool, setActiveTool] = useState<Tool | null>(null);
-    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | 'visualizer' | 'microdose' | null>(null);
+    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | 'visualizer' | 'microdose' | 'journey-room' | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -163,6 +175,7 @@ export default function SalaProPage() {
         if (tool.id === 'guided-session') setActiveModal('guided-session');
         if (tool.id === 'visualizer') setActiveModal('visualizer');
         if (tool.id === 'microdose') setActiveModal('microdose');
+        if (tool.id === 'journey-room') setActiveModal('journey-room');
     };
 
     if (loading) {
@@ -215,6 +228,11 @@ export default function SalaProPage() {
                         )}
                         {activeModal === 'microdose' && (
                             <MicrodosePlanner />
+                        )}
+                        {activeModal === 'journey-room' && (
+                            <div className="-mx-4 -my-4 h-[80vh] overflow-y-auto">
+                                <JourneyRoomSection />
+                            </div>
                         )}
                     </div>
                 </div>
@@ -278,87 +296,100 @@ export default function SalaProPage() {
                         )}
                     </div>
 
-                    {/* Grid de Herramientas */}
+                    {/* Grid de Herramientas Agrupado */}
                     <div className="mb-8">
-                        <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-lg font-black text-white/80">Herramientas</h2>
+                        <div className="flex items-center justify-between mb-8">
+                            <h2 className="text-xl font-black text-white/90">Ecosistema Integral</h2>
                             <span className="text-xs text-white/30">
-                                {proTools.filter(t => t.available).length} disponibles · {proTools.filter(t => !t.available).length} en desarrollo
+                                {proTools.filter(t => t.available).length} disponibles
                             </span>
                         </div>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {proTools.map(tool => {
-                                const Icon = tool.icon;
-                                const isLocked = !isPro || !tool.available;
 
-                                return (
-                                    <button
-                                        key={tool.id}
-                                        onClick={() => handleToolClick(tool)}
-                                        disabled={!tool.available}
-                                        className={`relative rounded-2xl p-6 text-left border transition-all duration-300 group ${tool.available && isPro
-                                            ? 'hover:scale-[1.02] cursor-pointer hover:border-white/20'
-                                            : tool.available && !isPro
-                                                ? 'hover:scale-[1.02] cursor-pointer'
-                                                : 'cursor-default opacity-60'
-                                            }`}
-                                        style={{
-                                            borderColor: tool.available && isPro ? `${tool.color}30` : 'rgba(255,255,255,0.05)',
-                                            background: tool.available && isPro
-                                                ? `linear-gradient(135deg, ${tool.color}08, transparent)`
-                                                : 'rgba(255,255,255,0.02)',
-                                            boxShadow: tool.available && isPro
-                                                ? `0 0 40px ${tool.color}08`
-                                                : undefined,
-                                        }}
-                                    >
-                                        {/* Badge */}
-                                        {tool.badge && (
-                                            <div className="absolute top-4 right-4">
-                                                <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full"
-                                                    style={{
-                                                        background: tool.available ? `${tool.color}25` : 'rgba(255,255,255,0.05)',
-                                                        color: tool.available ? tool.color : 'rgba(255,255,255,0.3)',
-                                                    }}>
-                                                    {tool.badge}
-                                                </span>
-                                            </div>
-                                        )}
+                        {[
+                            { title: 'Fase 1: Preparación', color: '#10b981', tools: ['set-setting', 'interactions', 'microdose'] },
+                            { title: 'Fase 2: El Viaje (Espacio Seguro)', color: '#7c3aed', tools: ['trip-timer', 'journey-room', 'visualizer'] },
+                            { title: 'Fase 3: Integración', color: '#f59e0b', tools: ['diary', 'guided-session', 'ai-guide'] }
+                        ].map((group, groupIndex) => (
+                            <div key={groupIndex} className="mb-12">
+                                <div className="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
+                                    <span className="w-2 h-2 rounded-full" style={{ background: group.color }} />
+                                    <h3 className="text-white/70 font-bold uppercase tracking-widest text-xs">
+                                        {group.title}
+                                    </h3>
+                                </div>
+                                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {proTools.filter(t => group.tools.includes(t.id)).map(tool => {
+                                        const Icon = tool.icon;
+                                        const isLocked = !isPro || !tool.available;
 
-                                        {/* Blur overlay para herramientas bloqueadas por PRO */}
-                                        {tool.available && !isPro && (
-                                            <div className="absolute inset-0 z-10 rounded-2xl flex items-center justify-center"
-                                                style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(2px)' }}>
-                                                <div className="text-center p-4">
-                                                    <Lock size={20} className="text-amber-400 mx-auto mb-2" />
-                                                    <p className="text-xs font-bold text-amber-400">Requiere PRO</p>
+                                        return (
+                                            <button
+                                                key={tool.id}
+                                                onClick={() => handleToolClick(tool)}
+                                                disabled={!tool.available}
+                                                className={`relative rounded-2xl p-6 text-left border transition-all duration-300 group ${tool.available && isPro
+                                                    ? 'hover:scale-[1.02] cursor-pointer hover:border-white/20'
+                                                    : tool.available && !isPro
+                                                        ? 'hover:scale-[1.02] cursor-pointer'
+                                                        : 'cursor-default opacity-60'
+                                                    }`}
+                                                style={{
+                                                    borderColor: tool.available && isPro ? `${tool.color}30` : 'rgba(255,255,255,0.05)',
+                                                    background: tool.available && isPro
+                                                        ? `linear-gradient(135deg, ${tool.color}08, transparent)`
+                                                        : 'rgba(255,255,255,0.02)',
+                                                    boxShadow: tool.available && isPro
+                                                        ? `0 0 40px ${tool.color}08`
+                                                        : undefined,
+                                                }}
+                                            >
+                                                {/* Badge */}
+                                                {tool.badge && (
+                                                    <div className="absolute top-4 right-4">
+                                                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full"
+                                                            style={{
+                                                                background: tool.available ? `${tool.color}25` : 'rgba(255,255,255,0.05)',
+                                                                color: tool.available ? tool.color : 'rgba(255,255,255,0.3)',
+                                                            }}>
+                                                            {tool.badge}
+                                                        </span>
+                                                    </div>
+                                                )}
+
+                                                {/* Blur overlay para herramientas bloqueadas por PRO */}
+                                                {tool.available && !isPro && (
+                                                    <div className="absolute inset-0 z-10 rounded-2xl flex items-center justify-center"
+                                                        style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(2px)' }}>
+                                                        <div className="text-center p-4">
+                                                            <Lock size={20} className="text-amber-400 mx-auto mb-2" />
+                                                            <p className="text-xs font-bold text-amber-400">Requiere PRO</p>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                                                    style={{ background: `${tool.color}15` }}>
+                                                    <Icon size={22} strokeWidth={1.5} style={{ color: tool.color }} />
                                                 </div>
+
+                                                <h3 className="font-black text-white mb-0.5">{tool.title}</h3>
+                                                <p className="text-xs text-white/40 mb-3">{tool.subtitle}</p>
+                                                <p className="text-white/50 text-sm leading-relaxed">{tool.description}</p>
+
+                                                {tool.available && isPro && (
+                                                    <div className="mt-4 flex items-center gap-1 text-xs font-bold"
+                                                        style={{ color: tool.color }}>
+                                                        Abrir <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                                                    </div>
+                                                )}
+                                    })}
                                             </div>
-                                        )}
+                            </div>
+                        ))}
+                            </div>
 
-                                        <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                                            style={{ background: `${tool.color}15` }}>
-                                            <Icon size={22} strokeWidth={1.5} style={{ color: tool.color }} />
-                                        </div>
-
-                                        <h3 className="font-black text-white mb-0.5">{tool.title}</h3>
-                                        <p className="text-xs text-white/40 mb-3">{tool.subtitle}</p>
-                                        <p className="text-white/50 text-sm leading-relaxed">{tool.description}</p>
-
-                                        {tool.available && isPro && (
-                                            <div className="mt-4 flex items-center gap-1 text-xs font-bold"
-                                                style={{ color: tool.color }}>
-                                                Abrir <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                                            </div>
-                                        )}
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Acceso rápido a Sala de Viaje */}
-                    <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    {/* Acceso rápido a Sala de Viaje */ }
+                            < div className = "p-6 rounded-2xl border border-white/5 bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-4" >
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-xl bg-psyche-violet/10 flex items-center justify-center flex-shrink-0">
                                 <Headphones size={20} className="text-psyche-violet" strokeWidth={1.5} />
@@ -368,10 +399,10 @@ export default function SalaProPage() {
                                 <p className="text-white/40 text-sm">Sesiones largas curadas por fase</p>
                             </div>
                         </div>
-                        <Link href="/bienestar#sala-viaje"
-                            className="vesica-btn px-5 py-2.5 glass-sacred text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 flex-shrink-0">
-                            <Headphones size={14} /> Ir a la música <ChevronRight size={14} />
-                        </Link>
+                        <button onClick={() => setActiveModal('journey-room')}
+                            className="vesica-btn px-5 py-2.5 glass-sacred text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 flex-shrink-0 cursor-pointer">
+                            <Headphones size={14} /> Abrir reproductor <ChevronRight size={14} />
+                        </button>
                     </div>
 
                     {/* Footer de seguridad */}

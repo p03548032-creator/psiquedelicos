@@ -5,17 +5,14 @@ import { usePathname } from 'next/navigation';
 import SearchOverlay from '@/components/SearchOverlay';
 import { createClient } from '@/lib/supabase/client';
 
-import { FlaskConical, Microscope, HeartPulse, UserCheck, MessagesSquare, Headphones, Wrench, Mail } from 'lucide-react';
+import { FlaskConical, UserCheck, MessagesSquare, Newspaper, Unlock } from 'lucide-react';
 
 const navLinks = [
     { href: '/sustancias', label: 'Sustancias', icon: FlaskConical },
-    { href: '/investigacion', label: 'Investigación', icon: Microscope },
-    { href: '/terapia-espana', label: 'Terapia España', icon: HeartPulse },
-    { href: '/terapeutas', label: 'Terapeutas', icon: UserCheck },
+    { href: '/noticias', label: 'Noticias', icon: Newspaper },
     { href: '/comunidad', label: 'Comunidad', icon: MessagesSquare },
-    { href: '/bienestar', label: 'Bienestar', icon: Headphones },
-    { href: '/herramientas', label: 'Herramientas', icon: Wrench },
-    { href: '/newsletter', label: 'Newsletter', icon: Mail },
+    { href: '/terapeutas', label: 'Terapeutas', icon: UserCheck },
+    { href: '/sala-libre', label: 'Sala Libre', icon: Unlock },
 ];
 
 export default function Navigation() {
