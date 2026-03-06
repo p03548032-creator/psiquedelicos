@@ -13,7 +13,7 @@ type Phase = 'preparacion' | 'viaje' | 'cumbre' | 'descenso' | 'integracion';
 
 interface JourneyTrack {
     id: string;
-    videoId: string;   // YouTube video ID
+    audioUrl: string;   // Native audio URL (ogg/mp3)
     title: string;
     artist: string;
     duration: string;
@@ -28,22 +28,22 @@ const journeyTracks: JourneyTrack[] = [
     // ── Preparación ──
     {
         id: 'p1',
-        videoId: 'UfcAVejslrU',
+        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Meditation_Impromptu_01.ogg',
         title: 'Música del Chakra Raíz — Arraigo Profundo',
-        artist: 'Meditative Mind',
-        duration: '3h 06min',
+        artist: 'Kevin MacLeod (Incompetech)',
+        duration: '10 min',
         phase: 'preparacion',
-        description: 'Tonos de tierra para centrar y enraizar la mente antes de la experiencia. 396 Hz en loop.',
+        description: 'Tonos de tierra para centrar y enraizar la mente antes de la experiencia.',
         icon: Leaf,
         color: '#10b981',
-        tags: ['396 Hz', 'Arraigo', 'Preparación'],
+        tags: ['Arraigo', 'Preparación'],
     },
     {
         id: 'p2',
-        videoId: '79kpoG8_O-8', // Actualizado: Nuevo enlace de meditación que permite embed
+        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Meditation_Impromptu_03.ogg',
         title: 'Calma Profunda — Silencio Preparatorio',
-        artist: 'Nu Meditation',
-        duration: '2h 00min',
+        artist: 'Kevin MacLeod (Incompetech)',
+        duration: '12 min',
         phase: 'preparacion',
         description: 'Ambient suave para la meditación pre-viaje. Establece un estado de quietud y apertura.',
         icon: Wind,
@@ -54,10 +54,10 @@ const journeyTracks: JourneyTrack[] = [
     // ── Inicio del viaje ──
     {
         id: 'j1',
-        videoId: 'b56eAUCt_I0', // Actualizado: Versión permitida para integración
+        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Night_Cave.ogg',
         title: 'Deep Journey — Ambient Terapéutico',
-        artist: 'Liquid Mind',
-        duration: '1h 30min',
+        artist: 'Kevin MacLeod',
+        duration: '8 min',
         phase: 'viaje',
         description: 'Atmósferas fluidas diseñadas para reducir la ansiedad y facilitar el inicio de la experiencia.',
         icon: Music,
@@ -66,77 +66,41 @@ const journeyTracks: JourneyTrack[] = [
     },
     {
         id: 'j2',
-        videoId: 'Na0w3Mz46GA',
-        title: 'Ícaros Amazónicos — Medicina de la Jungla',
-        artist: 'Maestro don Enrique',
-        duration: '3h 30min',
+        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Ambient_music.ogg',
+        title: 'Vibraciones Estelares — Expansión',
+        artist: 'Free Soundscape',
+        duration: '15 min',
         phase: 'viaje',
-        description: 'Ícaros tradicionales del Amazonas. Cantos chamánicos utilizados en ceremonias de Ayahuasca.',
+        description: 'Música ambiental expansiva, ideal para acompañar los primeros efectos visuales o físicos.',
         icon: Flame,
         color: '#f59e0b',
-        tags: ['Ícaros', 'Ayahuasca', 'Ceremonial', 'Amazónico'],
-    },
-    {
-        id: 'j3',
-        videoId: '5qap5aO4i9A',
-        title: 'Lofi Hip Hop Mix — Deep Focus Journey',
-        artist: 'lofi girl',
-        duration: '4h+',
-        phase: 'viaje',
-        description: 'Beats lo-fi rítmicos suaves. Para sesiones de microdosis y flujo creativo sostenido.',
-        icon: Headphones,
-        color: '#06b6d4',
-        tags: ['Lo-fi', 'Microdosis', 'Creativo', 'Flow'],
+        tags: ['Sintetizador', 'Expansivo', 'Ceremonial'],
     },
 
     // ── Cumbre / Pico ──
     {
         id: 'c1',
-        videoId: 'BBijb_qmZyA',
+        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Tibetan_Incantations.ogg',
         title: 'The Shaman\'s Dream — Ceremonial Soundscape',
-        artist: 'Shaman\'s Dream',
-        duration: '4h 12min',
+        artist: 'Traditional',
+        duration: '11 min',
         phase: 'cumbre',
-        description: 'Ambient chamánico de alta intensidad para acompañar la cumbre de la experiencia. Instrumental rico.',
+        description: 'Cánticos tibetanos y sonidos profundos para el pico de la experiencia.',
         icon: Star,
         color: '#db2777',
-        tags: ['Chamánico', 'Cumbre', 'Intenso', 'Ceremonial'],
-    },
-    {
-        id: 'c2',
-        videoId: 'n4tcGHMH1fE',
-        title: 'OM Mantra — Chakra Sahasrara',
-        artist: 'Meditative Mind',
-        duration: '2h 00min',
-        phase: 'cumbre',
-        description: 'OM continuo a 963 Hz para estados de consciencia expandida. Cymática pura.',
-        icon: Waves,
-        color: '#ec4899',
-        tags: ['963 Hz', 'Corona', 'OM', 'Consciencia'],
+        tags: ['Cánticos', 'Cumbre', 'Intenso', 'Ceremonial'],
     },
 
     // ── Descenso ──
     {
         id: 'd1',
-        videoId: 'UfcAVejslrU', // Reutilizando Meditative Mind (permite embed)
-        title: 'Paz Interior — Descenso Suave',
-        artist: 'Healing Sleep',
-        duration: '3h 00min',
-        phase: 'descenso',
-        description: 'Frecuencias de relajación para el regreso suave a la normalidad.',
-        icon: Moon,
-        color: '#4f46e5',
-        tags: ['Relajación', 'Descenso', 'Frecuencias'],
-    },
-    {
-        id: 'd2',
-        videoId: 'lE6RYpe9IT0',
+        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Relaxing_Piano_Music.ogg',
         title: 'Deep Healing — Calm the Mind',
-        artist: 'Greenred Productions',
-        duration: '2h 15min',
+        artist: 'Piano Meditations',
+        duration: '20 min',
         phase: 'descenso',
         description: 'Música de curación profunda con notas de piano. Para el regreso suave a la normalidad.',
-        icon: Waves,
+        icon: Moon,
         color: '#0ea5e9',
         tags: ['Curación', 'Piano', 'Suave', 'Post-cumbre'],
     },
@@ -144,27 +108,15 @@ const journeyTracks: JourneyTrack[] = [
     // ── Integración ──
     {
         id: 'i1',
-        videoId: '2In39K62Cpw', // Actualizado: Versión de integración funcional
+        audioUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Meditation_Impromptu_01.ogg',
         title: 'Earth Connection — Integración',
         artist: 'Nature Spirits',
-        duration: '2h 45min',
+        duration: '10 min',
         phase: 'integracion',
-        description: 'Sonidos de la naturaleza y cuencos para anclar la experiencia.',
+        description: 'Sonidos orgánicos para anclar la experiencia, meditar en paz y procesar los aprendizajes.',
         icon: Leaf,
         color: '#10b981',
         tags: ['Naturaleza', 'Integración', 'Tierra'],
-    },
-    {
-        id: 'i2',
-        videoId: 'SXx6RgKABXI',
-        title: 'Tibetan Healing Bowls — 432 Hz',
-        artist: 'Tibetan Meditation',
-        duration: '3h 00min',
-        phase: 'integracion',
-        description: 'Cuencos tibetanos afinados a 432 Hz para anclar el aprendizaje y volver al cuerpo.',
-        icon: Waves,
-        color: '#f97316',
-        tags: ['432 Hz', 'Cuencos', 'Grounding'],
     },
 
 ];
@@ -178,74 +130,118 @@ const phases: { id: Phase; label: string; color: string; desc: string }[] = [
 ];
 
 
-// ── Player de YouTube embebido ──
-function YouTubePlayer({ track, onClose }: { track: JourneyTrack; onClose: () => void }) {
+// ── Reproductor de Audio Nativo Custom ──
+function NativeAudioPlayer({ track, onClose }: { track: JourneyTrack; onClose: () => void }) {
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [currentTimeStr, setCurrentTimeStr] = useState('0:00');
+    const [durationStr, setDurationStr] = useState(track.duration);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.play().then(() => setIsPlaying(true)).catch(e => console.error("AutoPlay prevented", e));
+        }
+    }, [track.audioUrl]);
+
+    const formatTime = (time: number) => {
+        const min = Math.floor(time / 60);
+        const sec = Math.floor(time % 60);
+        return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    };
+
+    const handleTimeUpdate = () => {
+        if (audioRef.current) {
+            const current = audioRef.current.currentTime;
+            const dur = audioRef.current.duration;
+            setCurrentTimeStr(formatTime(current));
+            if (dur) setProgress((current / dur) * 100);
+        }
+    };
+
+    const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (audioRef.current) {
+            const seekTime = (Number(e.target.value) / 100) * audioRef.current.duration;
+            audioRef.current.currentTime = seekTime;
+            setProgress(Number(e.target.value));
+        }
+    };
+
+    const togglePlay = () => {
+        if (!audioRef.current) return;
+        if (isPlaying) {
+            audioRef.current.pause();
+        } else {
+            audioRef.current.play();
+        }
+        setIsPlaying(!isPlaying);
+    };
+
     return (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 md:p-8">
-            {/* Overlay oscuro */}
             <div
                 className="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer"
                 onClick={onClose}
             />
 
-            <div className="relative w-full max-w-4xl z-10">
-                {/* Header del player */}
-                <div className="flex items-start justify-between mb-4 gap-4">
+            <div className="relative w-full max-w-2xl z-10 glass-sacred rounded-3xl border border-white/10 p-6 md:p-10 shadow-2xl overflow-hidden">
+                {/* Visualizer Effect Background */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-3xl animate-pulse"
+                        style={{ background: track.color }} />
+                </div>
+
+                {/* Header */}
+                <div className="relative z-10 flex items-start justify-between mb-8 gap-4">
                     <div>
-                        <div
-                            className="text-xs font-bold uppercase tracking-widest mb-1 flex items-center gap-2"
-                            style={{ color: track.color }}
-                        >
+                        <div className="text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2" style={{ color: track.color }}>
                             <track.icon size={12} strokeWidth={2} />
                             {phases.find(p => p.id === track.phase)?.label}
                         </div>
-                        <h2 className="text-xl sm:text-2xl font-black text-white leading-tight">{track.title}</h2>
-                        <p className="text-white/50 text-sm mt-0.5">{track.artist} · {track.duration}</p>
+                        <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">{track.title}</h2>
+                        <p className="text-white/50 text-base mt-2">{track.artist}</p>
                     </div>
-                    <button
-                        onClick={onClose}
-                        className="flex-shrink-0 p-2 rounded-full glass-sacred hover:bg-white/10 transition-colors text-white/60 hover:text-white cursor-pointer"
-                    >
+                    <button onClick={onClose} className="p-2 flex-shrink-0 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/60 hover:text-white border border-white/10 cursor-pointer">
                         <X size={20} />
                     </button>
                 </div>
 
-                {/* Iframe de YouTube */}
-                <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-                    style={{ paddingBottom: '56.25%' /* 16/9 ratio */ }}>
-                    <iframe
-                        className="absolute inset-0 w-full h-full"
-                        src={`https://www.youtube.com/embed/${track.videoId}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&color=white`}
-                        title={track.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
+                {/* Player Controls */}
+                <div className="relative z-10 bg-black/40 border border-white/5 rounded-2xl p-6">
+                    <audio
+                        ref={audioRef}
+                        src={track.audioUrl}
+                        onTimeUpdate={handleTimeUpdate}
+                        onEnded={onClose}
+                        loop // Iterar durante la sesión para viajes largos
                     />
+
+                    <div className="flex items-center gap-4 mb-4">
+                        <span className="text-xs text-white/40 tabular-nums font-mono">{currentTimeStr}</span>
+                        <input
+                            type="range"
+                            min="0" max="100"
+                            value={progress}
+                            onChange={handleSeek}
+                            className="w-full h-1 bg-white/10 rounded-full appearance-none outline-none cursor-pointer"
+                            style={{
+                                background: `linear-gradient(to right, ${track.color} ${progress}%, rgba(255,255,255,0.1) ${progress}%)`
+                            }}
+                        />
+                        <span className="text-xs text-white/40 tabular-nums font-mono">{durationStr}</span>
+                    </div>
+
+                    <div className="flex justify-center mt-6">
+                        <button onClick={togglePlay} className="w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-black transition-transform hover:scale-105"
+                            style={{ background: `linear-gradient(135deg, ${track.color}, ${track.color}aa)` }}>
+                            {isPlaying ? <Music size={24} className="text-white animate-pulse" /> : <Play size={24} className="text-white" fill="white" style={{ marginLeft: 4 }} />}
+                        </button>
+                    </div>
                 </div>
 
-                {/* Info y tags */}
-                <div className="mt-4 flex flex-col sm:flex-row items-start gap-4">
-                    <div className="flex-1">
-                        <p className="text-white/50 text-sm leading-relaxed">{track.description}</p>
-                        <div className="flex flex-wrap gap-1.5 mt-2">
-                            {track.tags.map(t => (
-                                <span
-                                    key={t}
-                                    className="text-[10px] px-2 py-0.5 rounded-full"
-                                    style={{ background: track.color + '20', color: track.color + 'cc' }}
-                                >
-                                    {t}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                    <a
-                        href={`https://www.youtube.com/watch?v=${track.videoId}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs text-white/30 hover:text-white/70 transition-colors flex-shrink-0"
-                    >
-                        <ExternalLink size={12} /> Ver en YouTube
-                    </a>
+                {/* Footer description */}
+                <div className="relative z-10 mt-8 text-center">
+                    <p className="text-white/40 text-sm">{track.description}</p>
                 </div>
             </div>
         </div>
@@ -341,7 +337,7 @@ export default function JourneyRoomSection() {
         <>
             {/* Player Modal */}
             {playingTrack && (
-                <YouTubePlayer track={playingTrack} onClose={() => setPlayingTrack(null)} />
+                <NativeAudioPlayer track={playingTrack} onClose={() => setPlayingTrack(null)} />
             )}
 
             <section
@@ -370,11 +366,11 @@ export default function JourneyRoomSection() {
                             <span className="block text-white/90 mt-2">Viaje</span>
                         </h2>
                         <p className="text-white/40 max-w-2xl mx-auto text-lg">
-                            Música curada por fase de experiencia. Desde la preparación hasta la integración.
+                            Música curada por fase de experiencia. Servida directamente sin anuncios ni bloqueos.
                         </p>
                         <p className="text-white/25 text-sm mt-2 flex items-center justify-center gap-2">
                             <Headphones size={14} className="inline" />
-                            Auriculares recomendados · El vídeo se abre a pantalla completa al pulsar ▶
+                            Auriculares altamente recomendados
                         </p>
                     </div>
 
@@ -415,7 +411,7 @@ export default function JourneyRoomSection() {
                         <div className="mb-8 p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-3 text-xs text-white/50 leading-relaxed">
                             <Info size={14} className="text-amber-400 flex-shrink-0 mt-0.5" />
                             <span>
-                                <strong className="text-amber-300/80">Nota de reducción de daños:</strong> Esta sección actúa como reproductor de recursos musicales ya publicados en YouTube. PortalPSY no anima al consumo de ninguna sustancia, sino a la preparación adecuada, la reducción de daños y la integración posterior. La música es un apoyo clínico y cultural reconocido.
+                                <strong className="text-amber-300/80">Nota de reducción de daños:</strong> Esta sección actúa como reproductor de recursos y herramientas musicales. PortalPSY aloja directamente el audio para evitar interrupciones o publicidad que pueda alterar la experiencia.
                             </span>
                             <button onClick={() => setShowInfo(false)} className="flex-shrink-0 text-white/20 hover:text-white/50 cursor-pointer">
                                 <X size={12} />
