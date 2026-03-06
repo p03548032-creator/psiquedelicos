@@ -125,12 +125,17 @@ export default function Navigation() {
                     </Link>
 
                     {user ? (
-                        <Link href="/perfil" className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/5 transition">
-                            <span className="text-xs text-white/60">{user.user_metadata?.full_name?.split(' ')[0] || 'Mi Perfil'}</span>
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-psyche-violet to-psyche-pink flex items-center justify-center text-[10px] font-bold">
-                                {user.user_metadata?.full_name?.charAt(0) || 'U'}
-                            </div>
-                        </Link>
+                        <div className="hidden sm:flex items-center gap-2">
+                            <Link href="/sala-pro" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 transition text-amber-400 text-xs font-bold">
+                                ✦ Sala PRO
+                            </Link>
+                            <Link href="/perfil" className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/5 transition">
+                                <span className="text-xs text-white/60">{user.user_metadata?.full_name?.split(' ')[0] || 'Mi Perfil'}</span>
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-psyche-violet to-psyche-pink flex items-center justify-center text-[10px] font-bold">
+                                    {user.user_metadata?.full_name?.charAt(0) || 'U'}
+                                </div>
+                            </Link>
+                        </div>
                     ) : (
                         <Link href="/login"
                             className="hidden sm:flex vesica-btn px-3 py-1.5 text-xs text-white/50 hover:text-white transition-all">
@@ -166,10 +171,16 @@ export default function Navigation() {
                     </div>
                     <div className="border-t border-white/5 p-4 space-y-2">
                         {user ? (
-                            <Link href="/perfil" onClick={() => setMenuOpen(false)}
-                                className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-white/5 text-white/80 border border-white/10 hover:bg-white/10 transition">
-                                Mi Perfil
-                            </Link>
+                            <>
+                                <Link href="/sala-pro" onClick={() => setMenuOpen(false)}
+                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20 transition">
+                                    ✦ Sala PRO
+                                </Link>
+                                <Link href="/perfil" onClick={() => setMenuOpen(false)}
+                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-white/5 text-white/80 border border-white/10 hover:bg-white/10 transition">
+                                    Mi Perfil
+                                </Link>
+                            </>
                         ) : (
                             <Link href="/login" onClick={() => setMenuOpen(false)}
                                 className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-psyche-violet/20 text-psyche-violet border border-psyche-violet/30 hover:bg-psyche-violet/30 transition">
