@@ -14,8 +14,11 @@ import IntegrationDiary from '@/components/IntegrationDiary';
 import SetSettingGenerator from '@/components/SetSettingGenerator';
 import NaviganteChat from '@/components/NaviganteChat';
 import GuidedSession from '@/components/GuidedSession';
+import InteractiveVisualizer from '@/components/InteractiveVisualizer';
+import MicrodosePlanner from '@/components/MicrodosePlanner';
+import { MousePointer2, Calendar as CalendarIcon } from 'lucide-react';
 
-type Tool = 'trip-timer' | 'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session';
+type Tool = 'trip-timer' | 'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | 'visualizer' | 'microdose';
 
 interface ProTool {
     id: Tool;
@@ -96,6 +99,28 @@ const proTools: ProTool[] = [
         available: true,
         badge: 'NUEVO',
     },
+    {
+        id: 'visualizer',
+        icon: MousePointer2,
+        emoji: '🌀',
+        title: 'Anclaje Visual',
+        subtitle: 'Geometría y fluidos',
+        description: 'Visualizador interactivo para enfocar la mente y romper bucles de ansiedad durante el efecto pico.',
+        color: '#ec4899',
+        available: true,
+        badge: 'NUEVO',
+    },
+    {
+        id: 'microdose',
+        icon: CalendarIcon,
+        emoji: '📅',
+        title: 'Plan Microdosis',
+        subtitle: 'Calendario de tomas',
+        description: 'Planificador visual de 28 días basado en protocolos reconocidos (Fadiman, Stamets, Nightcap).',
+        color: '#34d399',
+        available: true,
+        badge: 'NUEVO',
+    },
 ];
 
 export default function SalaProPage() {
@@ -103,7 +128,7 @@ export default function SalaProPage() {
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [activeTool, setActiveTool] = useState<Tool | null>(null);
-    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | null>(null);
+    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | 'visualizer' | 'microdose' | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -136,6 +161,8 @@ export default function SalaProPage() {
         if (tool.id === 'set-setting') setActiveModal('set-setting');
         if (tool.id === 'ai-guide') setActiveModal('ai-guide');
         if (tool.id === 'guided-session') setActiveModal('guided-session');
+        if (tool.id === 'visualizer') setActiveModal('visualizer');
+        if (tool.id === 'microdose') setActiveModal('microdose');
     };
 
     if (loading) {
@@ -182,6 +209,12 @@ export default function SalaProPage() {
                         )}
                         {activeModal === 'guided-session' && (
                             <GuidedSession />
+                        )}
+                        {activeModal === 'visualizer' && (
+                            <InteractiveVisualizer />
+                        )}
+                        {activeModal === 'microdose' && (
+                            <MicrodosePlanner />
                         )}
                     </div>
                 </div>
