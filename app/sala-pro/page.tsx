@@ -6,10 +6,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
     Timer, AlertTriangle, BookOpen, Map, Star, Lock,
-    Headphones, Zap, ChevronRight, Shield
+    Headphones, Zap, ChevronRight, Shield, X
 } from 'lucide-react';
 import TripTimer from '@/components/TripTimer';
 import InteractionChecker from '@/components/InteractionChecker';
+import IntegrationDiary from '@/components/IntegrationDiary';
+import SetSettingGenerator from '@/components/SetSettingGenerator';
 
 type Tool = 'trip-timer' | 'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session';
 
@@ -54,10 +56,10 @@ const proTools: ProTool[] = [
         emoji: '📓',
         title: 'Diario de Integración',
         subtitle: 'Espacio de reflexión privado',
-        description: 'Escribe tus experiencias y reflexiones. La IA te ayuda a identificar patrones.',
+        description: 'Escribe tus experiencias y reflexiones. Preguntas guiadas para integrar cada viaje.',
         color: '#10b981',
-        available: false,
-        badge: 'MUY PRONTO',
+        available: true,
+        badge: 'NUEVO',
     },
     {
         id: 'set-setting',
@@ -65,10 +67,10 @@ const proTools: ProTool[] = [
         emoji: '🗺️',
         title: 'Generador Set & Setting',
         subtitle: 'Plan de viaje personalizado',
-        description: 'Genera un plan completo con protocolos de seguridad, playlist y rituales descargable en PDF.',
+        description: 'Wizard de 3 pasos: sustancia, intención y entorno → plan completo con timeline y seguridad.',
         color: '#f59e0b',
-        available: false,
-        badge: 'MUY PRONTO',
+        available: true,
+        badge: 'NUEVO',
     },
     {
         id: 'ai-guide',
@@ -99,7 +101,7 @@ export default function SalaProPage() {
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [activeTool, setActiveTool] = useState<Tool | null>(null);
-    const [activeModal, setActiveModal] = useState<'interactions' | null>(null);
+    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -128,6 +130,8 @@ export default function SalaProPage() {
         }
         if (tool.id === 'trip-timer') setActiveTool('trip-timer');
         if (tool.id === 'interactions') setActiveModal('interactions');
+        if (tool.id === 'diary') setActiveModal('diary');
+        if (tool.id === 'set-setting') setActiveModal('set-setting');
     };
 
     if (loading) {
@@ -145,22 +149,30 @@ export default function SalaProPage() {
                 <TripTimer onClose={() => setActiveTool(null)} />
             )}
 
-            {/* Interactions Modal */}
-            {activeModal === 'interactions' && (
+            {/* Generic Modal Wrapper */}
+            {activeModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-                    style={{ background: 'rgba(0,0,0,0.90)', backdropFilter: 'blur(20px)' }}>
-                    <div className="relative w-full max-w-xl glass-sacred rounded-3xl p-8 border border-white/5 max-h-[90vh] overflow-y-auto">
-                        <div className="flex items-center justify-between mb-6">
-                            <div>
-                                <h2 className="text-white font-black text-xl">⚠️ Comprobador de Interacciones</h2>
-                                <p className="text-white/40 text-sm mt-0.5">Basado en TripSit y guías clínicas de reducción de daños</p>
-                            </div>
-                            <button onClick={() => setActiveModal(null)}
-                                className="p-2 rounded-full glass-sacred hover:bg-white/10 transition-colors text-white/60 hover:text-white cursor-pointer flex-shrink-0">
-                                ✕
-                            </button>
-                        </div>
-                        <InteractionChecker />
+                    style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(20px)' }}>
+                    <div className="relative w-full max-w-xl glass-sacred rounded-3xl p-8 border border-white/5 max-h-[92vh] overflow-y-auto">
+                        <button onClick={() => setActiveModal(null)}
+                            className="absolute top-5 right-5 p-2 rounded-full glass-sacred hover:bg-white/10 transition-colors text-white/40 hover:text-white cursor-pointer z-10">
+                            <X size={18} />
+                        </button>
+                        {activeModal === 'interactions' && (
+                            <>
+                                <div className="mb-6">
+                                    <h2 className="text-white font-black text-xl">⚠️ Comprobador de Interacciones</h2>
+                                    <p className="text-white/40 text-sm mt-0.5">Basado en TripSit y guías clínicas de reducción de daños</p>
+                                </div>
+                                <InteractionChecker />
+                            </>
+                        )}
+                        {activeModal === 'diary' && user && (
+                            <IntegrationDiary userId={user.id} />
+                        )}
+                        {activeModal === 'set-setting' && (
+                            <SetSettingGenerator />
+                        )}
                     </div>
                 </div>
             )}
@@ -242,10 +254,10 @@ export default function SalaProPage() {
                                         onClick={() => handleToolClick(tool)}
                                         disabled={!tool.available}
                                         className={`relative rounded-2xl p-6 text-left border transition-all duration-300 group ${tool.available && isPro
-                                                ? 'hover:scale-[1.02] cursor-pointer hover:border-white/20'
-                                                : tool.available && !isPro
-                                                    ? 'hover:scale-[1.02] cursor-pointer'
-                                                    : 'cursor-default opacity-60'
+                                            ? 'hover:scale-[1.02] cursor-pointer hover:border-white/20'
+                                            : tool.available && !isPro
+                                                ? 'hover:scale-[1.02] cursor-pointer'
+                                                : 'cursor-default opacity-60'
                                             }`}
                                         style={{
                                             borderColor: tool.available && isPro ? `${tool.color}30` : 'rgba(255,255,255,0.05)',
