@@ -99,7 +99,7 @@ export default function NaviganteChat() {
                         <h3 className="text-white font-black text-base">El Navegante</h3>
                         <div className="flex items-center gap-1.5">
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span className="text-emerald-400 text-xs">Conectado · DeepSeek V3</span>
+                            <span className="text-emerald-400 text-xs">Conectado · Gemini 2.5 Flash</span>
                         </div>
                     </div>
                 </div>
@@ -146,8 +146,8 @@ export default function NaviganteChat() {
                         )}
                         <div
                             className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${msg.role === 'user'
-                                    ? 'bg-psyche-violet/20 text-white border border-psyche-violet/20 rounded-tr-sm'
-                                    : 'bg-white/[0.04] text-white/80 border border-white/5 rounded-tl-sm'
+                                ? 'bg-psyche-violet/20 text-white border border-psyche-violet/20 rounded-tr-sm'
+                                : 'bg-white/[0.04] text-white/80 border border-white/5 rounded-tl-sm'
                                 }`}
                             style={{ whiteSpace: 'pre-wrap' }}
                         >

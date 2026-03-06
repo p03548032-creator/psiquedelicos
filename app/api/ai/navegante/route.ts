@@ -1,11 +1,8 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenAI } from '@google/genai';
 
-// DeepSeek es compatible con la API de OpenAI, solo cambia la baseURL
-const deepseek = new OpenAI({
-    apiKey: process.env.DEEPSEEK_API_KEY!,
-    baseURL: 'https://api.deepseek.com',
-});
+// Eliminamos la inicialización global para hacerla luego dentro del POST
+
 
 const SYSTEM_PROMPT = `Eres "El Navegante", un asistente especializado en psicología transpersonal, psicodélicos y reducción de daños.
 
@@ -43,7 +40,7 @@ Cuando el usuario esté en una crisis durante un viaje:
 - Guía a técnicas de grounding (5-4-3-2-1, respiración 4-7-8, contacto con el suelo)
 - Si hay riesgo físico real, indica claramente: llama al 112
 
-Idioma: Responde siempre en español, el idioma del usuario.
+Idiomas: Responde siempre en español, el idioma del usuario.
 
 Formato: Tus respuestas deben ser claras y bien estructuradas. Usa párrafos cortos. Cuando des listas, usa viñetas. Sé conciso — prefiere respuestas de 100-250 palabras salvo que el usuario pida algo extenso.`;
 
@@ -55,26 +52,34 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Formato de mensajes inválido' }, { status: 400 });
         }
 
-        if (!process.env.DEEPSEEK_API_KEY) {
-            return NextResponse.json({ error: 'API no configurada. Añade DEEPSEEK_API_KEY en las variables de entorno.' }, { status: 500 });
+        if (!process.env.GEMINI_API_KEY) {
+            return NextResponse.json({ error: 'La API Key de Gemini no está configurada en .env.local' }, { status: 500 });
         }
 
-        const completion = await deepseek.chat.completions.create({
-            model: 'deepseek-chat',
-            messages: [
-                { role: 'system', content: SYSTEM_PROMPT },
-                ...messages,
-            ],
-            max_tokens: 600,
-            temperature: 0.7,
+        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+        // Convertimos el historial de formato OpenAI (role: 'user' | 'assistant') a formato Gemini (role: 'user' | 'model')
+        const contents = messages.map(msg => ({
+            role: msg.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: msg.content }]
+        }));
+
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: contents,
+            config: {
+                systemInstruction: SYSTEM_PROMPT,
+                temperature: 0.7,
+                maxOutputTokens: 600,
+            }
         });
 
-        const reply = completion.choices[0]?.message?.content || 'No pude generar una respuesta.';
+        const reply = response.text || 'No pude generar una respuesta.';
 
         return NextResponse.json({ reply });
 
     } catch (error: any) {
-        console.error('DeepSeek API error:', error);
-        return NextResponse.json({ error: error.message || 'Error al conectar con la IA' }, { status: 500 });
+        console.error('Gemini API error:', error);
+        return NextResponse.json({ error: error.message || 'Error al conectar con la IA de Google' }, { status: 500 });
     }
 }
