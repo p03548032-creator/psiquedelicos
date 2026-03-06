@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Map, Download, ChevronRight, Music, Shield, Sun, Moon, CheckSquare, Square } from 'lucide-react';
+import { Map, Download, ChevronRight, Music, Shield, Sun, Moon, CheckSquare, ExternalLink } from 'lucide-react';
 
 const substances = [
     { id: 'psilocibina', label: 'Psilocibina / Setas', color: '#7c3aed', prep: 45, peak: 90, total: '4-6h' },
@@ -75,11 +75,11 @@ function generatePlan(form: Plan) {
             '¿Tomando medicación? Verifica las interacciones en el Comprobador de la Sala PRO',
         ],
         playlist: [
-            { phase: 'Preparación', suggestion: 'Meditative Mind — 396 Hz Chakra Raíz' },
-            { phase: 'Inicio', suggestion: form.substance.id === 'ayahuasca' ? 'Ícaros Amazónicos — Maestro don Enrique' : 'Liquid Mind — Deep Journey Ambient' },
-            { phase: 'Pico', suggestion: form.intention.includes('espiritu') ? 'OM Mantra 963 Hz — Deep Space' : 'Shaman\'s Dream — Ceremonial Soundscape' },
-            { phase: 'Descenso', suggestion: 'Greenred Productions — Deep Healing Piano' },
-            { phase: 'Integración', suggestion: 'Tibetan Healing Bowls 432 Hz' },
+            { phase: 'Preparación', suggestion: 'Meditative Mind — 396 Hz Chakra Raíz', href: '/bienestar' },
+            { phase: 'Inicio', suggestion: form.substance.id === 'ayahuasca' ? 'Ícaros Amazónicos — Maestro don Enrique' : 'Liquid Mind — Deep Journey Ambient', href: '/bienestar' },
+            { phase: 'Pico', suggestion: form.intention.includes('espiritu') ? 'OM Mantra 963 Hz — Deep Space' : 'Shaman\'s Dream — Ceremonial Soundscape', href: '/bienestar' },
+            { phase: 'Descenso', suggestion: 'Greenred Productions — Deep Healing Piano', href: '/bienestar' },
+            { phase: 'Integración', suggestion: 'Tibetan Healing Bowls 432 Hz', href: '/bienestar' },
         ],
     };
 }
@@ -212,15 +212,15 @@ export default function SetSettingGenerator() {
                                 <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0">
                                     <Music size={14} className="text-amber-400" />
                                 </div>
-                                <div>
+                                <div className="flex-1">
                                     <p className="text-xs text-white/30 uppercase tracking-wider">{track.phase}</p>
                                     <p className="text-white/80 text-sm font-medium">{track.suggestion}</p>
                                 </div>
+                                <a href={track.href} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all flex-shrink-0 border border-white/5">
+                                    Ir a la Sala <ExternalLink size={10} />
+                                </a>
                             </div>
                         ))}
-                        <p className="text-white/20 text-xs text-center pt-2">
-                            Encuentra estas sesiones en la Sala de Viaje → /bienestar
-                        </p>
                     </div>
                 )}
             </div>
