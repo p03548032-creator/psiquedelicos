@@ -12,6 +12,7 @@ import TripTimer from '@/components/TripTimer';
 import InteractionChecker from '@/components/InteractionChecker';
 import IntegrationDiary from '@/components/IntegrationDiary';
 import SetSettingGenerator from '@/components/SetSettingGenerator';
+import NaviganteChat from '@/components/NaviganteChat';
 
 type Tool = 'trip-timer' | 'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session';
 
@@ -78,10 +79,10 @@ const proTools: ProTool[] = [
         emoji: '🤖',
         title: 'El Navegante IA',
         subtitle: 'Asistente especializado',
-        description: 'Preguntas sobre dosis, efectos, preparación e integración. Rigor científico en español.',
+        description: 'Preguntas sobre dosis, efectos, preparación e integración. Rigor científico en español. Impulsado por DeepSeek V3.',
         color: '#06b6d4',
-        available: false,
-        badge: 'PRÓXIMO',
+        available: true,
+        badge: 'NUEVO',
     },
     {
         id: 'guided-session',
@@ -101,7 +102,7 @@ export default function SalaProPage() {
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [activeTool, setActiveTool] = useState<Tool | null>(null);
-    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | null>(null);
+    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -132,6 +133,7 @@ export default function SalaProPage() {
         if (tool.id === 'interactions') setActiveModal('interactions');
         if (tool.id === 'diary') setActiveModal('diary');
         if (tool.id === 'set-setting') setActiveModal('set-setting');
+        if (tool.id === 'ai-guide') setActiveModal('ai-guide');
     };
 
     if (loading) {
@@ -172,6 +174,9 @@ export default function SalaProPage() {
                         )}
                         {activeModal === 'set-setting' && (
                             <SetSettingGenerator />
+                        )}
+                        {activeModal === 'ai-guide' && (
+                            <NaviganteChat />
                         )}
                     </div>
                 </div>
