@@ -10,6 +10,7 @@ export const metadata = {
 const NEWS_ITEMS = [
     {
         id: '1',
+        slug: 'fda-revision-mdma',
         title: 'La FDA revisa nuevamente la terapia con MDMA para el TEPT',
         summary: 'Tras los recientes debates clínicos, la asamblea busca clarificar los protocolos de seguridad necesarios para su aprobación inminente.',
         date: '24 Feb, 2026',
@@ -18,6 +19,7 @@ const NEWS_ITEMS = [
     },
     {
         id: '2',
+        slug: 'psilocibina-neuroplasticidad',
         title: 'Nuevos estudios sobre Psilocibina y neuroplasticidad',
         summary: 'Un reciente estudio revela de forma gráfica cómo se forman nuevas conexiones sinápticas tras una microdosis controlada.',
         date: '18 Feb, 2026',
@@ -26,6 +28,7 @@ const NEWS_ITEMS = [
     },
     {
         id: '3',
+        slug: 'futuro-redes-integracion',
         title: 'El futuro de las Redes Comunitarias de Integración',
         summary: 'Los foros y grupos locales están siendo un soporte fundamental para que los psiconautas reduzcan riesgos por su cuenta.',
         date: '10 Feb, 2026',
@@ -54,7 +57,7 @@ export default function NoticiasPage() {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                     {NEWS_ITEMS.map((item) => (
-                        <article key={item.id} className="group glass-sacred rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all flex flex-col h-full hover:-translate-y-1">
+                        <Link href={`/noticias/${item.slug}`} key={item.id} className="group glass-sacred rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all flex flex-col h-full hover:-translate-y-1">
                             <div className="h-48 w-full relative overflow-hidden bg-white/5">
                                 {/* Placeholder de imagen */}
                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
@@ -77,12 +80,12 @@ export default function NoticiasPage() {
                                     {item.summary}
                                 </p>
                                 <div className="mt-6 pt-6 border-t border-white/5">
-                                    <button className="text-psyche-violet text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    <span className="text-psyche-violet text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
                                         Leer más <ArrowRight size={14} />
-                                    </button>
+                                    </span>
                                 </div>
                             </div>
-                        </article>
+                        </Link>
                     ))}
                 </div>
 
