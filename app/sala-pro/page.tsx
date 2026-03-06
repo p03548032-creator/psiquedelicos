@@ -13,6 +13,7 @@ import InteractionChecker from '@/components/InteractionChecker';
 import IntegrationDiary from '@/components/IntegrationDiary';
 import SetSettingGenerator from '@/components/SetSettingGenerator';
 import NaviganteChat from '@/components/NaviganteChat';
+import GuidedSession from '@/components/GuidedSession';
 
 type Tool = 'trip-timer' | 'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session';
 
@@ -87,13 +88,13 @@ const proTools: ProTool[] = [
     {
         id: 'guided-session',
         icon: Headphones,
-        emoji: '🎵',
-        title: 'Sesión Guiada IA',
-        subtitle: 'Música adaptativa por intención',
-        description: 'Di tu intención y la IA selecciona la secuencia musical perfecta para cada fase.',
-        color: '#f472b6',
-        available: false,
-        badge: 'PRÓXIMO',
+        emoji: '🧘',
+        title: 'Sesión Guiada',
+        subtitle: 'Respiración y anclaje',
+        description: 'Técnicas de respiración interactivas (Box, 4-7-8, Resonancia) para preparar el viaje o salir de bucles de ansiedad.',
+        color: '#f43f5e',
+        available: true,
+        badge: 'NUEVO',
     },
 ];
 
@@ -102,7 +103,7 @@ export default function SalaProPage() {
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [activeTool, setActiveTool] = useState<Tool | null>(null);
-    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | null>(null);
+    const [activeModal, setActiveModal] = useState<'interactions' | 'diary' | 'set-setting' | 'ai-guide' | 'guided-session' | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -134,6 +135,7 @@ export default function SalaProPage() {
         if (tool.id === 'diary') setActiveModal('diary');
         if (tool.id === 'set-setting') setActiveModal('set-setting');
         if (tool.id === 'ai-guide') setActiveModal('ai-guide');
+        if (tool.id === 'guided-session') setActiveModal('guided-session');
     };
 
     if (loading) {
@@ -177,6 +179,9 @@ export default function SalaProPage() {
                         )}
                         {activeModal === 'ai-guide' && (
                             <NaviganteChat />
+                        )}
+                        {activeModal === 'guided-session' && (
+                            <GuidedSession />
                         )}
                     </div>
                 </div>
