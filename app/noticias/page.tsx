@@ -4,6 +4,7 @@ import { MetatronDivider } from '@/components/SacredGeometry';
 import { supabase } from '@/lib/supabase';
 import { getIconComponent } from '@/lib/iconMap';
 import Image from 'next/image';
+import NewsImage from '@/components/NewsImage';
 
 export const revalidate = 3600;
 
@@ -54,25 +55,17 @@ export default async function NoticiasPage() {
                         return (
                             <Link href={`/articulo/${item.slug}`} key={item.id} className="group glass-sacred rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all flex flex-col h-full hover:-translate-y-2 hover:shadow-2xl hover:shadow-psyche-violet/10">
                                 <div className="h-52 w-full relative overflow-hidden bg-void flex items-center justify-center">
-                                    {item.image_url ? (
-                                        <Image 
-                                            src={item.image_url} 
-                                            alt={item.title}
-                                            fill
-                                            className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100"
-                                        />
-                                    ) : (
-                                        <>
-                                            <div className="absolute inset-0 bg-gradient-to-br from-psyche-violet/20 to-psyche-pink/10 opacity-40 group-hover:opacity-60 transition-opacity" />
-                                            <Icon size={48} className="text-white/10 group-hover:scale-110 transition-transform duration-700" />
-                                        </>
-                                    )}
+                                    <NewsImage 
+                                        src={item.image_url} 
+                                        alt={item.title} 
+                                        iconName={item.icon_name}
+                                    />
                                     <div className="absolute top-4 left-4 z-10">
                                         <span className={`backdrop-blur-md ${catStyle.bg} ${catStyle.color} ${catStyle.border} text-[10px] uppercase font-bold px-3 py-1.5 rounded-full border shadow-lg`}>
                                             {item.category}
                                         </span>
                                     </div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent opacity-60" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent opacity-60 pointer-events-none" />
                                 </div>
 
                                 <div className="p-7 flex flex-col flex-1 relative">
