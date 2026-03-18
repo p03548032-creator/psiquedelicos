@@ -35,7 +35,12 @@ export async function middleware(request: NextRequest) {
     )
 
     // This will refresh session if expired
-    await supabase.auth.getUser()
+    // Usamos un timeout para evitar el GATEWAY_TIMEOUT de Vercel Edge Runtime
+    const timeoutPromise = new Promise<void>((resolve) => setTimeout(resolve, 5000))
+    await Promise.race([
+        supabase.auth.getUser(),
+        timeoutPromise,
+    ])
 
     return supabaseResponse
 }
