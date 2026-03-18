@@ -47,7 +47,7 @@ export default function HeroSection() {
 
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight mb-8">
                     <span className="block gradient-text">Explora</span>
-                    <span className="block text-white/90 mt-2">tu</span>
+                    <span className="block gradient-text-cool mt-2">tu</span>
                     <span className="block gradient-text-warm mt-2">Consciencia</span>
                 </h1>
 
@@ -60,15 +60,16 @@ export default function HeroSection() {
                     <Link href="/sustancias" className="vesica-btn px-10 py-4 gradient-psyche text-white font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-lg shadow-psyche-violet/25">
                         Explorar Sustancias
                     </Link>
-                    <Link href="/sustancias" className="vesica-btn px-10 py-4 glass-sacred text-white/80 font-medium text-lg hover:scale-105 transition-transform duration-300">
+                    <Link href="/herramientas" className="vesica-btn px-10 py-4 border border-psyche-cyan/40 bg-psyche-cyan/10 text-psyche-cyan font-medium text-lg hover:bg-psyche-cyan/20 hover:scale-105 hover:shadow-lg hover:shadow-psyche-cyan/20 transition-all duration-300">
                         Reducción de Daños
                     </Link>
                 </div>
+            </div>
 
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-float">
-                    <span className="text-white/30 text-xs tracking-widest uppercase">Scroll</span>
-                    <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent" />
-                </div>
+            {/* Indicador de scroll — posicionado dentro del section, fuera del contenido */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-float">
+                <span className="text-white/30 text-xs tracking-widest uppercase">Scroll</span>
+                <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent" />
             </div>
         </section>
     );
