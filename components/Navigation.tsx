@@ -5,14 +5,16 @@ import { usePathname } from 'next/navigation';
 import SearchOverlay from '@/components/SearchOverlay';
 import { createClient } from '@/lib/supabase/client';
 
-import { FlaskConical, UserCheck, MessagesSquare, Newspaper, Unlock } from 'lucide-react';
+import { FlaskConical, UserCheck, MessagesSquare, Newspaper, Unlock, Microscope, LayoutGrid } from 'lucide-react';
 
 const navLinks = [
     { href: '/sustancias', label: 'Sustancias', icon: FlaskConical },
+    { href: '/investigacion', label: 'Investigación', icon: Microscope },
+    { href: '/herramientas', label: 'Herramientas', icon: LayoutGrid },
     { href: '/noticias', label: 'Noticias', icon: Newspaper },
     { href: '/comunidad', label: 'Comunidad', icon: MessagesSquare },
     { href: '/terapeutas', label: 'Terapeutas', icon: UserCheck },
-    { href: '/sala-libre', label: 'Sala Libre', icon: Unlock },
+    { href: '/sala-de-viajes', label: 'Sala de Viajes', icon: Unlock },
 ];
 
 export default function Navigation() {
@@ -74,8 +76,8 @@ export default function Navigation() {
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-                    <svg viewBox="0 0 40 40" width="34" height="34" fill="none" className="group-hover:scale-110 transition-transform">
+                <Link href="/" className="flex items-center gap-3 group flex-shrink-0" aria-label="PortalPSY — Inicio">
+                    <svg viewBox="0 0 40 40" width="34" height="34" fill="none" className="group-hover:scale-110 transition-transform" aria-hidden="true">
                         <circle cx="20" cy="20" r="8" stroke="#7c3aed" strokeWidth="1" opacity="0.8" />
                         {[0, 1, 2, 3, 4, 5].map(i => {
                             const angle = (i * 60) * Math.PI / 180;
@@ -96,7 +98,7 @@ export default function Navigation() {
                         const active = pathname.startsWith(link.href);
                         return (
                             <Link key={link.href} href={link.href}
-                                className={`vesica-btn px-3 py-2 text-xs transition-all duration-300 ${active ? 'text-white bg-white/8 border-white/15' : 'text-white/40 hover:text-white/70'
+                                className={`vesica-btn px-3 py-2 text-xs transition-all duration-300 ${active ? 'text-white bg-white/8 border-white/15' : 'text-white/60 hover:text-white/90'
                                     }`}>
                                 {link.label}
                             </Link>
@@ -108,11 +110,12 @@ export default function Navigation() {
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => setSearchOpen(true)}
-                        className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 text-xs text-white/40 hover:text-white/70 transition"
+                        aria-label="Abrir buscador"
+                        className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 text-xs text-white/60 hover:text-white transition"
                     >
-                        <span>🔍</span>
+                        <span aria-hidden="true">🔍</span>
                         <span className="hidden lg:inline">Buscar</span>
-                        <kbd className="hidden lg:inline font-mono text-[10px] text-white/20">⌘K</kbd>
+                        <kbd className="hidden lg:inline font-mono text-[10px] text-white/30" aria-label="Atajo de teclado Control K">⌘K</kbd>
                     </button>
 
                     <Link href="/newsletter"
@@ -134,15 +137,24 @@ export default function Navigation() {
                             </Link>
                         </div>
                     ) : (
-                        <Link href="/login"
-                            className="hidden sm:flex vesica-btn px-3 py-1.5 text-xs text-white/50 hover:text-white transition-all">
-                            Entrar
-                        </Link>
+                        <div className="hidden sm:flex items-center gap-2">
+                            <Link href="/sala-pro" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition text-white/50 text-xs font-medium group">
+                                <span className="group-hover:text-amber-400 transition-colors">🔒 Sala PRO</span>
+                            </Link>
+                            <Link href="/login"
+                                className="vesica-btn px-3 py-1.5 text-xs text-white/70 hover:text-white transition-all">
+                                Entrar
+                            </Link>
+                        </div>
                     )}
 
                     {/* Mobile hamburger */}
                     <button className="xl:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-lg hover:bg-white/5 transition"
-                        onClick={() => setMenuOpen(!menuOpen)} aria-label="Menú">
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+                        aria-expanded={menuOpen}
+                        aria-controls="mobile-menu"
+                    >
                         <span className={`w-5 h-px bg-white/60 transition-all ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
                         <span className={`w-5 h-px bg-white/60 transition-all ${menuOpen ? 'opacity-0' : ''}`} />
                         <span className={`w-5 h-px bg-white/60 transition-all ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
@@ -152,7 +164,7 @@ export default function Navigation() {
 
             {/* Mobile menu */}
             {menuOpen && (
-                <div className="xl:hidden glass-sacred mt-2 mx-4 rounded-2xl overflow-hidden">
+                <div id="mobile-menu" className="xl:hidden glass-sacred mt-2 mx-4 rounded-2xl overflow-hidden">
                     <div className="p-4 grid grid-cols-2 gap-2">
                         {navLinks.map(link => {
                             const active = pathname.startsWith(link.href);
@@ -179,10 +191,16 @@ export default function Navigation() {
                                 </Link>
                             </>
                         ) : (
-                            <Link href="/login" onClick={() => setMenuOpen(false)}
-                                className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-psyche-violet/20 text-psyche-violet border border-psyche-violet/30 hover:bg-psyche-violet/30 transition">
-                                Iniciar sesión
-                            </Link>
+                            <>
+                                <Link href="/sala-pro" onClick={() => setMenuOpen(false)}
+                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-white/5 text-white/50 border border-white/10 hover:bg-white/10 hover:text-amber-400 transition group">
+                                    <span className="group-hover:text-amber-400 transition-colors">🔒 Sala PRO</span>
+                                </Link>
+                                <Link href="/login" onClick={() => setMenuOpen(false)}
+                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-psyche-violet/20 text-psyche-violet border border-psyche-violet/30 hover:bg-psyche-violet/30 transition">
+                                    Iniciar sesión
+                                </Link>
+                            </>
                         )}
                         <button onClick={() => { setMenuOpen(false); setSearchOpen(true); }}
                             className="w-full px-4 py-3 rounded-xl text-sm text-left text-white/50 hover:bg-white/5 transition flex items-center justify-between">

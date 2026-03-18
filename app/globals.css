@@ -230,12 +230,12 @@ body.focus-mode .text-glow {
 
   0%,
   100% {
-    transform: scale(1);
+    transform: scale3d(1, 1, 1);
     opacity: 0.6;
   }
 
   50% {
-    transform: scale(1.08);
+    transform: scale3d(1.08, 1.08, 1);
     opacity: 1;
   }
 }
@@ -400,51 +400,63 @@ body.focus-mode .text-glow {
 
 .animate-spin-sacred {
   animation: spin-sacred 40s linear infinite;
+  will-change: transform;
 }
 
 .animate-spin-reverse {
   animation: spin-reverse 50s linear infinite;
+  will-change: transform;
 }
 
 .animate-breathe {
   animation: breathe 5s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .animate-float {
   animation: float-phi 7s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 4s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 .animate-shimmer {
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
+  will-change: background-position;
 }
 
 .animate-morph {
   animation: morph-sacred 12s ease-in-out infinite;
+  will-change: border-radius;
 }
 
 .animate-spiral {
   animation: spiral-in 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  will-change: transform, opacity;
 }
 
 .animate-color-cycle {
   animation: color-cycle 8s ease-in-out infinite;
+  will-change: filter;
 }
 
 .animate-dash {
   animation: dash-sacred 4s linear infinite;
+  will-change: stroke-dashoffset;
 }
 
 .animate-noise {
   animation: noise-move 8s steps(10) infinite;
+  will-change: transform;
 }
 
 .animate-ripple {
   animation: ripple-sacred 2s ease-out infinite;
+  will-change: transform, opacity;
 }
 
 /* Reveal on scroll */

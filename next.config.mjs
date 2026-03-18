@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
 
   // Optimización de imágenes para producción
   images: {
     formats: ['image/avif', 'image/webp'],
+  },
+
+  // Compilador optimizado — reduce JS legacy
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 
   // Cabeceras de seguridad HTTP
@@ -25,4 +31,5 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
 
