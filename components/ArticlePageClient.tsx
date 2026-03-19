@@ -1,11 +1,11 @@
 'use client';
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { articlesFull } from '@/data/articles';
+import { getIconComponent } from '@/lib/iconMap';
 import { MetatronDivider } from '@/components/SacredGeometry';
 import { useReveal } from '@/hooks/useReveal';
 
-function SectionBlock({ section, index, id }: { section: typeof articlesFull[0]['sections'][0]; index: number; id: string }) {
+function SectionBlock({ section, index, id }: { section: any; index: number; id: string }) {
     const { ref, visible } = useReveal(0.05);
     const calloutStyles = {
         warning: { bg: 'rgba(239,68,68,0.06)', border: 'rgba(239,68,68,0.15)', icon: '⚠️', color: 'text-red-400/80' },
@@ -14,18 +14,18 @@ function SectionBlock({ section, index, id }: { section: typeof articlesFull[0][
     };
 
     return (
-        <div id={id} ref={ref} className={`mb-12 scroll-mt-28 ${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.08}s` }}>
+        <div id={id} ref={ref as any} className={`mb-12 scroll-mt-28 ${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.08}s` }}>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 leading-snug">{section.title}</h2>
             <div className="text-white/60 leading-relaxed text-base md:text-lg mb-6">
-                {section.content.split('\n\n').map((p, i) => <p key={i} className="mb-4">{p}</p>)}
+                {section.content?.split('\n\n').map((p: string, i: number) => <p key={i} className="mb-4">{p}</p>)}
             </div>
             {section.subsections && (
                 <div className="space-y-6 ml-0 md:ml-4 mb-6">
-                    {section.subsections.map((sub, i) => (
+                    {section.subsections.map((sub: any, i: number) => (
                         <div key={i} className="glass-sacred rounded-2xl p-6 md:p-8">
                             <h3 className="text-lg md:text-xl font-semibold text-white mb-3">{sub.title}</h3>
                             <div className="text-white/50 text-sm md:text-base leading-relaxed">
-                                {sub.content.split('\n\n').map((p, j) => <p key={j} className="mb-3">{p}</p>)}
+                                {sub.content?.split('\n\n').map((p: string, j: number) => <p key={j} className="mb-3">{p}</p>)}
                             </div>
                         </div>
                     ))}
@@ -33,7 +33,7 @@ function SectionBlock({ section, index, id }: { section: typeof articlesFull[0][
             )}
             {section.list && (
                 <ul className="space-y-3 mb-6">
-                    {section.list.map((item, i) => (
+                    {section.list.map((item: string, i: number) => (
                         <li key={i} className="flex items-start gap-3 text-white/55 text-sm md:text-base">
                             <span className="w-1.5 h-1.5 rounded-full bg-psyche-violet/60 mt-2 flex-shrink-0" />
                             <span className="leading-relaxed">{item}</span>
@@ -42,10 +42,10 @@ function SectionBlock({ section, index, id }: { section: typeof articlesFull[0][
                 </ul>
             )}
             {section.callout && (
-                <div className="rounded-2xl p-6 mt-6" style={{ background: calloutStyles[section.callout.type].bg, border: `1px solid ${calloutStyles[section.callout.type].border}` }}>
+                <div className="rounded-2xl p-6 mt-6" style={{ background: calloutStyles[section.callout.type as keyof typeof calloutStyles].bg, border: `1px solid ${calloutStyles[section.callout.type as keyof typeof calloutStyles].border}` }}>
                     <div className="flex items-start gap-3">
-                        <span className="text-xl flex-shrink-0">{calloutStyles[section.callout.type].icon}</span>
-                        <p className={`text-sm md:text-base leading-relaxed ${calloutStyles[section.callout.type].color}`}>{section.callout.text}</p>
+                        <span className="text-xl flex-shrink-0">{calloutStyles[section.callout.type as keyof typeof calloutStyles].icon}</span>
+                        <p className={`text-sm md:text-base leading-relaxed ${calloutStyles[section.callout.type as keyof typeof calloutStyles].color}`}>{section.callout.text}</p>
                     </div>
                 </div>
             )}
@@ -53,10 +53,8 @@ function SectionBlock({ section, index, id }: { section: typeof articlesFull[0][
     );
 }
 
-export default function ArticlePageClient({ id }: { id: string }) {
-    const article = articlesFull.find(a => a.id === id);
-
-    useEffect(() => { window.scrollTo(0, 0); }, [id]);
+export default function ArticlePageClient({ article, relatedArticles }: { article: any, relatedArticles: any[] }) {
+    useEffect(() => { window.scrollTo(0, 0); }, [article?.id]);
 
     if (!article) {
         return (
@@ -69,7 +67,7 @@ export default function ArticlePageClient({ id }: { id: string }) {
         );
     }
 
-    const relatedArticles = article.relatedArticles.map(rid => articlesFull.find(a => a.id === rid)).filter(Boolean);
+    const MainIcon = getIconComponent(article.icon_name);
 
     return (
         <article className="relative pt-24 pb-32 px-6">
@@ -85,7 +83,7 @@ export default function ArticlePageClient({ id }: { id: string }) {
 
                 <header className="mb-16">
                     <div className="flex items-center gap-3 mb-6">
-                        <span className="text-white/80"><article.icon size={48} strokeWidth={1.5} /></span>
+                        <span className="text-white/80"><MainIcon size={48} strokeWidth={1.5} /></span>
                         <span className="vesica-btn px-4 py-1.5 text-sm font-medium" style={{ background: `${article.color}15`, color: article.color }}>{article.category}</span>
                         <span className="text-white/20 text-sm">{article.readTime}</span>
                     </div>
@@ -107,7 +105,7 @@ export default function ArticlePageClient({ id }: { id: string }) {
                 <MetatronDivider />
 
                 <div className="mt-16">
-                    {article.sections.map((section, i) => <SectionBlock key={i} section={section} index={i} id={`section-${i}`} />)}
+                    {article.sections?.map((section: any, i: number) => <SectionBlock key={i} section={section} index={i} id={`section-${i}`} />)}
                 </div>
 
                 <MetatronDivider />
@@ -115,7 +113,7 @@ export default function ArticlePageClient({ id }: { id: string }) {
                 <div className="mt-12 mb-16">
                     <h3 className="text-lg font-bold text-white/50 mb-6">Referencias</h3>
                     <ol className="space-y-3">
-                        {article.references.map((ref, i) => {
+                        {(article.references_list || []).map((ref: any, i: number) => {
                             let linkHref = ref.url;
                             if (linkHref && linkHref.startsWith('http')) {
                                 try {
@@ -150,13 +148,16 @@ export default function ArticlePageClient({ id }: { id: string }) {
                         <MetatronDivider />
                         <h3 className="text-lg font-bold text-white/50 mb-8 mt-4">Artículos relacionados</h3>
                         <div className="grid md:grid-cols-3 gap-4">
-                            {relatedArticles.map(ra => ra && (
-                                <Link key={ra.id} href={`/articulo/${ra.id}`} className="glass-sacred rounded-2xl p-6 group hover:scale-[1.02] transition-all duration-500">
-                                    <span className="mb-3 block text-white/80"><ra.icon size={28} strokeWidth={1.5} /></span>
-                                    <h4 className="text-sm font-bold text-white group-hover:text-white/90 transition-colors mb-2 leading-snug">{ra.title}</h4>
-                                    <span className="text-xs text-white/20">{ra.readTime}</span>
-                                </Link>
-                            ))}
+                            {relatedArticles.map(ra => {
+                                const RelIcon = getIconComponent(ra.icon_name);
+                                return (
+                                    <Link key={ra.id} href={`/articulo/${ra.slug}`} className="glass-sacred rounded-2xl p-6 group hover:scale-[1.02] transition-all duration-500">
+                                        <span className="mb-3 block text-white/80"><RelIcon size={28} strokeWidth={1.5} /></span>
+                                        <h4 className="text-sm font-bold text-white group-hover:text-white/90 transition-colors mb-2 leading-snug">{ra.title}</h4>
+                                        <span className="text-xs text-white/20">{ra.read_time}</span>
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </div>
                 )}

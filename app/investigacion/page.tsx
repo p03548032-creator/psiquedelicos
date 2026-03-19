@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import ArticlesSection from '@/sections/ArticlesSection';
 import ResearchSection from '@/sections/ResearchSection';
 import { MetatronDivider } from '@/components/SacredGeometry';
+import { supabase } from '@/lib/supabase';
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
     title: 'Investigación y Artículos — PortalPSY',
@@ -9,7 +12,13 @@ export const metadata: Metadata = {
     keywords: ['investigación psicodélica', 'ensayos clínicos', 'psilocibina', 'MDMA', 'esketamina', 'neurociencia'],
 };
 
-export default function InvestigacionPage() {
+export default async function InvestigacionPage() {
+    const { data: articles } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('status', 'published')
+        .order('publish_date', { ascending: false });
+
     return (
         <main className="min-h-screen pt-28">
             {/* Header */}
@@ -29,7 +38,7 @@ export default function InvestigacionPage() {
                 </p>
             </div>
 
-            <ArticlesSection />
+            <ArticlesSection articles={articles || []} />
             <MetatronDivider />
             <ResearchSection />
         </main>

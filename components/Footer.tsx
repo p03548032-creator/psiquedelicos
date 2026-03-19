@@ -33,7 +33,7 @@ export default function Footer() {
                     <div>
                         <h4 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">Explorar</h4>
                         <div className="space-y-2">
-                            {[{ label: 'Sustancias', href: '/sustancias' }, { label: 'Terapia en España', href: '/terapia-espana' }, { label: 'Investigación', href: '/investigacion' }, { label: 'Artículos', href: '/investigacion' }, { label: '🛠️ Herramientas', href: '/herramientas' }].map(link => (
+                            {[{ label: 'Sustancias', href: '/sustancias' }, { label: 'Terapia en España', href: '/terapia-espana' }, { label: 'Noticias', href: '/noticias' }, { label: '🛠️ Herramientas', href: '/herramientas' }].map(link => (
                                 <Link key={link.label} href={link.href} className="block text-white/30 text-sm hover:text-white/60 transition-colors">{link.label}</Link>
                             ))}
                         </div>
@@ -42,7 +42,7 @@ export default function Footer() {
                     <div>
                         <h4 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">Experiencia</h4>
                         <div className="space-y-2">
-                            {[{ label: '🎧 Frecuencias', href: '/bienestar' }, { label: '🌐 Comunidad', href: '/comunidad' }, { label: '📖 Relatos', href: '/comunidad' }, { label: '🎵 Playlists', href: '/bienestar' }, { label: '⭐ Sala PRO', href: '/pro' }].map(link => (
+                            {[{ label: '🎧 Frecuencias', href: '/sala-de-viajes' }, { label: '🌐 Comunidad', href: '/comunidad' }, { label: '📖 Relatos', href: '/comunidad' }, { label: '🎵 Playlists', href: '/sala-de-viajes' }, { label: '⭐ Sala PRO', href: '/sala-pro' }].map(link => (
                                 <Link key={link.label} href={link.href} className="block text-white/30 text-sm hover:text-white/60 transition-colors">{link.label}</Link>
                             ))}
                         </div>
@@ -58,19 +58,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Newsletter CTA */}
-                <div className="mb-12 glass-sacred rounded-2xl p-8 flex flex-col md:flex-row items-center gap-6" style={{ borderColor: 'rgba(124,58,237,0.1)' }}>
-                    <div className="flex-1">
-                        <h3 className="text-lg font-bold text-white/80 mb-1">🌀 Newsletter Psiconáutico</h3>
-                        <p className="text-white/40 text-sm">Los mejores papers, noticias y relatos de la semana. Sin spam, solo lo que importa.</p>
-                    </div>
-                    <div className="flex items-center gap-4 flex-wrap justify-end md:justify-start">
-                        <Link href="/newsletter" className="vesica-btn px-6 py-3 gradient-psyche text-white text-sm font-semibold hover:scale-105 transition-transform shadow-lg shadow-psyche-violet/20">
-                            📬 Suscribirse — Es gratis →
-                        </Link>
-                        <span className="text-white/20 text-xs">Sin spam · Cancela cuando quieras</span>
-                    </div>
-                </div>
+
 
                 <div className="metatron-divider mb-6" />
 

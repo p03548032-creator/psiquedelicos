@@ -33,21 +33,20 @@ export default function PrivacidadPage() {
 
                         <section>
                             <h2 className="text-xl font-bold text-white mt-8 mb-4">1. Principio Fundamental</h2>
-                            <p>En PortalPSY el anonimato y la confidencialidad de nuestros usuarios es una prioridad absoluta dada la naturaleza de nuestros contenidos. Únicamente recopilamos los datos estrictamente necesarios para el funcionamiento técnico del portal y para la prestación de servicios explícitamente solicitados por el usuario (como la suscripción a nuestra newsletter).</p>
+                            <p>En PortalPSY el anonimato y la confidencialidad de nuestros usuarios es una prioridad absoluta dada la naturaleza de nuestros contenidos. Únicamente recopilamos los datos estrictamente necesarios para el funcionamiento técnico del portal y para la prestación de servicios explícitamente solicitados por el usuario.</p>
                         </section>
 
                         <section>
                             <h2 className="text-xl font-bold text-white mt-8 mb-4">2. Datos Recopilados y Finalidad</h2>
                             <p>Recopilamos información de forma directa cuando nos la proporcionas voluntariamente:</p>
                             <ul className="list-disc pl-5 mt-2 space-y-2 text-white/70">
-                                <li><strong>Newsletter:</strong> Cuando te suscribes a nuestra lista de correo, recopilamos tu dirección de correo electrónico y/o nombre con la única finalidad de enviarte las actualizaciones correspondientes. Esta información es gestionada de manera segura mediante proveedores como Resend y Supabase.</li>
                                 <li><strong>Comunidad / Foro (Próximamente):</strong> Para registrarte como usuario, es posible que solicitemos un alias/nombre de usuario y una cuenta de correo, de cara a la recuperación de contraseñas.</li>
                             </ul>
                         </section>
 
                         <section>
                             <h2 className="text-xl font-bold text-white mt-8 mb-4">3. Base Legitimadora del Tratamiento</h2>
-                            <p>El tratamiento de tus datos personales se realiza bajo el consentimiento expreso e inequívoco del usuario al suscribirse o registrarse en nuestros servicios, cumpliendo con el Reglamento General de Protección de Datos (RGPD) de la Unión Europea y la Ley Orgánica 3/2018 (LOPDGDD).</p>
+                            <p>El tratamiento de tus datos personales se realiza bajo el consentimiento expreso e inequívoco del usuario al registrarse en nuestros servicios, cumpliendo con el Reglamento General de Protección de Datos (RGPD) de la Unión Europea y la Ley Orgánica 3/2018 (LOPDGDD).</p>
                         </section>
 
                         <section>
@@ -64,7 +63,6 @@ export default function PrivacidadPage() {
                         <section>
                             <h2 className="text-xl font-bold text-white mt-8 mb-4">6. Derechos del Usuario (ARCO)</h2>
                             <p>Como titular de los datos, puedes ejercer en cualquier momento tus derechos de Acceso, Rectificación, Cancelación y Oposición (así como Portabilidad y Limitación) contactando a: <strong>contacto@portalpsy.es</strong>.</p>
-                            <p>En el caso concreto de la newsletter, todos los correos enviados incluyen un enlace directo de "Darse de baja" al final del documento.</p>
                         </section>
                     </div>
                 </div>

@@ -1,16 +1,17 @@
 'use client';
 import Link from 'next/link';
-import { articles } from '@/data/substances';
 import { useReveal } from '@/hooks/useReveal';
 import { MetatronDivider } from '@/components/SacredGeometry';
+import { getIconComponent } from '@/lib/iconMap';
 
-function ArticleCard({ article, index }: { article: typeof articles[0]; index: number }) {
+function ArticleCard({ article, index }: { article: any; index: number }) {
     const { ref, visible } = useReveal(0.1);
     const isFeature = index === 0;
+    const MainIcon = getIconComponent(article.icon_name);
 
     return (
         <div ref={ref} className={`${isFeature ? 'md:col-span-2 md:row-span-2' : ''} ${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.12}s` }}>
-            <Link href={`/articulo/${article.id}`}
+            <Link href={`/articulo/${article.slug}`}
                 className={`block glass-sacred rounded-2xl p-6 md:p-8 h-full group cursor-pointer hover:scale-[1.01] transition-all duration-500 relative overflow-hidden ${isFeature ? 'md:p-12' : ''}`}
                 style={{ borderColor: `${article.color}10` }}
             >
@@ -19,9 +20,9 @@ function ArticleCard({ article, index }: { article: typeof articles[0]; index: n
 
                 <div className="relative">
                     <div className="flex items-center gap-3 mb-4">
-                        <span className="text-white/80"><article.icon size={isFeature ? 48 : 28} strokeWidth={1.5} /></span>
+                        <span className="text-white/80"><MainIcon size={isFeature ? 48 : 28} strokeWidth={1.5} /></span>
                         <span className="vesica-btn px-3 py-1 text-xs font-medium" style={{ background: `${article.color}15`, color: article.color }}>{article.category}</span>
-                        <span className="text-white/20 text-xs ml-auto">{article.readTime}</span>
+                        <span className="text-white/20 text-xs ml-auto">{article.read_time}</span>
                     </div>
                     <h3 className={`font-bold text-white group-hover:text-white transition-colors mb-3 ${isFeature ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'}`}>{article.title}</h3>
                     <p className={`text-white/40 leading-relaxed ${isFeature ? 'text-base md:text-lg max-w-2xl' : 'text-sm'}`}>{article.excerpt}</p>
@@ -35,7 +36,7 @@ function ArticleCard({ article, index }: { article: typeof articles[0]; index: n
     );
 }
 
-export default function ArticlesSection() {
+export default function ArticlesSection({ articles }: { articles: any[] }) {
     const { ref: titleRef, visible: titleVisible } = useReveal();
     return (
         <section id="articulos" className="relative py-32 px-6">

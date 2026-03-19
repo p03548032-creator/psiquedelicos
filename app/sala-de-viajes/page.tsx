@@ -1,15 +1,25 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { MetatronDivider } from '@/components/SacredGeometry';
-import { Calculator, Orbit, Sparkles, AlertCircle, Headphones, ArrowRight } from 'lucide-react';
+import { Calculator, Orbit, Sparkles, AlertCircle, Clock, ArrowRight } from 'lucide-react';
+import TripTimer from '@/components/TripTimer';
 
-export const metadata = {
-    title: 'Sala Libre — PortalPSY',
-    description: 'Herramientas gratuitas para reducción de daños y bienestar psicodélico.'
-};
+// Nota: Al usar 'use client', no se puede exportar metadata estática desde el mismo archivo
+// a no ser que se divida en layout y page. Para simplificar sin romper, se define globalmente
+// desde el layout o con component properties. Aquí mantendremos la etiqueta HTML title como fallback si hace falta.
 
-export default function SalaLibreHub() {
+export default function SalaViajesHub() {
+    const [showTimer, setShowTimer] = useState(false);
+
     return (
         <main className="min-h-screen pt-28 pb-20 relative overflow-hidden">
+            {showTimer && <TripTimer onClose={() => setShowTimer(false)} />}
+            
+            <title>Sala de Viajes — PortalPSY</title>
+            <meta name="description" content="Utilidades gratuitas, reducción de daños y herramientas para el viaje psicodélico." />
+
             {/* Background Effects */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-psyche-cyan/10 blur-[150px] rounded-full mix-blend-screen" />
@@ -24,42 +34,57 @@ export default function SalaLibreHub() {
                         Acceso Abierto
                     </span>
                     <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                        Sala <span className="gradient-text-cool">Libre</span>
+                        Sala de <span className="gradient-text-cool">Viajes</span>
                     </h1>
                     <p className="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed">
-                        Herramientas esenciales de reducción de daños, cálculo de dosis y recursos de prueba para la comunidad.
+                        Utilidades básicas, herramientas esenciales para reducción de daños y recursos para navegar tu experiencia psicodélica de forma segura.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6 mb-16">
+                <div className="grid md:grid-cols-3 gap-6 mb-16">
                     {/* Calculadora (Gratis Total) */}
                     <div className="group glass-sacred rounded-3xl p-8 hover:scale-[1.02] transition-transform border border-white/5 hover:border-psyche-violet/30 relative overflow-hidden flex flex-col h-full">
                         <div className="absolute inset-0 bg-gradient-to-br from-psyche-violet/0 to-psyche-violet/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
                             <Calculator className="text-psyche-violet" size={24} />
                         </div>
-                        <h2 className="text-2xl font-bold text-white mb-3">Calculadora de Dosis</h2>
+                        <h2 className="text-xl font-bold text-white mb-3">Calculadora de Dosis</h2>
                         <p className="text-white/40 text-sm leading-relaxed mb-8 flex-grow">
-                            Estima los gramos secos a consumir según la intensidad deseada (microdosis a dosis heroica) y tu peso corporal. Una herramienta vital para no excederse en el primer viaje.
+                            Estima los gramos secos a consumir según la intensidad deseada y tu peso corporal. Una herramienta vital.
                         </p>
                         <Link href="/herramientas/calculadora-dosis" className="inline-flex items-center justify-center gap-2 vesica-btn bg-white/5 py-3 text-sm font-semibold text-psyche-violet hover:bg-psyche-violet/20 hover:text-white transition-all w-full mt-auto">
                             Abrir Calculadora <ArrowRight size={16} />
                         </Link>
                     </div>
 
-                    {/* Combo Checker (Gratis Total) */}
+                    {/* Combo Checker */}
                     <div className="group glass-sacred rounded-3xl p-8 hover:scale-[1.02] transition-transform border border-white/5 hover:border-psyche-cyan/30 relative overflow-hidden flex flex-col h-full">
                         <div className="absolute inset-0 bg-gradient-to-br from-psyche-cyan/0 to-psyche-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
                             <AlertCircle className="text-psyche-cyan" size={24} />
                         </div>
-                        <h2 className="text-2xl font-bold text-white mb-3">Combo Checker Básico</h2>
+                        <h2 className="text-xl font-bold text-white mb-3">Combo Checker Básico</h2>
                         <p className="text-white/40 text-sm leading-relaxed mb-8 flex-grow">
-                            Verifica de manera instantánea si tu combinación (MDMA, Alcohol, LSD, ISRSs...) produce sinergias sanas, corta el efecto, o presenta un riesgo fatal para tu salud.
+                            Verifica de manera instantánea si tu combinación (MDMA, Alcohol, LSD, ISRSs...) produce sinergias sanas o riesgos graves.
                         </p>
                         <Link href="/herramientas/interacciones" className="inline-flex items-center justify-center gap-2 vesica-btn bg-white/5 py-3 text-sm font-semibold text-psyche-cyan hover:bg-psyche-cyan/20 hover:text-white transition-all w-full mt-auto">
                             Comprobar Mezcla <ArrowRight size={16} />
                         </Link>
+                    </div>
+
+                    {/* Trip Timer */}
+                    <div className="group glass-sacred rounded-3xl p-8 hover:scale-[1.02] transition-transform border border-white/5 hover:border-pink-500/30 relative overflow-hidden flex flex-col h-full">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/0 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
+                            <Clock className="text-pink-400" size={24} />
+                        </div>
+                        <h2 className="text-xl font-bold text-white mb-3">Monitor de Viaje</h2>
+                        <p className="text-white/40 text-sm leading-relaxed mb-8 flex-grow">
+                            Temporizador en vivo de fases psicodélicas con técnicas de relajación (Grounding) para momentos de tensión.
+                        </p>
+                        <button onClick={() => setShowTimer(true)} className="inline-flex items-center justify-center gap-2 vesica-btn bg-white/5 py-3 text-sm font-semibold text-pink-400 hover:bg-pink-500/20 hover:text-white transition-all w-full mt-auto cursor-pointer">
+                            Iniciar Viaje <ArrowRight size={16} />
+                        </button>
                     </div>
                 </div>
 
@@ -77,7 +102,7 @@ export default function SalaLibreHub() {
                                 ¿Quieres la experiencia <span className="text-amber-400">completa?</span>
                             </h3>
                             <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
-                                La Sala Libre es solo el principio. Si quieres tener acceso a nuestro <strong>Trip Timer</strong> interativo, el <strong>Diario de Integración</strong> cifrado, el <strong>Reproductor Nativo HD</strong> sin interrupciones y conectarte con nuestra <strong>IA especialista El Navegante</strong>, tienes que entrar en la Sala PRO.
+                                La Sala de Viajes es solo el principio. Si quieres tener acceso a nuestro <strong>Diario de Integración</strong> cifrado avanzado, el <strong>Reproductor Nativo HD</strong> sin interrupciones y conectarte con nuestra <strong>IA especialista El Navegante</strong>, entra en la Sala PRO.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start">
                                 <Link href="/sala-pro" className="vesica-btn bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 py-3 text-sm transition-all shadow-lg shadow-amber-500/20">

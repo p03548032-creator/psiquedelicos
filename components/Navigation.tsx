@@ -123,11 +123,7 @@ export default function Navigation() {
                         <kbd className="hidden lg:inline font-mono text-[10px] text-white/30" aria-label="Atajo de teclado Control K">⌘K</kbd>
                     </button>
 
-                    <Link href="/newsletter"
-                        className="hidden sm:flex items-center gap-1 vesica-btn px-3 py-1.5 text-xs bg-psyche-violet/15 text-psyche-violet border-psyche-violet/20 hover:bg-psyche-violet/25 transition-all">
-                        <span>📬</span>
-                        <span className="hidden lg:inline">Suscribirse</span>
-                    </Link>
+
 
                     {user ? (
                         <div className="hidden sm:flex items-center gap-2">

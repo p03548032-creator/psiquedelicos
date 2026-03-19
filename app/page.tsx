@@ -176,35 +176,7 @@ export default async function HomePage() {
 
       <MetatronDivider />
 
-      {/* ═══ CTA NEWSLETTER ═══ */}
-      <section className="py-16 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="glass-sacred rounded-3xl p-8 md:p-14 text-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-5 pointer-events-none">
-              <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-psyche-violet blur-[100px]" />
-              <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-psyche-pink blur-[100px]" />
-            </div>
-            <div className="relative">
-              <SeedOfLifeIcon size={48} className="mx-auto mb-6 opacity-30" />
-              <h2 className="text-2xl md:text-3xl font-black mb-4">
-                <span className="gradient-text">El Pulso</span>{' '}
-                <span className="text-white/80">de la Ciencia Psicodélica</span>
-              </h2>
-              <p className="text-white/45 max-w-xl mx-auto mb-8 leading-relaxed">
-                Una newsletter mensual con análisis de ensayos clínicos, novedades regulatorias
-                y entrevistas con investigadores españoles. Gratis.
-              </p>
-              <Link href="/newsletter"
-                className="vesica-btn px-8 py-4 gradient-psyche text-white font-bold hover:scale-105 transition-all shadow-lg shadow-psyche-violet/20 inline-flex items-center gap-2">
-                📬 Suscribirse gratis
-              </Link>
-              <p className="text-white/20 text-xs mt-4">Sale el primer lunes de cada mes · Sin spam</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <BackToTopFab />
     </>
   );
 }

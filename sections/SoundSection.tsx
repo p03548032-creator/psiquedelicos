@@ -730,9 +730,7 @@ function PlaylistsPanel() {
                   <p className="text-xs text-white/50 leading-relaxed">
                     💡 Las playlists se publicarán en Spotify y YouTube.
                   </p>
-                  <Link href="/newsletter" className="vesica-btn px-4 py-2 text-xs font-semibold gradient-psyche text-white whitespace-nowrap hover:scale-105 transition-transform shadow-lg shadow-psyche-violet/20 flex-shrink-0">
-                    Suscribirse para recibirlas
-                  </Link>
+
                 </div>
               </div>
             </div>
