@@ -51,12 +51,21 @@ export default async function NoticiasPage() {
                         };
 
                         const catStyle = getCategoryStyle(item.category);
+                        
+                        // Override de emergencia para imágenes rotas conocidas basándonos en el título
+                        let finalImageUrl = item.image_url;
+                        const titleLower = (item.title || '').toLowerCase();
+                        if (titleLower.includes('fda') && titleLower.includes('mdma')) {
+                            finalImageUrl = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80';
+                        } else if (titleLower.includes('psilocibina') && titleLower.includes('neuroplasticidad')) {
+                            finalImageUrl = 'https://images.unsplash.com/photo-1508213638299-5fbc362c3463?w=800&q=80';
+                        }
 
                         return (
                             <Link href={`/articulo/${item.slug}`} key={item.id} className="group glass-sacred rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all flex flex-col h-full hover:-translate-y-2 hover:shadow-2xl hover:shadow-psyche-violet/10">
                                 <div className="h-52 w-full relative overflow-hidden bg-void flex items-center justify-center">
                                     <NewsImage 
-                                        src={item.image_url} 
+                                        src={finalImageUrl} 
                                         alt={item.title} 
                                         iconName={item.icon_name}
                                     />
