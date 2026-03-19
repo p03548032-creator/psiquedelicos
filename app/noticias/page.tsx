@@ -56,9 +56,9 @@ export default async function NoticiasPage() {
                         let finalImageUrl = item.image_url;
                         const titleLower = (item.title || '').toLowerCase();
                         if (titleLower.includes('fda') && titleLower.includes('mdma')) {
-                            finalImageUrl = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80';
+                            finalImageUrl = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80';
                         } else if (titleLower.includes('psilocibina') && titleLower.includes('neuroplasticidad')) {
-                            finalImageUrl = 'https://images.unsplash.com/photo-1508213638299-5fbc362c3463?w=800&q=80';
+                            finalImageUrl = 'https://images.unsplash.com/photo-1508213638299-5fbc362c3463?w=800&auto=format&fit=crop&q=80';
                         }
 
                         return (

@@ -46,7 +46,6 @@ export default function NewsImage({ src, alt, iconName = 'FileText' }: NewsImage
             src={finalSrc}
             alt={alt}
             fill
-            unoptimized
             className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100"
             onError={() => setError(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
