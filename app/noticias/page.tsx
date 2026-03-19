@@ -6,7 +6,7 @@ import { getIconComponent } from '@/lib/iconMap';
 import Image from 'next/image';
 import NewsImage from '@/components/NewsImage';
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
     title: 'Noticias y Actualidad Psicodélica — PortalPSY',
