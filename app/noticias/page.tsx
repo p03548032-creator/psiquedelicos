@@ -14,7 +14,7 @@ export const metadata = {
 };
 
 export default async function NoticiasPage() {
-    const { data: articles } = await supabase
+    const { data: articles, error } = await supabase
         .from('articles')
         .select('*')
         .eq('status', 'published')
