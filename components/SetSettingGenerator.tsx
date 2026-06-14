@@ -72,14 +72,14 @@ function generatePlan(form: Plan) {
             `Dosis estimada para ${form.dosis}: ${form.substance.id === 'psilocibina' ? (form.dosis === 'baja' ? '0.5–1g (seco)' : form.dosis === 'media' ? '1.5–2.5g (seco)' : '3–3.5g (seco)') : form.substance.id === 'lsd' ? (form.dosis === 'baja' ? '50–75µg' : form.dosis === 'media' ? '100–150µg' : '200µg+') : 'Consulta guías de reducción de daños para esta sustancia'}`,
             isSolo ? '⚠️ Evita bañarte, usar el coche o salir a la calle durante el pico' : 'El sitter no debe consumir. Su rol: mantener silencio y presencia, no dirigir',
             'Benzodiacepinas (Diazepam 5-10mg) cortan el efecto en ~30min si el viaje se complica',
-            '¿Tomando medicación? Verifica las interacciones en el Comprobador de la Sala PRO',
+            '¿Tomando medicación? Verifica las interacciones en el Comprobador',
         ],
         playlist: [
-            { phase: 'Preparación', suggestion: 'Meditative Mind — 396 Hz Chakra Raíz', href: '/bienestar' },
-            { phase: 'Inicio', suggestion: form.substance.id === 'ayahuasca' ? 'Ícaros Amazónicos — Maestro don Enrique' : 'Liquid Mind — Deep Journey Ambient', href: '/bienestar' },
-            { phase: 'Pico', suggestion: form.intention.includes('espiritu') ? 'OM Mantra 963 Hz — Deep Space' : 'Shaman\'s Dream — Ceremonial Soundscape', href: '/bienestar' },
-            { phase: 'Descenso', suggestion: 'Greenred Productions — Deep Healing Piano', href: '/bienestar' },
-            { phase: 'Integración', suggestion: 'Tibetan Healing Bowls 432 Hz', href: '/bienestar' },
+            { phase: 'Preparación', suggestion: 'Meditative Mind — 396 Hz Chakra Raíz', href: '/herramientas' },
+            { phase: 'Inicio', suggestion: form.substance.id === 'ayahuasca' ? 'Ícaros Amazónicos — Maestro don Enrique' : 'Liquid Mind — Deep Journey Ambient', href: '/herramientas' },
+            { phase: 'Pico', suggestion: form.intention.includes('espiritu') ? 'OM Mantra 963 Hz — Deep Space' : 'Shaman\'s Dream — Ceremonial Soundscape', href: '/herramientas' },
+            { phase: 'Descenso', suggestion: 'Greenred Productions — Deep Healing Piano', href: '/herramientas' },
+            { phase: 'Integración', suggestion: 'Tibetan Healing Bowls 432 Hz', href: '/herramientas' },
         ],
     };
 }

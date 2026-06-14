@@ -367,8 +367,8 @@ function SolfeggioPanel({ onUpdate }: { onUpdate: () => void }) {
 
                 {isOn && (
                   <div className="flex items-end gap-0.5 mt-2 h-4 justify-center">
-                    {[0, 1, 2, 3, 4].map(i => (
-                      <div key={i} className="w-1 rounded-full animate-pulse" style={{ height: `${30 + Math.random() * 70}%`, backgroundColor: f.color, opacity: 0.7, animationDelay: `${i * 0.12}s`, animationDuration: `${0.4 + Math.random() * 0.4}s` }} />
+                    {[50, 70, 45, 85, 60].map((h, i) => (
+                      <div key={i} className="w-1 rounded-full animate-pulse" style={{ height: `${h}%`, backgroundColor: f.color, opacity: 0.7, animationDelay: `${i * 0.12}s`, animationDuration: `${0.5 + i * 0.15}s` }} />
                     ))}
                   </div>
                 )}

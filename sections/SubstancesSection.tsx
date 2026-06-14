@@ -7,7 +7,7 @@ import { MetatronDivider, SeedOfLifeIcon } from '@/components/SacredGeometry';
 function SubstanceCard({ substance, index }: { substance: typeof substances[0]; index: number }) {
     const { ref, visible } = useReveal(0.1);
     return (
-        <div ref={ref} className={`${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.1}s` }}>
+        <div ref={ref} className={`${visible ? 'animate-focus' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.1}s` }}>
             <Link href={`/sustancia/${substance.id}`}
                 className="block w-full text-left glass-sacred rounded-2xl p-6 md:p-8 group cursor-pointer hover:scale-[1.02] transition-all duration-500 relative overflow-hidden"
                 style={{ borderColor: `${substance.color}15` }}
@@ -47,7 +47,7 @@ export default function SubstancesSection() {
         <section id="sustancias" className="relative py-32 px-6">
             <div className="absolute inset-0 bg-flower-of-life opacity-30" />
             <div className="relative max-w-6xl mx-auto">
-                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-spiral' : 'opacity-0'}`}>
+                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-focus' : 'opacity-0'}`}>
                     <span className="text-sm uppercase tracking-[0.3em] text-psyche-violet/60 block mb-4">Enciclopedia Psiconáutica</span>
                     <h2 className="text-4xl md:text-6xl font-black gradient-text mb-6">Sustancias</h2>
                     <p className="text-white/40 max-w-xl mx-auto">Información detallada y basada en evidencia sobre las principales sustancias psicodélicas. Conocer es protegerse.</p>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { articlesFull } from '@/data/articles';
+import { enforceCronAuth } from '@/lib/api/auth';
 
 // Inicializar Supabase con Service Role Key para poder insertar saltando RLS
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -12,8 +13,11 @@ const iconMap = new Map<any, string>();
 // Para no importar todos, extraeremos el nombre del componente o usaremos un fallback, pero es mejor mapear los usados.
 // En articles.ts se usan: TestTube, HeartPulse, Brain, Leaf, ShieldAlert, Palette
 
-export async function GET() {
+export async function GET(request: Request) {
     try {
+        const authError = enforceCronAuth(request);
+        if (authError) return authError;
+
         let insertedCount = 0;
         let errors = [];
 

@@ -253,7 +253,7 @@ export function GoldenSpiral({ size = 300, className = '' }: { size?: number; cl
         const x = size / 2 + r2 * Math.cos(t);
         const y = size / 2 + r2 * Math.sin(t);
         if (x >= 0 && x <= size && y >= 0 && y <= size) {
-            points.push(`${x},${y}`);
+            points.push(`${x.toFixed(2)},${y.toFixed(2)}`);
         }
     }
 

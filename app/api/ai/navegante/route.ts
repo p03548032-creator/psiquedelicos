@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
-
-// Eliminamos la inicialización global para hacerla luego dentro del POST
-
+import { z } from 'zod';
+import { enforceRateLimit } from '@/lib/rate-limit';
 
 const SYSTEM_PROMPT = `Eres "El Navegante", un asistente especializado en psicología transpersonal, psicodélicos y reducción de daños.
 
@@ -52,14 +51,25 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Formato de mensajes inválido' }, { status: 400 });
         }
 
+        const bodySchema = z.object({
+            messages: z.array(z.object({
+                role: z.enum(['user', 'assistant']),
+                content: z.string().min(1).max(2000),
+            })).min(1).max(30),
+        });
+
+        const parseResult = bodySchema.safeParse({ messages });
+        if (!parseResult.success) {
+            return NextResponse.json({ error: 'Payload inválido' }, { status: 400 });
+        }
+
         if (!process.env.GEMINI_API_KEY) {
             return NextResponse.json({ error: 'La API Key de Gemini no está configurada en .env.local' }, { status: 500 });
         }
 
         const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-        // Convertimos el historial de formato OpenAI (role: 'user' | 'assistant') a formato Gemini (role: 'user' | 'model')
-        const contents = messages.map(msg => ({
+        const contents = parseResult.data.messages.map(msg => ({
             role: msg.role === 'assistant' ? 'model' : 'user',
             parts: [{ text: msg.content }]
         }));

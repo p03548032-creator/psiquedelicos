@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## PortalPSY — Next.js app
 
-## Getting Started
+Aplicación principal del portal con Supabase, Stripe y herramientas PRO.
 
-First, run the development server:
+### Requisitos
+
+- Node 18+
+- Cuenta de Supabase (Postgres 15)
+- Claves de Stripe y Gemini si vas a usar pagos + IA
+
+### Variables de entorno
+
+| Clave | Uso |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Sólo para scripts/cron (NO exponer en el cliente) |
+| `NEXT_PUBLIC_URL` | URL pública (https://portalpsy.es) |
+| `GEMINI_API_KEY` | IA El Navegante |
+| `STRIPE_SECRET_KEY` / `STRIPE_PRICE_ID_PRO` | Checkout PRO |
+| `CRON_SECRET` | Token Bearer para `/api/cron/*` y `/api/admin/*` |
+| `AUDIO_PROXY_ALLOWED_HOSTS` | Lista separada por comas de dominios permitidos en `/api/proxy-audio` |
+| `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` | Rate limiting (opcional pero recomendado) |
+
+Coloca los valores en `.env.local` (y `.env.vercel` para despliegues).
+
+### Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev            # servidor local
+npm run build          # build de producción
+npm run start          # sirve la build
+npm run seed:articles  # carga los artículos seed en Supabase
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`seed:articles` requiere `SUPABASE_SERVICE_ROLE_KEY` y vuelca `data/articles.ts` en la tabla `articles` respetando RLS.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Migraciones de Supabase
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Los SQL viven en `supabase/migrations` y están numerados:
 
-## Learn More
+1. `0001_core_schema.sql`: perfiles, terapeutas, foro y triggers.
+2. `0002_articles.sql`: tabla de artículos + RLS.
+3. `0003_newsletter.sql`: tabla de suscriptores.
 
-To learn more about Next.js, take a look at the following resources:
+Ejecuta cada archivo en el SQL Editor de Supabase siguiendo el orden o usa `psql`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+psql "$SUPABASE_DB_URL" -f supabase/migrations/0001_core_schema.sql
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Datos compartidos
 
-## Deploy on Vercel
+Los listados estáticos (sustancias, artículos destacados) viven ahora en `../shared-data`. El cliente Vite y esta app Next leen del mismo origen para evitar divergencias.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Cron / Jobs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/api/cron/fetch-news`: protegida con `CRON_SECRET` + rate limit. Configura un Vercel Cron y envía `Authorization: Bearer $CRON_SECRET`.
+- `/api/admin/migrate-articles`: misma protección. Usa scripts locales en su lugar (`seed:articles`).
+
+### Seguridad
+
+- Todas las rutas PRO (`/sala-pro`, `/api/proxy-audio`, `/api/ai/navegante`) verifican la sesión Supabase y el plan.
+- Rate limiting opcional con Upstash bloquea abusos en Stripe, IA y audio.
+- Define `AUDIO_PROXY_ALLOWED_HOSTS` para bloquear proxys arbitrarios (ej: `AUDIO_PROXY_ALLOWED_HOSTS=www.soundhelix.com`).
+
+### Observabilidad
+
+Consulta `docs/observability.md` para recomendaciones de Sentry, Logtail y alertas automatizadas.

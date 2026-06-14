@@ -40,28 +40,28 @@ export default function HeroSection() {
             </div>
 
             <div className="relative z-10 text-center px-6 max-w-5xl mx-auto" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
-                <div className="inline-flex items-center gap-2 vesica-btn px-6 py-2 glass-sacred text-sm text-psyche-violet mb-8">
-                    <span className="w-2 h-2 rounded-full bg-psyche-violet animate-pulse" />
-                    Portal Psicodélico — España 2026
+                <div className="inline-flex items-center gap-2 vesica-btn px-6 py-2 glass-sacred text-sm text-white/50 mb-10">
+                    <span className="w-2 h-2 rounded-full bg-psyche-teal animate-pulse" />
+                    Un mapa para explorar la consciencia
                 </div>
 
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight mb-8">
-                    <span className="block gradient-text">Explora</span>
-                    <span className="block gradient-text-cool mt-2">tu</span>
-                    <span className="block gradient-text-warm mt-2">Consciencia</span>
+                    <span className="block gradient-text">Antes de</span>
+                    <span className="block gradient-text-cool mt-2">decidir,</span>
+                    <span className="block gradient-text-warm mt-2">infórmate.</span>
                 </h1>
 
                 <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
-                    El portal de referencia en España sobre sustancias psicodélicas.
-                    <span className="text-white/70"> Información basada en evidencia, reducción de daños y cultura psiconáutica.</span>
+                    Información rigurosa sobre psicodélicos, reducción de daños y bienestar.
+                    <span className="text-white/70"> Sin alarmismo, sin ventas. Solo lo que necesitas para navegar con consciencia.</span>
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link href="/sustancias" className="vesica-btn px-10 py-4 gradient-psyche text-white font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-lg shadow-psyche-violet/25">
-                        Explorar Sustancias
+                        Explorar el mapa
                     </Link>
-                    <Link href="/herramientas" className="vesica-btn px-10 py-4 border border-psyche-cyan/40 bg-psyche-cyan/10 text-psyche-cyan font-medium text-lg hover:bg-psyche-cyan/20 hover:scale-105 hover:shadow-lg hover:shadow-psyche-cyan/20 transition-all duration-300">
-                        Reducción de Daños
+                    <Link href="/herramientas" className="vesica-btn px-10 py-4 border border-psyche-teal/40 bg-psyche-teal/10 text-psyche-teal font-medium text-lg hover:bg-psyche-teal/20 hover:scale-105 hover:shadow-lg hover:shadow-psyche-teal/20 transition-all duration-300">
+                        Herramientas gratuitas
                     </Link>
                 </div>
             </div>

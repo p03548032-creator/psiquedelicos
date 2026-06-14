@@ -6,7 +6,7 @@ import { MetatronDivider } from '@/components/SacredGeometry';
 function SafetyCard({ rule, index }: { rule: typeof safetyRules[0]; index: number }) {
     const { ref, visible } = useReveal(0.1);
     return (
-        <div ref={ref} className={`${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.1}s` }}>
+        <div ref={ref} className={`${visible ? 'animate-focus' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.1}s` }}>
             <div className="glass-sacred rounded-2xl p-6 h-full hover:scale-[1.02] transition-all duration-500 group">
                 <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 group-hover:scale-110 transition-transform text-white/80">
@@ -28,7 +28,7 @@ export default function SafetySection() {
         <section id="seguridad" className="relative py-32 px-6">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-950/5 to-transparent" />
             <div className="relative max-w-6xl mx-auto">
-                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-spiral' : 'opacity-0'}`}>
+                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-focus' : 'opacity-0'}`}>
                     <span className="text-sm uppercase tracking-[0.3em] text-amber-500/60 block mb-4">Tu seguridad es lo primero</span>
                     <h2 className="text-4xl md:text-6xl font-black mb-6">
                         <span className="gradient-text-warm">Reducción</span>{' '}

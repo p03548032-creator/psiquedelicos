@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: '/api/',
+            disallow: ['/api/', '/login', '/registro', '/perfil', '/sala-de-viajes', '/reset-password'],
         },
-        sitemap: 'https://portalpsy.es/sitemap.xml',
+        sitemap: `${process.env.NEXT_PUBLIC_URL || 'https://portalpsy.es'}/sitemap.xml`,
     };
 }

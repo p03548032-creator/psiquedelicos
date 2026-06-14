@@ -10,7 +10,7 @@ function ArticleCard({ article, index }: { article: any; index: number }) {
     const MainIcon = getIconComponent(article.icon_name);
 
     return (
-        <div ref={ref} className={`${isFeature ? 'md:col-span-2 md:row-span-2' : ''} ${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.12}s` }}>
+        <div ref={ref} className={`${isFeature ? 'md:col-span-2 md:row-span-2' : ''} ${visible ? 'animate-focus' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.12}s` }}>
             <Link href={`/articulo/${article.slug}`}
                 className={`block glass-sacred rounded-2xl p-6 md:p-8 h-full group cursor-pointer hover:scale-[1.01] transition-all duration-500 relative overflow-hidden ${isFeature ? 'md:p-12' : ''}`}
                 style={{ borderColor: `${article.color}10` }}
@@ -41,7 +41,7 @@ export default function ArticlesSection({ articles }: { articles: any[] }) {
     return (
         <section id="articulos" className="relative py-32 px-6">
             <div className="max-w-6xl mx-auto">
-                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-spiral' : 'opacity-0'}`}>
+                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-focus' : 'opacity-0'}`}>
                     <span className="text-sm uppercase tracking-[0.3em] text-psyche-pink/60 block mb-4">Conocimiento Psicodélico</span>
                     <h2 className="text-4xl md:text-6xl font-black gradient-text-warm mb-6">Artículos</h2>
                     <p className="text-white/40 max-w-xl mx-auto">Guías, investigaciones y reflexiones sobre el universo psicodélico.</p>

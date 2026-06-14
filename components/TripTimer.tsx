@@ -64,9 +64,10 @@ const groundingTechniques = [
 
 interface TripTimerProps {
     onClose: () => void;
+    onGoToJournal?: () => void;
 }
 
-export default function TripTimer({ onClose }: TripTimerProps) {
+export default function TripTimer({ onClose, onGoToJournal }: TripTimerProps) {
     const [step, setStep] = useState<'setup' | 'running' | 'done'>('setup');
     const [selectedSubstance, setSelectedSubstance] = useState<Substance>(substances[0]);
     const [elapsed, setElapsed] = useState(0); // minutes
@@ -285,7 +286,7 @@ export default function TripTimer({ onClose }: TripTimerProps) {
                                 <li>• Evita compromisos sociales hoy</li>
                             </ul>
                         </div>
-                        <button onClick={onClose}
+                        <button onClick={() => { onClose(); onGoToJournal?.(); }}
                             className="vesica-btn w-full py-3 gradient-psyche text-white font-bold cursor-pointer">
                             Ir al Diario de Integración →
                         </button>

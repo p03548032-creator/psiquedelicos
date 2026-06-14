@@ -22,7 +22,7 @@ function StatItem({ stat, index }: { stat: typeof keyStats[0]; index: number }) 
   return (
     <div
       ref={ref}
-      className={`${visible ? 'animate-spiral' : 'opacity-0'}`}
+      className={`${visible ? 'animate-focus' : 'opacity-0'}`}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="glass-sacred rounded-2xl p-5 text-center hover:scale-105 transition-all duration-500 group relative overflow-hidden">
@@ -63,7 +63,7 @@ function TimelineItem({ event, index, isLeft }: { event: TimelineEvent; index: n
   return (
     <div
       ref={ref}
-      className={`relative flex items-center ${visible ? 'animate-spiral' : 'opacity-0'} ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+      className={`relative flex items-center ${visible ? 'animate-focus' : 'opacity-0'} ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
       style={{ animationDelay: `${index * 0.08}s` }}
     >
       {/* Content */}
@@ -135,7 +135,7 @@ function CenterCard({ center, index }: { center: ResearchCenter; index: number }
   return (
     <div
       ref={ref}
-      className={`${visible ? 'animate-spiral' : 'opacity-0'}`}
+      className={`${visible ? 'animate-focus' : 'opacity-0'}`}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="glass-sacred rounded-2xl p-6 h-full hover:scale-[1.02] transition-all duration-500 group relative overflow-hidden">
@@ -191,7 +191,7 @@ function TherapyCard({ therapy, index }: { therapy: TherapyApproach; index: numb
   return (
     <div
       ref={ref}
-      className={`${visible ? 'animate-spiral' : 'opacity-0'}`}
+      className={`${visible ? 'animate-focus' : 'opacity-0'}`}
       style={{ animationDelay: `${index * 0.12}s` }}
     >
       <div className="glass-sacred rounded-2xl overflow-hidden hover:scale-[1.01] transition-all duration-500 group">
@@ -268,7 +268,7 @@ function QuoteCard({ quote, index }: { quote: typeof expertQuotes[0]; index: num
   return (
     <div
       ref={ref}
-      className={`${visible ? 'animate-spiral' : 'opacity-0'}`}
+      className={`${visible ? 'animate-focus' : 'opacity-0'}`}
       style={{ animationDelay: `${index * 0.15}s` }}
     >
       <div className="glass-sacred rounded-2xl overflow-hidden hover:scale-[1.01] transition-all duration-500 group">
@@ -363,7 +363,7 @@ function LegalCard({ aspect, index }: { aspect: typeof legalFramework[0]; index:
   return (
     <div
       ref={ref}
-      className={`${visible ? 'animate-spiral' : 'opacity-0'}`}
+      className={`${visible ? 'animate-focus' : 'opacity-0'}`}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div
@@ -414,7 +414,7 @@ function SpainMap({ centers }: { centers: ResearchCenter[] }) {
   });
 
   return (
-    <div ref={ref} className={`${visible ? 'animate-spiral' : 'opacity-0'}`}>
+    <div ref={ref} className={`${visible ? 'animate-focus' : 'opacity-0'}`}>
       <div className="glass-sacred rounded-2xl p-4 md:p-8 relative overflow-hidden">
         <h3 className="text-lg font-bold text-white mb-6 text-center">
           🗺️ Mapa de Investigación Psicodélica en España
@@ -676,7 +676,7 @@ export default function TherapySpainSection() {
       <div className="relative max-w-6xl mx-auto">
 
         {/* ═══════ HERO DE SECCIÓN ═══════ */}
-        <div ref={heroRef} className={`text-center mb-12 ${heroVisible ? 'animate-spiral' : 'opacity-0'}`}>
+        <div ref={heroRef} className={`text-center mb-12 ${heroVisible ? 'animate-focus' : 'opacity-0'}`}>
           <div className="inline-flex items-center gap-2 vesica-btn px-5 py-2 glass-sacred text-sm text-psyche-pink mb-6">
             <span className="w-2 h-2 rounded-full bg-psyche-pink animate-pulse" />
             Artículo Destacado
@@ -705,7 +705,7 @@ export default function TherapySpainSection() {
 
         {/* ═══════ ENFOQUES TERAPÉUTICOS ═══════ */}
         <div className="mt-20 mb-20">
-          <div ref={therapyTitle} className={`text-center mb-12 ${therapyTitleVis ? 'animate-spiral' : 'opacity-0'}`}>
+          <div ref={therapyTitle} className={`text-center mb-12 ${therapyTitleVis ? 'animate-focus' : 'opacity-0'}`}>
             <span className="text-sm uppercase tracking-[0.3em] text-psyche-cyan/60 block mb-4">
               Tratamientos
             </span>
@@ -729,7 +729,7 @@ export default function TherapySpainSection() {
 
         {/* ═══════ MAPA DE CENTROS ═══════ */}
         <div className="mt-20 mb-20">
-          <div ref={centersTitle} className={`text-center mb-12 ${centersTitleVis ? 'animate-spiral' : 'opacity-0'}`}>
+          <div ref={centersTitle} className={`text-center mb-12 ${centersTitleVis ? 'animate-focus' : 'opacity-0'}`}>
             <span className="text-sm uppercase tracking-[0.3em] text-psyche-violet/60 block mb-4">
               Dónde se investiga
             </span>
@@ -756,7 +756,7 @@ export default function TherapySpainSection() {
 
         {/* ═══════ CRONOLOGÍA ═══════ */}
         <div className="mt-20 mb-20">
-          <div ref={timelineTitle} className={`text-center mb-12 ${timelineTitleVis ? 'animate-spiral' : 'opacity-0'}`}>
+          <div ref={timelineTitle} className={`text-center mb-12 ${timelineTitleVis ? 'animate-focus' : 'opacity-0'}`}>
             <span className="text-sm uppercase tracking-[0.3em] text-psyche-pink/60 block mb-4">
               Cronología
             </span>
@@ -801,7 +801,7 @@ export default function TherapySpainSection() {
 
         {/* ═══════ MARCO LEGAL ═══════ */}
         <div className="mt-20 mb-20">
-          <div ref={legalTitle} className={`text-center mb-12 ${legalTitleVis ? 'animate-spiral' : 'opacity-0'}`}>
+          <div ref={legalTitle} className={`text-center mb-12 ${legalTitleVis ? 'animate-focus' : 'opacity-0'}`}>
             <span className="text-sm uppercase tracking-[0.3em] text-amber-500/60 block mb-4">
               Regulación
             </span>
@@ -842,7 +842,7 @@ export default function TherapySpainSection() {
 
         {/* ═══════ VOCES EXPERTAS ═══════ */}
         <div className="mt-20 mb-20">
-          <div ref={quotesTitle} className={`text-center mb-12 ${quotesTitleVis ? 'animate-spiral' : 'opacity-0'}`}>
+          <div ref={quotesTitle} className={`text-center mb-12 ${quotesTitleVis ? 'animate-focus' : 'opacity-0'}`}>
             <span className="text-sm uppercase tracking-[0.3em] text-psyche-violet/60 block mb-4">
               Testimonios
             </span>

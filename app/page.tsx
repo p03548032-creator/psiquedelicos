@@ -1,65 +1,82 @@
 import HeroSection from '@/sections/HeroSection';
 import Link from 'next/link';
-import { substances, articles } from '@/data/substances';
 import { supabase } from '@/lib/supabase';
 import { getIconComponent } from '@/lib/iconMap';
-import { MetatronDivider, SeedOfLifeIcon } from '@/components/SacredGeometry';
+import { MetatronDivider } from '@/components/SacredGeometry';
 import AuroraBanner from '@/components/AuroraBanner';
-import BackToTopFab from '@/components/BackToTopFab';
 
-import { FlaskConical, Microscope, HeartPulse, UserCheck, MessagesSquare, Headphones } from 'lucide-react';
+import { FlaskConical, BookOpen, Microscope, HeartPulse, UserCheck, MessagesSquare, Shield, Beaker } from 'lucide-react';
 
-const sections = [
+const pillars = [
   {
     href: '/sustancias',
     icon: FlaskConical,
-    label: 'Sustancias',
-    desc: 'Enciclopedia completa con efectos, dosis, riesgos y estado legal',
+    label: 'Mapa de sustancias',
+    desc: 'Fichas con efectos, dosis, seguridad y legality en España. Para decidir con información.',
     color: '#c084fc',
+    stage: 'Preparación',
   },
   {
     href: '/herramientas',
-    icon: Microscope,
+    icon: Beaker,
     label: 'Herramientas',
-    desc: 'Calculadora de dosis, interacciones y planificador de microdosis',
+    desc: 'Calculadora de dosis, interacciones y planificador de microdosis. Acceso gratuito.',
     color: '#22d3ee',
+    stage: 'Preparación',
+  },
+  {
+    href: '/herramientas/interacciones',
+    icon: Shield,
+    label: 'Reducción de daños',
+    desc: 'Comprueba combinaciones, evita riesgos y sabe qué hacer en cada fase del viaje.',
+    color: '#ef4444',
+    stage: 'Durante',
+  },
+  {
+    href: '/herramientas/calculadora-dosis',
+    icon: Microscope,
+    label: 'Calculadora de dosis',
+    desc: 'Dosis aproximadas según sustancia y objetivo. Nunca es un sustituto del conocimiento personal.',
+    color: '#06b6d4',
+    stage: 'Preparación',
   },
   {
     href: '/noticias',
-    icon: Microscope,
-    label: 'Noticias',
-    desc: 'Ensayos clínicos, papers y actualidad científica en español',
-    color: '#3b82f6',
+    icon: BookOpen,
+    label: 'Artículos y guías',
+    desc: 'Ciencia revisada, reducción de daños e integración. Sin sensacionalismo.',
+    color: '#818cf8',
+    stage: 'Integración',
   },
   {
     href: '/terapia-espana',
     icon: HeartPulse,
     label: 'Terapia en España',
-    desc: 'Mapa de centros, cronología y marco legal actualizado 2026',
+    desc: 'Estado actual de la psicoterapia asistida con psicodélicos en 2026.',
     color: '#f472b6',
+    stage: 'Integración',
   },
   {
     href: '/terapeutas',
     icon: UserCheck,
-    label: 'Terapeutas',
-    desc: 'Directorio verificado de centros e integradores en España',
+    label: 'Directorio de terapeutas',
+    desc: 'Centros verificados e integradores en España.',
     color: '#34d399',
+    stage: 'Integración',
   },
   {
     href: '/comunidad',
     icon: MessagesSquare,
     label: 'Comunidad',
-    desc: 'Foro y espacio de debate libre de estigma',
+    desc: 'Espacio para compartir experiencias y aprender de otros navegantes.',
     color: '#a78bfa',
+    stage: 'Integración',
   },
 ];
 
-export const revalidate = 3600; // Cache de 1 hora para nuevas noticias
+export const revalidate = 3600;
 
 export default async function HomePage() {
-  const featuredSubstances = substances.slice(0, 4);
-  
-  // Obtener los últimos 3 artículos publicados (más recientes primero)
   const { data: featuredArticles } = await supabase
     .from('articles')
     .select('id, slug, title, excerpt, icon_name')
@@ -72,29 +89,36 @@ export default async function HomePage() {
       <HeroSection />
       <AuroraBanner />
 
-      {/* ═══ SECCIONES DEL PORTAL ═══ */}
       <section className="relative py-16 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="text-sm uppercase tracking-[0.3em] text-white/25 block mb-3">Explora el portal</span>
-            <h2 className="text-3xl md:text-4xl font-black gradient-text">Todo lo que necesitas saber</h2>
+          <div className="text-center mb-12">
+            <span className="text-sm uppercase tracking-[0.3em] text-white/25 block mb-3">Tu punto de partida</span>
+            <h2 className="text-3xl md:text-4xl font-black gradient-text mb-3">
+              Navega con información, no con intuición.
+            </h2>
+            <p className="text-white/45 text-base max-w-xl mx-auto">
+              PortalPSY es un mapa. No te dice qué hacer. Te da lo que necesitas para decidir con responsabilidad.
+            </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {sections.map(s => (
-              <Link key={s.href} href={s.href}
-                className="glass-sacred rounded-2xl p-6 hover:scale-[1.03] transition-all duration-300 group relative overflow-hidden border border-transparent hover:border-white/10">
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {pillars.map(p => (
+              <Link key={p.href} href={p.href}
+                className="glass-sacred rounded-2xl p-5 hover:scale-[1.02] transition-all duration-300 group relative overflow-hidden border border-transparent hover:border-white/10">
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `radial-gradient(circle at top left, ${s.color}15, transparent 60%)` }} />
+                  style={{ background: `radial-gradient(circle at top left, ${p.color}10, transparent 60%)` }} />
                 <div className="relative">
-                  <span className="mb-4 block p-2 rounded-xl inline-flex" style={{ color: s.color, background: `${s.color}15` }}>
-                    <s.icon size={28} strokeWidth={1.5} />
-                  </span>
-                  <h3 className="text-base font-bold text-white mb-2">{s.label}</h3>
-                  <p className="text-white/45 text-sm leading-relaxed">{s.desc}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium"
-                    style={{ color: s.color }}>
-                    Explorar <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
-                  </span>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 rounded-full border"
+                      style={{ color: p.color, borderColor: `${p.color}30`, background: `${p.color}08` }}>
+                      {p.stage}
+                    </span>
+                    <span style={{ color: p.color }}>
+                      <p.icon size={18} strokeWidth={1.5} />
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-bold text-white mb-1">{p.label}</h3>
+                  <p className="text-white/40 text-xs leading-relaxed">{p.desc}</p>
                 </div>
               </Link>
             ))}
@@ -104,47 +128,12 @@ export default async function HomePage() {
 
       <MetatronDivider />
 
-      {/* ═══ PREVIEW SUSTANCIAS ═══ */}
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <span className="text-sm uppercase tracking-[0.3em] text-psyche-violet/60 block mb-3">Sustancias</span>
-              <h2 className="text-3xl font-black gradient-text">Guía de Psicodélicos</h2>
-            </div>
-            <Link href="/sustancias" className="vesica-btn px-4 py-2 text-sm text-white/50 hover:text-white transition hidden sm:flex items-center gap-2">
-              Ver todas <span>→</span>
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {featuredSubstances.map(s => (
-              <Link key={s.id} href={`/sustancia/${s.id}`}
-                className="glass-sacred rounded-2xl p-5 hover:scale-[1.04] transition-all duration-300 group border border-transparent hover:border-psyche-violet/20 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'radial-gradient(circle at top left, rgba(124,58,237,0.1), transparent 70%)' }} />
-                <span className="mb-3 block text-psyche-violet/80 group-hover:text-psyche-violet transition-colors">
-                  <s.icon size={28} strokeWidth={1.5} />
-                </span>
-                <h3 className="text-sm font-bold text-white mb-1">{s.name}</h3>
-                <p className="text-xs text-white/45">{s.aka}</p>
-              </Link>
-            ))}
-          </div>
-          <div className="flex justify-center mt-6 sm:hidden">
-            <Link href="/sustancias" className="vesica-btn px-5 py-2.5 text-sm text-white/50">Ver todas las sustancias →</Link>
-          </div>
-        </div>
-      </section>
-
-      <MetatronDivider />
-
-      {/* ═══ PREVIEW ARTÍCULOS ═══ */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <span className="text-sm uppercase tracking-[0.3em] text-psyche-cyan/60 block mb-3">Actualidad</span>
-              <h2 className="text-3xl font-black gradient-text-cool">Últimas Noticias</h2>
+              <span className="text-sm uppercase tracking-[0.3em] text-psyche-cyan/60 block mb-3">Desde la comunidad</span>
+              <h2 className="text-3xl font-black gradient-text-cool">Lo último</h2>
             </div>
             <Link href="/noticias" className="vesica-btn px-4 py-2 text-sm text-white/50 hover:text-white transition hidden sm:flex items-center gap-2">
               Ver todas <span>→</span>
@@ -168,15 +157,22 @@ export default async function HomePage() {
               );
             })}
           </div>
-          <div className="flex justify-center mt-6 sm:hidden">
-            <Link href="/noticias" className="vesica-btn px-5 py-2.5 text-sm text-white/50">Ver todas las noticias →</Link>
-          </div>
         </div>
       </section>
 
       <MetatronDivider />
 
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-sm uppercase tracking-[0.3em] text-white/25 block mb-4">Para quien esto le ayuda</span>
+          <blockquote className="text-xl md:text-2xl font-medium text-white/70 leading-relaxed mb-8">
+            &ldquo;Llevo años con ansiedad y la información sobre psicodélicos estaba desperdigada o cargada de sensacionalismo. PortalPSY es lo primero que me da datos sin intentar venderme nada.&rdquo;
+          </blockquote>
+          <cite className="text-white/30 text-sm not-italic">— Un navegante anónimo</cite>
+        </div>
+      </section>
 
+      <MetatronDivider />
     </>
   );
 }

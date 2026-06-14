@@ -34,7 +34,7 @@ function TherapistCard({ t, index }: { t: Therapist; index: number }) {
     };
 
     return (
-        <div ref={ref} className={`${visible ? 'animate-spiral' : 'opacity-0'}`}
+        <div ref={ref} className={`${visible ? 'animate-focus' : 'opacity-0'}`}
             style={{ animationDelay: `${index * 0.08}s` }}>
             <div className="glass-sacred rounded-2xl overflow-hidden hover:scale-[1.01] transition-all duration-300 group">
                 {/* Top color bar */}

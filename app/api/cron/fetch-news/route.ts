@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import Parser from 'rss-parser';
 import { createClient } from '@supabase/supabase-js';
+import { enforceCronAuth } from '@/lib/api/auth';
+import { z } from 'zod';
 
 // Inicializar RSS Parser
 const parser = new Parser();
@@ -20,12 +22,8 @@ const RSS_FEEDS = [
 
 export async function GET(request: Request) {
     try {
-        // 1. Protección del endpoint (Basic Security)
-        const authHeader = request.headers.get('authorization');
-        if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-            // Uncomment in production:
-            // return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        }
+        const authError = enforceCronAuth(request);
+        if (authError) return authError;
 
         const newArticlesFound = [];
 
@@ -67,6 +65,23 @@ export async function GET(request: Request) {
         const processedArticles = [];
 
         // 3. Procesamiento de IA (Traducción y Resumen estructurado)
+        const articleSchema = z.object({
+            title: z.string().min(5),
+            subtitle: z.string().min(5),
+            excerpt: z.string().min(5),
+            category: z.string().min(3),
+            read_time: z.string().min(3),
+            color: z.string().regex(/^#/),
+            icon_name: z.string().min(2),
+            author: z.string().min(2),
+            publish_date: z.string().min(3),
+            hero_quote: z.string().optional().nullable(),
+            hero_quote_author: z.string().optional().nullable(),
+            sections: z.array(z.object({ title: z.string(), content: z.string() })).min(1),
+            references_list: z.array(z.object({ title: z.string(), url: z.string().url() })).min(1),
+            related_articles: z.array(z.string()).optional(),
+        });
+
         for (const article of newArticlesFound) {
             if (!GEMINI_API_KEY) break;
 
@@ -122,7 +137,13 @@ REGLAS ESTRICTAS:
                     // Limpiar markdown residual que a veces Google Gemini inyecta por error
                     jsonString = jsonString.replace(/```json/gi, '').replace(/```/gi, '').trim();
 
-                    const parsedArticle = JSON.parse(jsonString);
+                    const parsedJson = JSON.parse(jsonString);
+                    const parsedResult = articleSchema.safeParse(parsedJson);
+                    if (!parsedResult.success) {
+                        console.error('Gemini payload inválido:', parsedResult.error.flatten());
+                        continue;
+                    }
+                    const parsedArticle = parsedResult.data;
 
                     // Inferir Slug
                     const slug = parsedArticle.title

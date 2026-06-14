@@ -1,16 +1,14 @@
 import { NextResponse } from 'next/server';
+import { validateProxyUrl } from '@/lib/api/auth';
+import { enforceRateLimit } from '@/lib/rate-limit';
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    const url = searchParams.get('url');
-
-    if (!url) {
-        return new NextResponse('URL faltante', { status: 400 });
-    }
+    const validation = validateProxyUrl(searchParams.get('url'));
+    if ('response' in validation) return validation.response;
 
     try {
-        const response = await fetch(url, {
-            // No enviar referrer ni credenciales para evitar bloqueos
+        const response = await fetch(validation.url.toString(), {
             referrerPolicy: 'no-referrer'
         });
 
@@ -18,7 +16,6 @@ export async function GET(request: Request) {
             throw new Error(`Error fetching audio: ${response.statusText}`);
         }
 
-        // Crear una respuesta con el contenido del audio y permitir CORS
         const headers = new Headers(response.headers);
         headers.set('Access-Control-Allow-Origin', '*');
         headers.set('Cache-Control', 'public, max-age=86400');

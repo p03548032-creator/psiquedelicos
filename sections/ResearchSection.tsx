@@ -13,7 +13,7 @@ const studies = [
 function StudyCard({ study, index }: { study: typeof studies[0]; index: number }) {
     const { ref, visible } = useReveal(0.1);
     return (
-        <div ref={ref} className={`${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.12}s` }}>
+        <div ref={ref} className={`${visible ? 'animate-focus' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.12}s` }}>
             <div className="glass-sacred rounded-2xl p-6 md:p-8 h-full hover:scale-[1.01] transition-all duration-500 group relative overflow-hidden">
                 <div className="absolute left-0 top-0 bottom-0 w-[2px] opacity-30 group-hover:opacity-60 transition-opacity"
                     style={{ background: `linear-gradient(to bottom, transparent, ${study.color}, transparent)` }} />
@@ -39,7 +39,7 @@ export default function ResearchSection() {
         <section id="investigacion" className="relative py-32 px-6">
             <div className="absolute inset-0 bg-flower-of-life opacity-20" />
             <div className="relative max-w-6xl mx-auto">
-                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-spiral' : 'opacity-0'}`}>
+                <div ref={titleRef} className={`text-center mb-20 ${titleVisible ? 'animate-focus' : 'opacity-0'}`}>
                     <span className="text-sm uppercase tracking-[0.3em] text-psyche-cyan/60 block mb-4">La Ciencia Habla</span>
                     <h2 className="text-4xl md:text-6xl font-black gradient-text-cool mb-6">Investigación</h2>
                     <p className="text-white/40 max-w-2xl mx-auto">El renacimiento psicodélico está respaldado por las universidades más prestigiosas del mundo. Estos son los avances más recientes.</p>
@@ -57,7 +57,7 @@ export default function ResearchSection() {
                     ].map((stat, i) => {
                         const { ref, visible } = useReveal(0.1); // eslint-disable-line react-hooks/rules-of-hooks
                         return (
-                            <div key={i} ref={ref} className={`text-center glass-sacred rounded-2xl p-6 ${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${i * 0.15}s` }}>
+                            <div key={i} ref={ref} className={`text-center glass-sacred rounded-2xl p-6 ${visible ? 'animate-focus' : 'opacity-0'}`} style={{ animationDelay: `${i * 0.15}s` }}>
                                 <div className="text-3xl md:text-4xl font-black mb-2" style={{ color: stat.color }}>{stat.value}</div>
                                 <div className="text-white/30 text-xs">{stat.label}</div>
                             </div>

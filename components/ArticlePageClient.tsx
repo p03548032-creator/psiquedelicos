@@ -14,7 +14,7 @@ function SectionBlock({ section, index, id }: { section: any; index: number; id:
     };
 
     return (
-        <div id={id} ref={ref as any} className={`mb-12 scroll-mt-28 ${visible ? 'animate-spiral' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.08}s` }}>
+        <div id={id} ref={ref as any} className={`mb-12 scroll-mt-28 ${visible ? 'animate-focus' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.08}s` }}>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 leading-snug">{section.title}</h2>
             <div className="text-white/60 leading-relaxed text-base md:text-lg mb-6">
                 {section.content?.split('\n\n').map((p: string, i: number) => <p key={i} className="mb-4">{p}</p>)}

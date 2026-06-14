@@ -5,16 +5,14 @@ import { usePathname } from 'next/navigation';
 import SearchOverlay from '@/components/SearchOverlay';
 import { createClient } from '@/lib/supabase/client';
 
-import { FlaskConical, UserCheck, MessagesSquare, Newspaper, Unlock, Microscope, LayoutGrid } from 'lucide-react';
+import { FlaskConical, BookOpen, Wrench, MessagesSquare, Music } from 'lucide-react';
 
 const navLinks = [
-    { href: '/sustancias', label: 'Sustancias', icon: FlaskConical },
-    { href: '/investigacion', label: 'Investigación', icon: Microscope },
-    { href: '/herramientas', label: 'Herramientas', icon: LayoutGrid },
-    { href: '/noticias', label: 'Noticias', icon: Newspaper },
+    { href: '/sustancias', label: 'Mapa', icon: FlaskConical },
+    { href: '/noticias', label: 'Guía', icon: BookOpen },
+    { href: '/herramientas', label: 'Herramientas', icon: Wrench },
+    { href: '/musica', label: 'Música', icon: Music },
     { href: '/comunidad', label: 'Comunidad', icon: MessagesSquare },
-    { href: '/terapeutas', label: 'Terapeutas', icon: UserCheck },
-    { href: '/sala-de-viajes', label: 'Sala de Viajes', icon: Unlock },
 ];
 
 export default function Navigation() {
@@ -127,8 +125,8 @@ export default function Navigation() {
 
                     {user ? (
                         <div className="hidden sm:flex items-center gap-2">
-                            <Link href="/sala-pro" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 transition text-amber-400 text-xs font-bold">
-                                ✦ Sala PRO
+                            <Link href="/sala-pro" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/5 transition text-white/60 text-xs">
+                                Mi espacio
                             </Link>
                             <Link href="/perfil" className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/5 transition">
                                 <span className="text-xs text-white/60">{user.user_metadata?.full_name?.split(' ')[0] || 'Mi Perfil'}</span>
@@ -139,9 +137,6 @@ export default function Navigation() {
                         </div>
                     ) : (
                         <div className="hidden sm:flex items-center gap-2">
-                            <Link href="/sala-pro" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition text-white/50 text-xs font-medium group">
-                                <span className="group-hover:text-amber-400 transition-colors">🔒 Sala PRO</span>
-                            </Link>
                             <Link href="/login"
                                 className="vesica-btn px-3 py-1.5 text-xs text-white/70 hover:text-white transition-all">
                                 Entrar
@@ -183,8 +178,8 @@ export default function Navigation() {
                         {user ? (
                             <>
                                 <Link href="/sala-pro" onClick={() => setMenuOpen(false)}
-                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20 transition">
-                                    ✦ Sala PRO
+                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-white/5 text-white/80 border border-white/10 hover:bg-white/10 transition">
+                                    Mi espacio
                                 </Link>
                                 <Link href="/perfil" onClick={() => setMenuOpen(false)}
                                     className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-white/5 text-white/80 border border-white/10 hover:bg-white/10 transition">
@@ -193,21 +188,12 @@ export default function Navigation() {
                             </>
                         ) : (
                             <>
-                                <Link href="/sala-pro" onClick={() => setMenuOpen(false)}
-                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-white/5 text-white/50 border border-white/10 hover:bg-white/10 hover:text-amber-400 transition group">
-                                    <span className="group-hover:text-amber-400 transition-colors">🔒 Sala PRO</span>
-                                </Link>
                                 <Link href="/login" onClick={() => setMenuOpen(false)}
-                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-psyche-violet/20 text-psyche-violet border border-psyche-violet/30 hover:bg-psyche-violet/30 transition">
-                                    Iniciar sesión
+                                    className="block w-full px-4 py-3 rounded-xl text-sm text-center font-medium bg-psyche-violet/20 text-white border border-psyche-violet/30 hover:bg-psyche-violet/30 transition">
+                                    Entrar
                                 </Link>
                             </>
                         )}
-                        <button onClick={() => { setMenuOpen(false); setSearchOpen(true); }}
-                            className="w-full px-4 py-3 rounded-xl text-sm text-left text-white/50 hover:bg-white/5 transition flex items-center justify-between">
-                            <span>🔍 Buscar en el portal</span>
-                            <kbd className="font-mono text-[10px] text-white/20 border border-white/10 px-1.5 py-0.5 rounded">⌘K</kbd>
-                        </button>
                     </div>
                 </div>
             )}

@@ -86,8 +86,9 @@ La integración comunitaria, organizada de forma anónima pero moderada, no solo
     }
 ];
 
-export default function NoticiaPage({ params }: { params: { slug: string } }) {
-    const article = NEWS_ITEMS.find(item => item.slug === params.slug);
+export default async function NoticiaPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const article = NEWS_ITEMS.find(item => item.slug === slug);
 
     if (!article) {
         notFound();
