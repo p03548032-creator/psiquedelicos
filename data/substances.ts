@@ -1,9 +1,9 @@
 import type { LucideIcon } from 'lucide-react';
 import { Eye, Leaf, Sparkles, Droplet, Beaker, TestTube, HeartPulse, Brain, ShieldAlert, Palette, Scale, Users, Home, Pill, AlertTriangle } from 'lucide-react';
-import type { SubstanceCore } from '../../shared-data/substances';
-import { substancesCore } from '../../shared-data/substances';
-import type { ArticleCore } from '../../shared-data/articles';
-import { articlesCore } from '../../shared-data/articles';
+import type { SubstanceCore } from '@/shared-data/substances';
+import { substancesCore } from '@/shared-data/substances';
+import type { ArticleCore } from '@/shared-data/articles';
+import { articlesCore } from '@/shared-data/articles';
 
 const substanceIconMap: Record<string, LucideIcon> = {
   Eye,
